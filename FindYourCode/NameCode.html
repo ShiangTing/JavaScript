@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="name" id="getName">
+        <input type="text" id="names">
+        <input type="submit" onclick="fullCharCode()" value="轉換Ascii碼">
+        <div class="show" id="show">
+        </div>
+     
+    </div>
+
+    <script>
+        function fullCharCode() {
+           var html =''
+           let array=[];
+            let names = document.getElementById("names").value;
+            //names.Trim;
+            //names.length==0||typeof name!=String
+            if(typeof names != "string" ||/^\s+$/.test(names)){
+
+               
+                show.innerText = "請輸入中文名字"
+               // console.log("請輸入中文名字");
+            }
+            else if (/\s/.test(names)) {
+                show.innerText = "請輸入不含空白的中文名字"
+               // console.log("請輸入不含空白的中文名字");
+            } 
+            else
+                for (let g = 0; g < names.length; g++) {
+                    var answer = names.charCodeAt(g);
+                    console.log(answer);
+                   
+
+                    var trans = answer.toString().split("");
+                  
+                    array.push(trans);
+               
+                    console.log(array);
+                    // for(let j=0;j<trans.length;j++){
+                    //     // var div = document.createElement("div");
+                    //     //  div.innerHTML = trans[j];
+                    //     html += '<div>'+trans[j]+'</div>';
+                    // }
+
+                  
+                    //show.innerText = answerarr;
+                }
+                
+        }
+    </script>
+</body>
+
+</html>

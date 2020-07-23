@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<style>
+    border, td{
+        border:1px solid black;
+    }
+</style>
+<body>
+    <h1>全球Covid19統計資料表</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>國家</td>
+                <td>確診</td>
+                <td>死亡</td>
+                <td>治癒</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tw">
+                <td>台灣</td>
+                <td name="confirmed"></td>
+                <td name="died"></td>
+                <td name="recover"></td>
+            </tr>
+            <tr class="china">
+                <td>中國</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="us">
+                <td>美國</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="total">
+                <td>全球統計</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        
+        var countryObject = {
+            Taiwan:{
+                name:"Taiwan",
+                state:{
+                    confirmed:455,
+                    died:7,
+                     recover: 440,
+                },
+              
+            },
+               
+            UnitedState:{
+                name:" UnitedState",
+                state:{
+                    confirmed:3970000,
+                    died:1440000,
+                    recover: 1160000,
+                },
+              
+            },
+            
+            Brazl:{
+                name:" Brazl",
+                confirmed:2170000,
+                died:81597,
+                recover: 1470000,
+            },
+
+            China:{
+                name:" China",
+                state:{
+                    confirmed:80134,
+                    died:2914,
+                    recover: 44595,
+                },
+                
+            }
+
+        }
+        
+        //建立Virus資料，傳入Table中
+        let title = document.querySelector("h1");
+        title.innerText = "全球Covid19統計資料表";
+
+         QueryData(".tw","Taiwan");
+         QueryData(".china","China");
+         QueryData(".us","UnitedState");
+         CaculData();
+        
+         function test(a,b){
+             let number3 =  document.querySelector(a);
+
+             var name = number3.document.querySelector(["name"=b]);
+             name.innerText = countryObject[b]
+         }
+         function QueryData(a,b){
+            
+            var context = ["confirmed","died","recover"];
+            for(let i =2 ;i<=4;i++){
+            let number = document.querySelector("table tbody " +a+ " td:nth-child("+i+")");
+    
+          
+            number.innerText = countryObject[b].state[context[i-2]];
+            // number.innerText = countryObject[b].state.died;
+            // number.innerText = countryObject[b].state.recover;
+        }
+
+            }
+
+        function CaculData(){
+            var context = ["confirmed","died","recover"];
+            for(let j=2;j<=4;j++){
+                let number2 = document.querySelector("table tbody .total td:nth-child("+j+")" );
+                number2.innerText =countryObject.Taiwan.state[context[j-2]]+ countryObject.UnitedState.state[context[j-2]] + countryObject.China.state[context[j-2]];
+            }
+
+           
+
+            // countryObject.s.confirmed
+         
+            // console.log(countryObject.Taiwan.state.confirmed+ countryObject.UnitedState.state.confirmed + countryObject.China.state.confirmed);
+
+        }
+
+
+  </script>
+</body>
+
+</html>

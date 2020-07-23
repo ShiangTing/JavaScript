@@ -1,0 +1,19 @@
+var age = 35;
+age = "Really ?";
+age = false;
+
+console.log(age);
+console.log(typeof age);
+
+function Add(x,y){
+    return x+y;
+}
+console.log(Add(3,8));
+console.log(Add('3',8));
+console.log(Add('3','8'));
+
+
+//比較下在JS中自動轉型 在等號左邊的物件會自動轉型
+console.log(1=='1');
+console.log(1==='1');
+

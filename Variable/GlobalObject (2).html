@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var book = "JavaScript";
+        console.log(book);
+        console.log(window.book);
+        window.book="ASP.NET MVC5";
+        console.log(book);
+        //用var宣告的變數自動會成為window全域的物件
+        let car = "Toyota";
+        console.log(window.car);
+        console.log(book);
+    </script>
+</body>
+</html>

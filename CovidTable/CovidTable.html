@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<style>
+    border, td{
+        border:1px solid black;
+    }
+</style>
+<body>
+    <h1>全球Covid19統計資料表</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>國家</td>
+                <td>確診</td>
+                <td>死亡</td>
+                <td>治癒</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tw">
+                <td>台灣</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="china">
+                <td>中國</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="us">
+                <td>美國</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="total">
+                <td>全球統計</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        
+        var countryObject = {
+            Taiwan:[
+               { name:"Taiwan"},
+               { confirmed:455},
+               { died:7},
+               { recorver: 440},
+               ],
+               
+            UnitedState:[
+               { name:" United State"},
+               { confirmed:3970000},
+               { died:1440000},
+               { recorver: 1160000},
+               ],
+            
+            Brazl:[
+               { name:" Brazl"},
+               { confirmed:2170000},
+               { died:81597},
+               { recorver: 1470000},
+              ],
+
+        }
+
+        //建立Virus資料，傳入Table中
+        let title = document.querySelector("h1");
+        title.innerText = "全球Covid19統計資料表";
+
+        // let number = document.querySelector("table tbody .tw td:nth-child(2)");
+       
+        // number.innerText = countryObject.Taiwan[1].confirmed;
+      
+        // let number2 = document.querySelector("table tbody .tw td:nth-child(3)");
+        // number2.innerText = countryObject.Taiwan[2].died;
+      
+        // let number3 = document.querySelector("table tbody .tw td:nth-child(4)");
+        // number3.innerText = countryObject.Taiwan[3].recorver;
+        QueryData("tw","Taiwan");
+        function QueryData(a,b){
+       for(let i=1;i<4;i++){
+       let number = document.querySelector("table tbody" +a + "td:nth-child(2)");
+       number.innerText = countryObject.b[i].confirmed;
+       let number2 = document.querySelector("table tbody" +a + "td:nth-child(3)");
+       number2.innerText = countryObject.b[i+1].died;
+       let number3 = document.querySelector("table tbody" +a + "td:nth-child(4)");
+
+       number3.innerText = countryObject.b[i+2].recorver;
+    }
+   
+}
+
+
+    
+        // QueryData("china");
+        // QueryData("us");
+
+//input入class 跟.後面的
+
+        // function TotalCount(){
+        //     let total = document.
+        // }
+  </script>
+</body>
+
+</html>

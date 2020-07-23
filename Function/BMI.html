@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>BMI計算器</h1>
+
+    <label for="height">身高:</label>
+    <input type="text" id="height">
+    <br/>
+    <label for="weight">體重:</label>
+    <input type="text" id="weight">
+    <br/>
+    <!-- <input type="submit" name="caculate" id="caculate"> -->
+
+    <button onclick="callBmi()">計算BMI</button>
+    <div id="msg"></div>
+    
+    <script>
+        // let getHeight = document.getElementById("")
+       //方法一
+        function callBmi(){
+            let height = document.getElementById("height").value;
+            let weight = document.getElementById("weight").value;
+            calcBmi(height,weight);
+        }
+    
+        let calcBmi = (height,weight)=>{
+        
+            let bmi= weight / Math.pow((height/100), 2);
+
+            let msg = document.getElementById("msg");
+            //設定文字時用上面兩個而不是innerHTML 為了安全性考量
+            msg.innerText = bmi;
+            msg.textContent = bmi;
+            
+            msg.innerHTML = bmi;
+           //msg.innerHTML = `<b>${bmi}</b>`;
+        }
+        //方法二 但onclick call的function要改變
+
+        // let calcBmi = ()=>{
+        //     let height = document.getElementById("height").value;
+        //     let weight = document.getElementById("weight").value;
+        
+        // let bmi= weight / Math.pow((height/100), 2);
+
+        // let msg = document.getElementById("msg");
+        // msg.innerText = bmi;
+    //}
+    </script>
+</body>
+</html>

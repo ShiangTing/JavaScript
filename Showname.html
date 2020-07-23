@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+
+    </script>
+</head>
+<body>
+    <input id = "lastName" type="text">
+    <input id = "firstName" type="text">
+    <button onclick="ShowFullName()"> ShowFullName</button>
+    <button onclick="ShowName()">Show Name</button>
+    <script>
+        function ShowName(){
+            var lastName = "David";
+            var firstName = "Lee";
+            var fullName = lastName + "," + firstName;
+            alert(fullName);
+        }
+        function ShowFullName()
+        {
+            let lastNames = document.getElementById("lastName").value;
+            let firstNames = document.getElementById("firstName").value;
+            let fullName = lastNames + "," +firstName;
+            console.log(fullName);
+            alert(fullName);
+        }
+ 
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var numbList = ["A","B","C","D","E"]
+        console.log('for');
+        for(let i=0 ;i<numbList.length;i++){
+            console.log(numbList[i]);
+        }
+//拿出index
+console.log('for in');
+        for(let item in numbList){
+            console.log(item);
+        }
+//拿出索引 但只能用在迭代(陣列)
+console.log('for of');
+        for(let item2 of numbList){
+            console.log(numbList);
+        }
+
+        var obj = {
+            Name:"Jimmy",
+            Age:100
+        }
+        //可以拿出屬性名稱
+        for(let item in obj){
+            console.log(item);
+        }
+
+        console.log("拿出屬性值");
+        console.log(obj['Name']);
+        for(let item in obj){
+            console.log(item);
+
+            //let item 是string
+            console.log(obj[item]);
+        }
+    
+    </script>
+</body>
+</html>
