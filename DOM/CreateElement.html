@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var tag = ["h1","div","ul"];
+        // for(i in tag){
+        //     let i = document.createElement(i);
+        // }
+
+        let body = document.querySelector("body");
+        let h1 = document.createElement("h1");
+        h1.innerText = "DOM";
+        body.appendChild(h1);
+        let div = document.createElement("div");
+        body.appendChild(div);
+
+    
+        CreateElement("p",div);
+        var collectionItem = ["p1","p2","p3"]
+        function CreateElement(item, parentItem){
+            for(let i in collectionItem){
+                 i = document.createElement(item)
+                parentItem.appendChild(item);
+            }
+        }
+        p1.innerText = "window";
+        // CreateElement(p2,div);
+        // CreateElement(p3,div);
+      //  let p = document.createElement("p")
+       // p.innerHTML = "window";
+      //  let p1 = document.createElement("p")
+      //  p1.innerHTML = "document";
+      //  let p2 = document.createElement("p")
+       // p2.innerHTML = "html";
+        // div.appendChild(p);
+        // div.appendChild(p1);
+        // div.appendChild(p2);
+
+       // CreateElement(li,ul);
+       // CreateElement(li2,ul);
+       // let ul = document.createElement("ul");
+       // body.appendChild(ul);
+        
+       // let li = document.createElement("li")
+        //li.innerText = "Node";
+        
+       // let li2 = document.createElement("li")
+       // li2.innerText = "NodeList";
+        
+        // ul.appendChild(li);
+        // ul.appendChild(li2);
+
+    </script>
+</body>
+</html>

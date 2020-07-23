@@ -9,25 +9,50 @@
     <h1>Pokemon圖鑑</h1>
     <button onclick="AddElement()">加入寶可夢元素圖片</button>
     <div id='container'></div>
+  
     <script>
         function AddElement(){
+           let randomNumber= $GetRandom(1,809).toString().padStart(3, '0');
             let img = document.createElement('img');
-            img.setAttribute('src','https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png');
+         
+            img.setAttribute('src','https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'+randomNumber+'.png');
+            //img.onclick(alert("Pica!"));
+            
+            
+            AppendChild("#container",img);
 
-            let container = document.getElementById("container");
-            let div = document.querySelector("body div");
+            img.onclick=function(){this.remove();}
 
-            container.appendChild(img);
-            div.appendChild(img);
+
+
+
+            //補充
+            // let filepath=http://///
+            // img.src=filepath;
+
+            // var pokemon = {
+            //     src:'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
+            //     alt:"Pokemon"
+            // };
+
+            // function setAttr(obj){
+            //     for(let prop in obj){
+            //         img.setAttribute(prop,prop[obj])
+            //     }
+            // }
         }
 
-        // function AppendChild(selectorString,element){
-        //     let container = document(selectorString);
-        //     let div = document.querySelector(selectorString);
 
-        //      container.appendChild(element);
-        //      div.appendChild(element);
-        // }
+        function $GetRandom(min ,max){
+            return Math.floor(Math.random()*(max-min)+min)
+        }
+
+        function AppendChild(selectorString,childElement){
+
+            let parentElement = document.querySelector(selectorString);
+            parentElement.appendChild(childElement);
+
+        }
     </script>
 </body>
 </html>
