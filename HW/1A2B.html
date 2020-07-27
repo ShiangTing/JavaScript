@@ -1,222 +1,238 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-   <style>
-       *{
-           font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-           font-weight: bold;
-       }
-       .btn-group{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        * {
+            font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: bold;
+        }
+
+        .btn-group {
             justify-content: center;
             align-items: center;
             padding: 80px 0;
-       }
-       .hint{
-           background-color: lightsalmon;
-           color: white;
-           width: fit-content;
-           /* height: 30px; */
-           border-radius: 10%; 
-           text-align: center;
-           padding: 10px;
-       
-       }
-       .answerrow{
-           margin: 10px 0;
-       }
+        }
+
+        .hint {
+            background-color: lightsalmon;
+            color: white;
+            width: fit-content;
+            /* height: 30px; */
+            border-radius: 10%;
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        .answerrow {
+            margin: 10px 0;
+        }
 
 
-       .guessnumber{
-        padding: 10px;
-       }
+        .guessnumber {
+            padding: 10px;
+        }
 
-       .numberbox{
-           margin: 10px 0;
-           padding: 20px;
-           /* border: grey 1px ; */
-       }
-   </style>
+        .numberbox {
+            margin: 10px 0;
+            padding: 20px;
+            /* border: grey 1px ; */
+        }
+    </style>
     <title>Hello, world!</title>
-  </head>
-  <body>
-   <div class="container">
-      <div class="row">
-          
-        <div class="btn-group btn-block " role="group" aria-label="Basic example">
-            <button type="button btn-block" class="btn  btn-outline-secondary" id="startbtn">開始</button>
-            <button type="button btn-block" class="btn btn-outline-danger " id="startoverbtn">放棄重來</button>
-            <button type="button btn-block" class="btn btn-outline-warning" id="answerbtn">看答案</button>
-          </div>
-      
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="btn-group btn-block " role="group" aria-label="Basic example">
+                <button type="button btn-block" class="btn  btn-outline-secondary" id="startbtn">開始</button>
+                <button type="button btn-block" class="btn btn-outline-danger " id="startoverbtn">放棄重來</button>
+                <button type="button btn-block" class="btn btn-outline-warning" id="answerbtn">看答案</button>
+            </div>
+
         </div>
 
         <!-- <ul class="list-group numberbox" id="numberbox" >
             < <li class="list-group-item"></li>
             <li class="list-group-item">Dapibus ac facilisis in</li> -->
-      
+
         <div class="numberbox" id="numberbox">
 
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">開始猜</span>
+                <span class="input-group-text">開始猜</span>
             </div>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="inputtext" disabled="true" >
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="inputtext"
+                disabled="true">
             <div class="input-group-append">
                 <button type="button btn-block" class="btn  btn-outline-secondary" id="guessbtn">猜</button>
             </div>
-          </div>
+        </div>
     </div>
 
- 
-
-   <script>
-    //    data={
-    //        answer:[],
-    //        guessNumber:[],
-    //         currentValue:''
-    //    };
-
-    let answer=[];
-    let list = [];
-    let guessNumber='';
 
 
-    const inputText = document.querySelector('#inputtext');
-    const guessBtn = document.querySelector('#guessbtn');
-    const startoverbtn = document.querySelector('#startoverbtn');
-    let numberbox = document.querySelector('#numberbox');
-    guessBtn.addEventListener('click',(event)=>{
-        guessNumber = inputText.value;
-        CheckAnswer();
-      //  CheckWin();
-        
-    })
+    <script>
+        //    data={
+        //        answer:[],
+        //        guessNumber:[],
+        //         currentValue:''
+        //    };
+
+        let answer = [];
+        let list = [];
+        let guessNumber = '';
+
+
+        const inputText = document.querySelector('#inputtext');
+        const guessBtn = document.querySelector('#guessbtn');
+        const startoverbtn = document.querySelector('#startoverbtn');
+        let numberbox = document.querySelector('#numberbox');
+        guessBtn.addEventListener('click', (event) => {
+            guessNumber = inputText.value;
+            CheckAnswer();
+            //  CheckWin();
+
+        })
 
 
 
-    ///產生變數///
-    const start = document.querySelector("#startbtn");
-    start.addEventListener('click',(event)=>{
-        inputText.disabled = false;
-        createRandom();
+        ///產生變數///
+        const start = document.querySelector("#startbtn");
+        start.addEventListener('click', (event) => {
+            inputText.disabled = false;
+            createRandom();
 
-    })
- 
-    const answerBtn = document.querySelector('#answerbtn');
-    answerBtn.addEventListener('click',(event)=>{
-        let answerString = answer.toString();
-        alert(`答案是${answerString}`);
-    })
+        })
+
+        const answerBtn = document.querySelector('#answerbtn');
+        answerBtn.addEventListener('click', (event) => {
+            let answerString = answer.toString();
+            alert(`答案是${answerString}`);
+        })
 
 
- 
-function createRandom(){
-   let temp = 0
-   while(answer.length<4){
-    let number = Math.floor(Math.random()*10);
-        if(answer.indexOf(number)<0) {
-        
-            answer.push(number);
-           
+
+        function createRandom() {
+            let temp = 0
+            while (answer.length < 4) {
+                let number = Math.floor(Math.random() * 10);
+                if (answer.indexOf(number) < 0) {
+
+                    answer.push(number);
+
+                }
+                // else{
+                console.log(answer);
+                // }
+            }
+            // for(let i =1 ;answer.length<=4; i++){
+            //     let number = Math.floor(Math.random()*10);
+            //     if(answer.indexOf(number)<0) {
+
+            //         i--;
+            //         continue;
+            //     }
+            //     else{
+            //         answer.push(number);
+            //         console.log(answer);
+            //     }
+
+            // }
         }
-        // else{
-            console.log(answer);
-        // }
-   }
-    // for(let i =1 ;answer.length<=4; i++){
-    //     let number = Math.floor(Math.random()*10);
-    //     if(answer.indexOf(number)<0) {
-        
-    //         i--;
-    //         continue;
-    //     }
-    //     else{
-    //         answer.push(number);
-    //         console.log(answer);
-    //     }
-       
-    // }
-}
-function CreateELement(a,b){
-    numberbox.insertAdjacentHTML("beforeend",`<div class="d-flex flex-row answerrow" id="element">
+
+        function CreateELement(a, b) {
+
+            numberbox.insertAdjacentHTML("beforeend", `<div class="d-flex flex-row answerrow" id="element">
         <div class="hint" id="hint">${a}A${b}B</div>
         <div class="guessnumber">${parseInt(guessNumber)}</div>
         </div>`);
-}
+        }
 
 
 
-    ///判斷function///
-function CheckAnswer(){
-    let a =0;
-    let b =0;
-    if(isNaN(guessNumber) || guessNumber.split('').length!=4){
-        alert("請輸入四個數字");
-    }
-    else {
-        let splitNumber = guessNumber.split('').map(function(item){return parseInt(item,10)});
-        console.log(typeof answer);
-        splitNumber.forEach((item,index)=>{
-            console.log(guessNumber);
-            let answerIndex = answer.indexOf(item);
-            console.log(answerIndex);
-            if(answerIndex != -1){
-                if(answerIndex == index){
-                    a= a+1;
+        ///判斷function///
+        function CheckAnswer() {
+            let a = 0;
+            let b = 0;
+            if (isNaN(guessNumber) || guessNumber.split('').length != 4) {
+                alert("請輸入四個數字");
+            } else {
+                let splitNumber = guessNumber.split('').map(function (item) {
+                    return parseInt(item, 10)
+                });
+                console.log(typeof answer);
+                splitNumber.forEach((item, index) => {
+                    console.log(guessNumber);
+                    let answerIndex = answer.indexOf(item);
+                    console.log(answerIndex);
+                    if (answerIndex != -1) {
+                        if (answerIndex == index) {
+                            a = a + 1;
+                        } else {
+                            b = b + 1;
+                        }
+                    }
+                })
+                CreateELement(a, b);
+            
+                let hint = document.querySelectorAll(".hint");
+                let hintLength = hint.length;
+          
+                if (a == 4 && b==0) {
+                
+                    hint[hintLength-1].style.backgroundColor = "lightgreen";
+                    alert("答對了，遊戲獲勝")
                 }
-                else{
-                    b = b+1;
-                }
+
             }
-        })
-        CreateELement(a,b);
-        let hint = document.querySelector("#hint");
-        if(a==4){
-        hint.style.backgroundColor = "lightgreen";
-       alert("答對了，遊戲獲勝")
-     }
 
-    }
+        }
+        startoverbtn.addEventListener('click', StartOver);
 
-}
-startoverbtn.addEventListener('click',StartOver);
+        //重新開始
+        function StartOver() {
+            let element = document.querySelector('#element')
+            inputText.value = '';
+            alert(`答案是${answer.toString()}`);
+            element.remove();
 
-//重新開始
-function StartOver(){
-    let element = document.querySelector('#element')
-    inputText.value='';
-    alert(`答案是${answer.toString()}`);
-    element.remove();
-
-}
-// function CheckWin(){
-//     // if(a==4){
-//     //     alert("答對了，遊戲獲勝")
-//     // }
-// }
+        }
+        // function CheckWin(){
+        //     // if(a==4){
+        //     //     alert("答對了，遊戲獲勝")
+        //     // }
+        // }
 
 
 
 
 
 
-    ///判斷生成///
-
-
-
-
-   </script>
+        ///判斷生成///
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>
