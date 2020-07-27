@@ -8,6 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
    <style>
+       *{
+           font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+           font-weight: bold;
+       }
        .btn-group{
             justify-content: center;
             align-items: center;
@@ -23,8 +27,9 @@
            padding: 10px;
        
        }
-/* 
-       //input鎖起來 */
+       .answerrow{
+           margin: 10px 0;
+       }
 
 
        .guessnumber{
@@ -62,7 +67,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">開始猜</span>
             </div>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="inputtext" >
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="inputtext" disabled="true" >
             <div class="input-group-append">
                 <button type="button btn-block" class="btn  btn-outline-secondary" id="guessbtn">猜</button>
             </div>
@@ -99,6 +104,7 @@
     ///產生變數///
     const start = document.querySelector("#startbtn");
     start.addEventListener('click',(event)=>{
+        inputText.disabled = false;
         createRandom();
 
     })
@@ -139,8 +145,8 @@ function createRandom(){
     // }
 }
 function CreateELement(a,b){
-    numberbox.insertAdjacentHTML("beforeend",`<div class="d-flex flex-row " id="element">
-        <div class="hint">${a}A${b}B</div>
+    numberbox.insertAdjacentHTML("beforeend",`<div class="d-flex flex-row answerrow" id="element">
+        <div class="hint" id="hint">${a}A${b}B</div>
         <div class="guessnumber">${parseInt(guessNumber)}</div>
         </div>`);
 }
@@ -171,9 +177,9 @@ function CheckAnswer(){
             }
         })
         CreateELement(a,b);
-
+        let hint = document.querySelector("#hint");
         if(a==4){
-        hint.setattribute();
+        hint.style.backgroundColor = "lightgreen";
        alert("答對了，遊戲獲勝")
      }
 
