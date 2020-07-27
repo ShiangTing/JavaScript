@@ -203,11 +203,14 @@
 
         //重新開始
         function StartOver() {
-            let element = document.querySelector('#element')
+            let element = document.querySelectorAll('.answerrow')
             inputText.value = '';
             alert(`答案是${answer.toString()}`);
-            element.remove();
-
+            for(var item of element){
+              item.remove();
+            }
+            inputText.disabled = true;
+            answer = [];
         }
         // function CheckWin(){
         //     // if(a==4){
