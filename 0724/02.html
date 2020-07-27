@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        .layer1{
+            width: 500px;
+            height: 500px;
+            background-color: red;
+        }
+        .layer2{
+            width: 300px;
+            height: 300px;
+            background-color: blue;
+        }
+        .layer3{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="layer1">
+        <div id="layer2">
+            <div id="layer3"></div>
+        </div>
+    </div>
+    https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/
+    <script>
+        let layer1_Div = document.getElementById('layer1')
+        let layer2_Div = document.getElementById('layer2')
+        let layer3_Div = document.getElementById('layer3')
+
+        layer3_Div.addEventListener('click',function(){
+            console.log("我是Layer3");
+        })
+        layer3_Div.addEventListener('click',(e)=>{
+            console.log(e);
+            console.log("我是Layer3");
+            e.stopPropagation;
+        })
+    </script>
+</body>
+</html>

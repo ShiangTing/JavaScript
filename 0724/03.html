@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table table *{
+            border: 1px solid black;
+           
+        }
+        tr{
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+
+        //目的 在body加上Table
+        //3*3
+        var body = document.getElementsByTagName('body')[0]
+
+        let table = document.createElement('table');
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+       
+        let theadtr = document.createElement('tr');
+        for(let i = 0;i<3;i++){
+            let theadtrth = document.createElement('th');
+            theadtrth.innerText = i
+            theadtr.appendChild(theadtrth)
+        }
+      thead.appendChild(theadtr);
+     //   let tbodytr = document.createElement('tr');
+        for(let a=0;a<3;a++){
+            let tbodytr = document.createElement('tr');
+        
+        for(let i = 0;i<3;i++){
+            let tbodytrtd = document.createElement('td');
+           tbodytrtd.innerText = i
+           tbodytr.appendChild(tbodytrtd)
+        }
+        tbody.appendChild(tbodytr);
+    }
+    table.appendChild(thead)
+    table.appendChild(tbody)
+    body.appendChild(table)
+
+    </script>
+    
+</body>
+</html>

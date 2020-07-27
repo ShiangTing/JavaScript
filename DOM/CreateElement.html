@@ -7,28 +7,70 @@
 </head>
 <body>
     <script>
-        // var tag = ["h1","div","ul"];
-        // for(i in tag){
-        //     let i = document.createElement(i);
-        // }
+
 
         let body = document.querySelector("body");
-        let h1 = document.createElement("h1");
-        h1.innerText = "DOM";
-        body.appendChild(h1);
-        let div = document.createElement("div");
-        body.appendChild(div);
+      
+        let element = ["h1","div","ul"];
+        element.forEach(item=>{
+        body.appendChild(document.createElement(item))
+    
+        })
+        let h1 =  document.querySelector("h1");
+        h1.innerText = "DOM"
+
+     
+        let div = document.querySelector("div");
+        let ul = document.querySelector("ul");
+        let text = ["window","document","html"];
+        for(let i=1; i<=3 ;i++){
+            CreateElement("p",div);
+            CreateElement("li",ul);
+          
+
+        }
+       
+        function CreateElement(childNode,parentNode){
+            parentNode.appendChild(document.createElement(childNode));
+   
+            
+
+        }
+        
+        for(let j=1;j<=3;j++){
+            putinnerText("p",text);
+        }
+        function putinnerText(item,textcollect){
+            
+            item = document.querySelector(item);
+            for(let j=0;j<=1;j++){
+                item.innerText = textcollect[0];
+            }
+          
+           
+           
+        }
+
+       
+        // let h1 = document.createElement("h1");
+        
+        // body.appendChild(h1);
+        // let div = document.createElement("div");
+        // body.appendChild(div);
 
     
-        CreateElement("p",div);
-        var collectionItem = ["p1","p2","p3"]
-        function CreateElement(item, parentItem){
-            for(let i in collectionItem){
-                 i = document.createElement(item)
-                parentItem.appendChild(item);
-            }
-        }
-        p1.innerText = "window";
+        // CreateElement("p",div);
+        // var collectionItem = ["p1","p2","p3"]
+
+
+
+        // function CreateElement(item, parentItem){
+        //     for(let i in collectionItem){
+        //          i = document.createElement(item)
+        //         parentItem.appendChild(item);
+        //     }
+        // }
+        // p1.innerText = "window";
         // CreateElement(p2,div);
         // CreateElement(p3,div);
       //  let p = document.createElement("p")

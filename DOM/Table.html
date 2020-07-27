@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>CSS Selector</title>
+
+    <style>
+        table,
+        td {
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="title"></div>
+    <div id="subtitle" class="bg-info"></div>
+    <table>
+        <thead>
+            <tr>
+                <td>編號</td>
+                <td>姓名</td>
+                <td>電子郵件</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1.</td>
+                <td>Kevin</td>
+                <td>kevin@gmail.com</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>David</td>
+                <td>david@gmail.com</td>
+            </tr>
+            <tr>
+                <td>3.</td>
+                <td>Mary</td>
+                <td>mary@gmail.com</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+
+    <script type="module">
+        import {$g} from './JavaScriptExercise/modules/helpers.js';
+       // var h1 = $g('h1');
+        $g("#title").innerHTML = "<h1>Year 2020</h1>"
+//  function $g(value){
+//      if(value.includes('#')){
+//          return document.querySelector(value);
+//      }
+//      var nodelist = document.querySelectorAll(value);
+//      return nodelist.length == 1 ?nodelist[0] : nodelist;
+//  }
+
+// export{ $g, displayName, $title,$ex,$log};
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <style>
+        .box{
+               /* width: 100px;
+        height: 100px; */
+        padding: 10px;
+        /* //background-color: red; */
+        border: 1px solid #d6d6d6;
+        padding: 30px 0px;
+        border-radius: 4px;
+        }
+        .color{
+        height: 50%;
+        }
+        .color img{
+            height: 30%;
+            width: 30%;
+        }
+        .price{
+            background-color: #FAFAFA;
+            height: 20%;
+            width: 100%;
+        }
+        .pad-top-1{
+            padding-top: 20px;
+        }
+        .pad-top-2{
+            padding-top: 100px;
+        }
+        .store, .wifi{
+            height: 20%;
+        }
+
+        .mg-1{
+            margin: 20px 0;
+        }
+    </style>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="btn-gp">
+        <div class="container">
+            <div class="row text-center justify-content-center">
+        <button class="btn btn-dark "> IPad </button>
+        <button class="btn btn-dark"> IPhone</button>
+            </div>
+        </div>
+    </div>
+   <div class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="picture pad-top-2" id="picture">
+                    
+                </div>
+   
+
+            </div>
+            
+            
+            
+            
+            
+            <div class="col-lg-6">
+                <div class="title">
+                    <h2>購買 iPad</h2>
+                    <p>購買 iPad 可享免額外付費運送服務。</p>
+                </div>
+                <div class="specpad-top-1">
+                  <div class="colorbox pad-top-1">
+                    <h5>外觀</h5>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center ipad-color" id="colorgrey" name="grey">
+                                <div class="color">
+                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/finish-spacegray-201903?wid=102&hei=102&fmt=png-alpha&.v=1552422652805" alt=""></div>
+                                <div class="text">太空灰</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center ipad-color" id="colorsilver" name="silver">
+                                <div class="color">
+                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/finish-silver-201903?wid=102&hei=102&fmt=png-alpha&.v=1552422655664" alt=""></div>
+                                <div class="text">銀色</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center ipad-color" id="colorgold" name="gold">
+                                <div class="color">
+                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/finish-gold-201903?wid=102&hei=102&fmt=png-alpha&.v=1552422653869" alt=""></div>
+                                <div class="text">金色</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+                  <div class="store pad-top-1">
+                    <h5>儲存裝置</h5>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center" id="minstore">
+                               <!-- <div class="color"></div> -->
+                                <div class="text">32GB</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center" id="maxstore">
+                                <!-- <div class="color"></div> -->
+                                <div class="text">128GB</div>
+                            </div>
+                        </div>
+
+                    </div>
+               
+
+                  </div>
+                  <div class="wifi pad-top-1">
+                    <h5>WI-FI加行動網路</h5>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center" id="wifi">
+                               <!-- <div class="color"></div> -->
+                                <div class="text">WI-FI</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="box text-center d-flex flex-column align-items-center" id="wifiplus">
+                                <!-- <div class="color"></div> -->
+                                <div class="text">WI-FI + 行動網路</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </div>
+                <div class="price text-center mg-1">
+                    <h3>$1000</h3>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+   </div>
+
+
+
+   <script>
+       
+    const ProductPicture=[
+       {
+           
+        picture:'../assets/ipad-cell-select-gold.png'
+       },
+       {
+          // color:'spacegrey',
+        picture:'../assets/ipad-cell-select-space.png'
+       },
+       {
+        picture:'../assets/ipad-cell-select-silver.png'
+       },
+       {
+        picture:'../assets/ipad-wifi-select-gold.png'
+       },
+       {
+        picture:'../assets/ipad-wifi-select-silver.png'
+       },
+       {
+        picture:'../assets/ipad-wifi-select-space.png'
+       }
+
+
+    ];
+
+    
+    const picture = document.querySelector('#picture');
+    document.querySelectorAll('.ipad-color').forEach((itemC) => {
+        console.log('---- itemC', itemC);
+        itemC.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const domObj = event.target;
+            // const color = domObj.attributes.name.value;
+            console.log('---- domObj', domObj);
+            // console.log('---- color', color);
+            // picture.attributes.src.value = '';
+        }, true)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    let grey = document.querySelector("#colorgrey");
+    let silver = document.querySelector("#colorsilver");
+    let gold = document.querySelector("#colorgold");
+    let wifi = document.querySelector("#wifi");
+    let wifiplus = document.querySelector("#wifiplus");
+    let img = document.createElement('img');
+    let picDiv = document.querySelector("#picture");
+    Listener(grey);
+    Listener(silver);
+    Listener(gold);
+   // ListenWifi(wifi);
+  
+   function Listener(item){
+       item.addEventListener('click',(event)=>{
+           item.attributes.name.value;
+          CheckSpec(item);
+          ListenWifi(item,wifiplus);
+       })
+   }
+   function  ListenWifi(item,item2){
+    item2.addEventListener('click',(event)=>{
+       
+          // item = document
+           CheckhasWifi(item,item2);
+       })
+   }
+
+   function CheckSpec(color){
+       if(color==grey){
+       img.setAttribute('src',ProductPicture[5].picture);
+        picDiv.appendChild(img);
+       }
+        if(color==gold){
+       img.setAttribute('src',ProductPicture[3].picture);
+        picDiv.appendChild(img);
+       }
+      if(color==silver){
+       img.setAttribute('src',ProductPicture[4].picture);
+        picDiv.appendChild(img);
+       }
+   }
+
+   function CheckhasWifi(color,wifispec){
+       if(color==grey && wifispec==wifiplus){
+
+       img.setAttribute('src',ProductPicture[1].picture);
+        picDiv.appendChild(img);
+       }
+       else if(color==silver && wifispec==wifiplus){
+    
+       img.setAttribute('src',ProductPicture[2].picture);
+        picDiv.appendChild(img);
+       }
+       else if(color==gold && wifispec==wifiplus){
+     
+       img.setAttribute('src',ProductPicture[0].picture);
+        picDiv.appendChild(img);
+       }
+
+
+   }
+  
+
+    function SetImg(){
+        let picDiv = document.querySelector("#picture");
+        let img = document.createElement('img');
+        img.setAttribute('src','');
+        picDiv.appendChild(img);
+    }
+
+
+    // const pickPicArr = ProductColor.filter((item) => {
+    //     return item.color === selectedColor && item.hasWifi === selectedWifi;
+    // })
+
+    // picUrl =  pickPicArr[0].picture;
+
+
+   </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
