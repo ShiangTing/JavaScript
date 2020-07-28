@@ -12,16 +12,23 @@
 
     <title>Apple</title>
     <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif,'Microsoft JhengHei';
+        }
         .box {
-            /* width: 100px;
-        height: 100px; */
-            /* padding: 10px; */
-            /* //background-color: red; */
+            margin: 10px 0;
             border: 1px solid #d6d6d6;
             padding: 30px 0px;
             border-radius: 4px;
         }
-
+        .wifitext {
+         font-weight: 600;
+         font-size: 20px;
+        }
+        .storagetext{
+        font-weight: 600;
+         font-size: 29px; 
+        }
         .color {
             height: 50%;
         }
@@ -31,10 +38,24 @@
             width: 30%;
         }
 
-        .price {}
+        .price ,.wifiprice {
+            font-size: 13px;
+            color: #333333;
+        }
 
         .totalprice {
+     
+        font-size: 40px;
+        font-weight: bold;
+
+        }
+
+        .content{
+            justify-content: center;
+            display: flex;
+          align-items: center;
             background-color: #FAFAFA;
+            margin: 20px 0;
             height: 20%;
             width: 100%;
         }
@@ -55,6 +76,23 @@
         .mg-1 {
             margin: 20px 0;
         }
+        .context{
+   
+         overflow: scroll;
+        
+        }
+
+        .context::-webkit-scrollbar{
+            width: 0px;
+            background: transparent; /* Chrome/Safari/Webkit */
+        }
+        .context {
+         scrollbar-width: none; /* Firefox */
+         -ms-overflow-style: none;  /* IE 10+ */
+        }
+
+        
+ 
     </style>
 </head>
 
@@ -82,7 +120,8 @@
 
 
 
-                <div class="col-lg-6 ">
+                <div class="col-lg-6 context ">
+               
                     <div class="title" id="title">
                         <h2></h2>
                     
@@ -98,14 +137,7 @@
                                             <div class="color" id="reddot"></div>
                                             <div class="text"></div>
                                         </div>
-                                    </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="box text-center d-flex flex-column align-items-center" id="colorgrey">
-                                                <div class="color" id="reddot"></div>
-                                                <div class="text"></div>
-                                            </div>
-                                     </div> -->
+                                    </div>-->
 
                             <!-- </div> -->
 
@@ -120,13 +152,6 @@
                                         <div class="price"></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="maxstore">
-                                        <div class="text"></div>
-                                        <div class="price"></div>
-                                    </div>
-                                </div> -->
-                            <!-- 
                             </div> -->
 
 
@@ -140,13 +165,6 @@
    
                                         <div class="text">WI-FI</div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="wifiplus">
-
-                                        <div class="text">WI-FI + 行動網路</div>
-
-                                    </div>
                                 </div> -->
 
                             <!-- </div> -->
@@ -159,10 +177,11 @@
 
                     </div> -->
                     </div>
-                </div>
+                    </div>
+             
 
-
-
+             
+           
 
             </div>
 
@@ -331,12 +350,6 @@
 
 
 
-
-        //console.log(row)
-        // const rowStorage = document.querySelector('#rowStorage');
-        // const rowWifi = document.querySelector('#rowwifi');
-        // const wifitext = document.querySelectorAll('.wifitext');
-
         let currentPrice = Product.Ipad.Spec.Storage[0].price;
         let picture = document.querySelector('#picture');
         let title = document.querySelector('.title h2');
@@ -366,7 +379,7 @@
             setHtml();
             title.innerText = "購買IPhone"
             picture.src="../assets/iphone-se-black.png";
-         
+       
             var row = document.querySelector('#row');
 
             var rowStorage = document.querySelector('#rowStorage');
@@ -400,7 +413,7 @@
 
             })
             let price = document.querySelector(".totalprice");
-            price.innerText = `NT${currentPrice}起`;
+            price.innerText = `NT$${currentPrice}起`;
 
 
         })
@@ -414,9 +427,10 @@
             content.innerHTML = '';
             picture.src="../assets/ipad-wifi-select-spacegray.png";
             setHtml();
+    
             title.innerText = "購買IPad"
             let wifi = document.querySelector('.wifi');
-            let h1 = document.createElement('h5');
+            let h1 = document.createElement('h4');
             h1.innerText = "WI-FI加行動網路";
             wifi.append(h1);
             let div3 = document.createElement('div');
@@ -514,7 +528,7 @@
 
             })
             let price = document.querySelector(".totalprice");
-            price.innerText = `NT${currentPrice}起`;
+            price.innerText = `NT$${currentPrice}起`;
 
 
 
@@ -534,7 +548,7 @@
         function createStorageHtml(rootEl, dataSet) {
             dataSet.forEach(element => {
                 rootEl.insertAdjacentHTML("beforeend",
-                    `<div class="col-lg-6"><div class="box text-center d-flex flex-column align-items-center storage-select" name="${element.price}" ><div class="text">${element.size}</div><div class="price">NT$${element.price}起</div></div></div>`
+                    `<div class="col-lg-6"><div class="box text-center d-flex flex-column align-items-center storage-select" name="${element.price}" ><div class="text storagetext">${element.size}</div><div class="price">NT$${element.price}起</div></div></div>`
                 )
 
             });
@@ -577,54 +591,15 @@
 
 
         ///圖片顏色選取互動///
-        // 
-        // document.querySelectorAll('.color-select').forEach((item) => {
-        //     item.addEventListener('click', (event) => {
-        //         const obj = event.currentTarget;
-        //         //const color = obj.attributes.name.value
-        //         const color2 = obj.getAttribute('name');
-
-        //         picture.setAttribute('src', `../assets/ipad-wifi-select-${color2}.png`)
-
-        //         console.log("ahah")
-        //     })
-        // });
-
-
 
         //圖片wifi選取互動//
-        // document.querySelectorAll('.wifi-select').forEach((item) => {
-        //     item.addEventListener('click', (event) => {
-        //         const wifiColor = event.currentTarget.getAttribute('name');
-        //         const color = picture.getAttribute('src');
+   
 
-        //         const colorSplit = color.split('-');
-        //         if (wifiColor == "true") {
-        //             picture.setAttribute('src', `../assets/ipad-cell-select-${colorSplit[3]}`);
-        //         } else {}
-
-        //         const changewifiPrice = event.currentTarget.querySelector('.wifi-select .wifiprice')
-        //             .innerText;
-
-        //         currentPrice = parseInt(changewifiPrice.split('$')[1].split('起')[0]);
-
-        //         console.log(currentPrice);
-        //         price.innerText = `NT$${currentPrice}起`;
-
-        //     })
-
-
-        // })
-
-
-        //算錢
-        // let price = document.querySelector(".totalprice");
-        // price.innerText = `NT${currentPrice}起`;
 
         //創造Html骨幹//
         function setHtml() {
             let colorbox = document.querySelector('.colorbox');
-            let h5 = document.createElement('h5');
+            let h5 = document.createElement('h4');
             h5.innerText = "外觀";
             colorbox.append(h5);
             let div = document.createElement('div');
@@ -633,7 +608,7 @@
             colorbox.append(div);
 
             let store = document.querySelector('.store');
-            let h = document.createElement('h');
+            let h = document.createElement('h4');
             h.innerText = "儲存裝置";
             store.append(h);
             let div2 = document.createElement('div');
@@ -644,6 +619,14 @@
             let div4 = document.createElement('div');
             div4.setAttribute('class', 'totalprice text-center mg-1');
             content.append(div4);
+        }
+
+
+        function scroll(){
+            let parent  = document.querySelector('.context');
+            let child  = document.querySelector('.scroll');
+            child.style.paddingRight = child.offsetWidth - child.clientWidth + "px";
+
         }
     </script>
 
