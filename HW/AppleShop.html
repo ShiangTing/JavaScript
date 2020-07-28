@@ -21,6 +21,14 @@
             padding: 30px 0px;
             border-radius: 4px;
         }
+
+        .box:hover{
+            border-color: darkgray;
+            cursor: pointer;
+           background-color: snow;
+        }
+
+
         .wifitext {
          font-weight: 600;
          font-size: 20px;
@@ -79,7 +87,7 @@
         .context{
    
          overflow: scroll;
-        
+         padding: 20px 0;
         }
 
         .context::-webkit-scrollbar{
@@ -178,20 +186,10 @@
                     </div> -->
                     </div>
                     </div>
-             
-
-             
-           
 
             </div>
 
-
-
-
         </div>
-
-
-
 
     </div>
 
@@ -362,11 +360,10 @@
         const wifiIdSet = document.querySelector('#wifi');
         const storeIdSet = document.querySelector('#store');
         const colorboxIdSet = document.querySelector('#colorbox');
-
+   
         ///生成HTML/// 
         let ipadBtn = document.querySelector('#button_ipad')
         let iphoneBtn = document.querySelector('#button_iphone')
-
 
         ///切換Iphone///
         iphoneBtn.addEventListener('click', (event) => {
@@ -377,6 +374,7 @@
             content.innerHTML = '';
 
             setHtml();
+            // addColor();
             title.innerText = "購買IPhone"
             picture.src="../assets/iphone-se-black.png";
        
@@ -427,6 +425,7 @@
             content.innerHTML = '';
             picture.src="../assets/ipad-wifi-select-spacegray.png";
             setHtml();
+          
     
             title.innerText = "購買IPad"
             let wifi = document.querySelector('.wifi');
@@ -443,11 +442,14 @@
             var rowWifi = document.querySelector('#rowwifi');
             var wifitext = document.querySelectorAll('.wifitext');
 
-
+         
             createWifiSection(rowWifi, Product.Ipad.HtmlData.HasWifi);
             createColorHtml(row, Product.Ipad.HtmlData.ColorDot);
             createStorageHtml(rowStorage, Product.Ipad.Spec.Storage);
 
+            var allBox = document.querySelectorAll('.box');
+            // console.log(allBox)
+            // addColor(allBox);
             ///圖片顏色選取互動///
             document.querySelectorAll('.color-select').forEach((item) => {
                 item.addEventListener('click', (event) => {
@@ -533,6 +535,21 @@
 
 
         })
+
+        // function addColor(box){
+           
+        //     box.forEach((item)=>{
+        //     item.addEventListener('click',(event)=>{
+        //         event.currentTarget.style.borderColor = "skyblue"
+
+
+        //     })
+
+
+
+        // })
+   // }
+
 
 
         function createColorHtml(rootEl, dataSet) {
