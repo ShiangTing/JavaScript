@@ -62,8 +62,8 @@
     <div class="btn-gp">
         <div class="container">
             <div class="row text-center justify-content-center">
-                <button class="btn btn-dark "> IPad </button>
-                <button class="btn btn-dark"> IPhone</button>
+                <button class="btn btn-dark " id="button_ipad"> IPad </button>
+                <button class="btn btn-dark" id="button_iphone"> IPhone</button>
             </div>
         </div>
     </div>
@@ -105,38 +105,7 @@
                                                 <div class="color" id="reddot"></div>
                                                 <div class="text"></div>
                                             </div>
-                                        </div>
-                                
-                            
-                                
-
-                                <div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="colorgrey">
-                                        <div class="color" id="reddot"></div>
-                                        <div class="text"></div>
-                                    </div>
-                                </div><div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="colorgrey">
-                                        <div class="color" id="reddot"></div>
-                                        <div class="text"></div>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="colorsilver">
-                                        <div class="color"><img
-                                                src=""
-                                                alt=""></div>
-                                        <div class="text"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="box text-center d-flex flex-column align-items-center" id="colorgold">
-                                        <div class="color"><img
-                                                src=""
-                                                alt=""></div>
-                                        <div class="text"></div>
-                                    </div>
-                                </div> -->
+                                     </div> -->
 
                             </div>
 
@@ -186,7 +155,7 @@
 
                     </div>
                     <div class="totalprice text-center mg-1">
-                   
+
                     </div>
 
                 </div>
@@ -294,38 +263,31 @@
             Iphone: {
 
                 ProductDetails: [{
-                        Name: "IPhone11"
+                        Name: "IPhoneSE"
                     },
 
                 ],
                 //{ProductName:"Ipad"},
-                HtmlData: [{
-                        tagName: "白色",
-                        img: "url()"
-                    },
-                    {
-                        tagName: "黑色",
-                        img: "url()"
-                    },
-                    {
-                        tagName: "綠色",
-                        img: "url()"
-                    },
-                    {
-                        tagName: "黃色",
-                        img: "url()"
-                    },
-                    {
-                        tagName: "紫色",
-                        img: "url()"
-                    },
-                    {
-                        tagName: "紅色",
-                        img: "url()"
-                    },
+                HtmlData: {
+                    ColorDot: [{
+                            tagName: "白色",
+                            img: "../assets/finish-white-201909.jpg",
+                            idName: "white"
+                        },
+                        {
+                            tagName: "黑色",
+                            img: "../assets/finish-black-201909.jpg",
+                            idName: "black"
+                        },
 
-                ],
+                        {
+                            tagName: "紅色",
+                            img: "../assets/finish-red-201909.jpg",
+                            idName: "red"
+                        },
 
+                    ]
+                },
                 Spec: {
                     Storage: [{
                             size: "64GB",
@@ -352,18 +314,7 @@
                         color: "dark",
                         picture: "url"
                     },
-                    {
-                        color: "green",
-                        picture: "url"
-                    },
-                    {
-                        color: "yellow",
-                        picture: "url"
-                    },
-                    {
-                        color: "purple",
-                        picture: "url"
-                    },
+
                     {
                         color: "red",
                         picture: "url"
@@ -386,6 +337,7 @@
         const hasWifiPriceCount = 4500;
 
         const row = document.querySelector('#row');
+        console.log(row)
         const rowStorage = document.querySelector('#rowStorage');
 
         const rowWifi = document.querySelector('#rowwifi');
@@ -393,99 +345,243 @@
         console.log(row);
         console.log(wifitext);
         ///生成HTML/// 
-        Product.Ipad.HtmlData.ColorDot.forEach(element => {
-            row.insertAdjacentHTML("beforeend",
-                `<div class= "col-lg-6"><div class="box text-center d-flex flex-column align-items-center color-select" name="${element.idName}"> <div class="color"><img src="${element.img}"></div> <div class="text">${element.tagName}</div></div></div>`
-                )
-        });
+        let ipadBtn = document.querySelector('#button_ipad')
+        let iphoneBtn = document.querySelector('#button_iphone')
+        
+        
+        ///切換Iphone///
+        iphoneBtn.addEventListener('click', (event) => {
+            //清除innerHTML//
+            row.innerHTML = '';
+            rowStorage.innerHTML = '';
+            rowWifi.innerHTML = '';
 
-        Product.Ipad.Spec.Storage.forEach(element => {
-            rowStorage.insertAdjacentHTML("beforeend",
-                `<div class="col-lg-6"><div class="box text-center d-flex flex-column align-items-center storage-select" name="${element.price}" ><div class="text">${element.size}</div><div class="price">NT$${element.price}起</div></div></div>`
-                )
+            createColorHtml(row, Product.Iphone.HtmlData.ColorDot);
+            createStorageHtml(rowStorage, Product.Ipad.Spec.Storage);
 
-        });
-
-        Product.Ipad.HtmlData.HasWifi.forEach(element => {
-            rowWifi.insertAdjacentHTML("beforeend",
-                `<div class="col-lg-6">
-                    <div class="box text-center d-flex flex-column align-items-center wifi-select" name="${element.wifiplus}"> 
-                        <div class="text wifitext">${element.wifiType}</div>
-                        <div class="wifiprice" name="${currentPrice + hasWifiPriceCount}">NT$${currentPrice + hasWifiPriceCount}起</div>
-                    </div> 
-                </div>`
-                )
-
-        });
-
-      //  const StorageandInternet = Product.Ipad.Spec.Storage.concat(Product.Ipad.Spec.Internet)
+            ///圖片顏色選取互動///
+            document.querySelectorAll('.color-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    const obj = event.currentTarget;
+                    const color2 = obj.getAttribute('name');
+                    picture.setAttribute('src', `../assets/iphone-se-${color2}.png`)
+                    console.log("ahah")
+                })
+            });
 
 
 
-      ///選取容量之價錢變化///
-        document.querySelectorAll('.storage-select').forEach((item)=>{
-            item.addEventListener('click',(event) =>{
-               // const storage = event.currentTarget.querySelector('.price').innerText;
-                const storage = event.currentTarget.getAttribute('name');
-               currentPrice =  parseInt(storage);
-               const changePrice = document.querySelectorAll('.wifiprice');
-            //    for(let item of changePrice ){
-            //       item.innerHTML=`NT${currentPrice + hasWifiPriceCount}起`;
-            //    }
+            document.querySelectorAll('.storage-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    // const storage = event.currentTarget.querySelector('.price').innerText;
+                    const storage = event.currentTarget.getAttribute('name');
+                    currentPrice = parseInt(storage);
+                    const changePrice = document.querySelectorAll('.wifiprice');
+                    for (let item of changePrice) {
+                        item.innerHTML = `NT${currentPrice }起`;
+                    }
+                    price.innerText = `NT$${currentPrice}起`;
 
-               changePrice[0].innerHTML = `NT$${currentPrice}起`;
-               changePrice[1].innerHTML = `NT$${currentPrice+hasWifiPriceCount}起`;
-               price.innerText = `NT$${currentPrice}起`;
-                
+                })
+
+            })
+
+        })
+
+        ///切換Ipad///
+        ipadBtn.addEventListener('click', (event) => {
+            row.innerHTML = '';
+            rowStorage.innerHTML = '';
+            rowWifi.innerHTML = '';
+
+            createWifiSection(rowWifi, Product.Ipad.HtmlData.HasWifi);
+            createColorHtml(row, Product.Ipad.HtmlData.ColorDot);
+            createStorageHtml(rowStorage, Product.Ipad.Spec.Storage);
+
+            ///圖片顏色選取互動///
+            document.querySelectorAll('.color-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    const obj = event.currentTarget;
+                    //const color = obj.attributes.name.value
+                    const color2 = obj.getAttribute('name');
+
+                    picture.setAttribute('src', `../assets/ipad-wifi-select-${color2}.png`)
+
+                    console.log("ahah")
+                })
+            });
+
+            document.querySelectorAll('.wifi-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    const wifiColor = event.currentTarget.getAttribute('name');
+                    const color = picture.getAttribute('src');
+
+                    const colorSplit = color.split('-');
+                    if (wifiColor == "true") {
+                        picture.setAttribute('src',
+                            `../assets/ipad-cell-select-${colorSplit[3]}`);
+                    } else {}
+
+                    const changewifiPrice = event.currentTarget.querySelector(
+                        '.wifi-select .wifiprice').innerText;
+
+                    currentPrice = parseInt(changewifiPrice.split('$')[1].split('起')[0]);
+
+                    console.log(currentPrice);
+                    price.innerText = `NT$${currentPrice}起`;
+
+                })
+
+
+            })
+
+            document.querySelectorAll('.wifi-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    const wifiColor = event.currentTarget.getAttribute('name');
+                    const color = picture.getAttribute('src');
+
+                    const colorSplit = color.split('-');
+                    if (wifiColor == "true") {
+                        picture.setAttribute('src',
+                            `../assets/ipad-cell-select-${colorSplit[3]}`);
+                    } else {}
+
+                    const changewifiPrice = event.currentTarget.querySelector(
+                        '.wifi-select .wifiprice').innerText;
+
+                    currentPrice = parseInt(changewifiPrice.split('$')[1].split('起')[0]);
+
+                    console.log(currentPrice);
+                    price.innerText = `NT$${currentPrice}起`;
+
+                })
+
+
             })
 
 
+            document.querySelectorAll('.storage-select').forEach((item) => {
+                item.addEventListener('click', (event) => {
+                    const storage = event.currentTarget.getAttribute('name');
+                    currentPrice = parseInt(storage);
+                    const changePrice = document.querySelectorAll('.wifiprice');
+                    //    for(let item of changePrice ){
+                    //       item.innerHTML=`NT${currentPrice + hasWifiPriceCount}起`;
+                    //    }
+                    changePrice[0].innerHTML = `NT$${currentPrice}起`;
+                    changePrice[1].innerHTML = `NT$${currentPrice+hasWifiPriceCount}起`;
+                    price.innerText = `NT$${currentPrice}起`;
 
-        }) 
-
-
-
-        ///圖片顏色選取互動///
-        let picture = document.querySelector('#picture');
-        document.querySelectorAll('.color-select').forEach((item) => {
-            item.addEventListener('click', (event) => {
-                const obj = event.currentTarget;
-                //const color = obj.attributes.name.value
-                const color2 = obj.getAttribute('name');
-
-                picture.setAttribute('src', `../assets/ipad-wifi-select-${color2}.png`)
-
-                console.log("ahah")
-            })
-        });
-
-        //圖片wifi選取互動//
-        document.querySelectorAll('.wifi-select').forEach((item) => {
-            item.addEventListener('click', (event) => {
-                const wifiColor = event.currentTarget.getAttribute('name');
-                const color = picture.getAttribute('src');
-
-                const colorSplit = color.split('-');
-                if (wifiColor == "true") {
-                    picture.setAttribute('src', `../assets/ipad-cell-select-${colorSplit[3]}`);
-                } else {}
-
-                const changewifiPrice =  event.currentTarget.querySelector('.wifi-select .wifiprice').innerText;
-
-                currentPrice = parseInt(changewifiPrice.split('$')[1].split('起')[0]);
-
-                console.log(currentPrice);
-                price.innerText = `NT$${currentPrice}起`;
+                })
 
             })
+
 
 
         })
 
 
+        function createColorHtml(rootEl, dataSet) {
+            dataSet.forEach(element => {
+                rootEl.insertAdjacentHTML("beforeend",
+                    `<div class= "col-lg-6"><div class="box text-center d-flex flex-column align-items-center color-select" name="${element.idName}"> <div class="color"><img src="${element.img}"></div> <div class="text">${element.tagName}</div></div></div>`
+                )
+            });
+        }
+
+
+        function createStorageHtml(rootEl, dataSet) {
+            dataSet.forEach(element => {
+                rootEl.insertAdjacentHTML("beforeend",
+                    `<div class="col-lg-6"><div class="box text-center d-flex flex-column align-items-center storage-select" name="${element.price}" ><div class="text">${element.size}</div><div class="price">NT$${element.price}起</div></div></div>`
+                )
+
+            });
+        }
+
+        function createWifiSection(rootEl, dataSet) {
+            dataSet.forEach(element => {
+                rootEl.insertAdjacentHTML("beforeend",
+                    `<div class="col-lg-6">
+                <div class="box text-center d-flex flex-column align-items-center wifi-select" name="${element.wifiplus}"> 
+                    <div class="text wifitext">${element.wifiType}</div>
+                    <div class="wifiprice" name="${currentPrice + hasWifiPriceCount}">NT$${currentPrice + hasWifiPriceCount}起</div>
+                </div> 
+            </div>`
+                )
+
+            });
+        }
+
+
+
+
+
+        ///選取容量之價錢變化///
+        document.querySelectorAll('.storage-select').forEach((item) => {
+            item.addEventListener('click', (event) => {
+                // const storage = event.currentTarget.querySelector('.price').innerText;
+                const storage = event.currentTarget.getAttribute('name');
+                currentPrice = parseInt(storage);
+                const changePrice = document.querySelectorAll('.wifiprice');
+                //    for(let item of changePrice ){
+                //       item.innerHTML=`NT${currentPrice + hasWifiPriceCount}起`;
+                //    }
+                changePrice[0].innerHTML = `NT$${currentPrice}起`;
+                changePrice[1].innerHTML = `NT$${currentPrice+hasWifiPriceCount}起`;
+                price.innerText = `NT$${currentPrice}起`;
+
+            })
+
+        })
+
+
+        ///圖片顏色選取互動///
+        // let picture = document.querySelector('#picture');
+        // document.querySelectorAll('.color-select').forEach((item) => {
+        //     item.addEventListener('click', (event) => {
+        //         const obj = event.currentTarget;
+        //         //const color = obj.attributes.name.value
+        //         const color2 = obj.getAttribute('name');
+
+        //         picture.setAttribute('src', `../assets/ipad-wifi-select-${color2}.png`)
+
+        //         console.log("ahah")
+        //     })
+        // });
+
+
+
+        //圖片wifi選取互動//
+        // document.querySelectorAll('.wifi-select').forEach((item) => {
+        //     item.addEventListener('click', (event) => {
+        //         const wifiColor = event.currentTarget.getAttribute('name');
+        //         const color = picture.getAttribute('src');
+
+        //         const colorSplit = color.split('-');
+        //         if (wifiColor == "true") {
+        //             picture.setAttribute('src', `../assets/ipad-cell-select-${colorSplit[3]}`);
+        //         } else {}
+
+        //         const changewifiPrice = event.currentTarget.querySelector('.wifi-select .wifiprice')
+        //             .innerText;
+
+        //         currentPrice = parseInt(changewifiPrice.split('$')[1].split('起')[0]);
+
+        //         console.log(currentPrice);
+        //         price.innerText = `NT$${currentPrice}起`;
+
+        //     })
+
+
+        // })
+
+
         //算錢
         let price = document.querySelector(".totalprice");
         price.innerText = `NT${currentPrice}起`;
+
+        ///按鈕點擊///
     </script>
 
 

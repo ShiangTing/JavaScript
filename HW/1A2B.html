@@ -84,25 +84,19 @@
 
 
     <script>
-        //    data={
-        //        answer:[],
-        //        guessNumber:[],
-        //         currentValue:''
-        //    };
 
         let answer = [];
         let list = [];
         let guessNumber = '';
-
-
         const inputText = document.querySelector('#inputtext');
         const guessBtn = document.querySelector('#guessbtn');
         const startoverbtn = document.querySelector('#startoverbtn');
         let numberbox = document.querySelector('#numberbox');
+        
         guessBtn.addEventListener('click', (event) => {
             guessNumber = inputText.value;
             CheckAnswer();
-            //  CheckWin();
+
 
         })
 
@@ -212,11 +206,6 @@
             inputText.disabled = true;
             answer = [];
         }
-        // function CheckWin(){
-        //     // if(a==4){
-        //     //     alert("答對了，遊戲獲勝")
-        //     // }
-        // }
 
 
 
