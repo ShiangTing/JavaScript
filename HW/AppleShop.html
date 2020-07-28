@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="picture pad-top-2">
-                        <img id="picture" src="../assets/ipad-wifi-select-spacegray.png" alt="">
+                        <img id="picture" src="" alt="">
                     </div>
 
 
@@ -82,13 +82,13 @@
 
 
 
-                <div class="col-lg-6 content">
-                    <div class="title">
-                        <h2>購買 iPad</h2>
-                        <p>購買 iPad 可享免額外付費運送服務。</p>
+                <div class="col-lg-6 ">
+                    <div class="title" id="title">
+                        <h2></h2>
+                    
                     </div>
                     <div class="specpad-top-1">
-                        <div class="colorbox pad-top-1">
+                        <div class="colorbox pad-top-1" id="colorbox">
                             <!-- <h5>外觀</h5>
 
                              <div class="row ipad-row" id="row"> -->
@@ -110,11 +110,11 @@
                             <!-- </div> -->
 
                         </div>
-                        <div class="store pad-top-1">
+                        <div class="store pad-top-1" id="store">
                             <!-- <h5>儲存裝置</h5>
                             <div class="row" id="rowStorage"> -->
 
-                                <!-- <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                     <div class="box text-center d-flex flex-column align-items-center" id="minstore">
                                         <div class="text"></div>
                                         <div class="price"></div>
@@ -126,16 +126,16 @@
                                         <div class="price"></div>
                                     </div>
                                 </div> -->
-<!-- 
+                            <!-- 
                             </div> -->
 
 
                         </div>
-                        <div class="wifi pad-top-1">
+                        <div class="wifi pad-top-1" id="wifi">
                             <!-- <h5>WI-FI加行動網路</h5>
                             <div class="row" id="rowwifi"> -->
 
-                                <!-- <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                     <div class="box text-center d-flex flex-column align-items-center" id="wifi">
    
                                         <div class="text">WI-FI</div>
@@ -154,10 +154,11 @@
                         </div>
 
                     </div>
-                    <!-- <div class="totalprice text-center mg-1">
+                    <div class="content" id="content">
+                        <!-- <div class="totalprice text-center mg-1">
 
                     </div> -->
-
+                    </div>
                 </div>
 
 
@@ -329,56 +330,46 @@
         }
 
 
-        //et colorDot =  document.querySelector("#reddot");
-
-        //let img = document.createElement("img");
-        //colorDot.appendChild(img);
-        let currentPrice = Product.Ipad.Spec.Storage[0].price;
-        const hasWifiPriceCount = 4500;
 
 
         //console.log(row)
-        const rowStorage = document.querySelector('#rowStorage');
+        // const rowStorage = document.querySelector('#rowStorage');
+        // const rowWifi = document.querySelector('#rowwifi');
+        // const wifitext = document.querySelectorAll('.wifitext');
 
-        const rowWifi = document.querySelector('#rowwifi');
-        const wifitext = document.querySelectorAll('.wifitext');
+        let currentPrice = Product.Ipad.Spec.Storage[0].price;
+        let picture = document.querySelector('#picture');
+        let title = document.querySelector('.title h2');
 
-        console.log(wifitext);
+
+        const hasWifiPriceCount = 4500;
+
+
+        const content = document.querySelector('.content');
+        const wifiIdSet = document.querySelector('#wifi');
+        const storeIdSet = document.querySelector('#store');
+        const colorboxIdSet = document.querySelector('#colorbox');
+
         ///生成HTML/// 
         let ipadBtn = document.querySelector('#button_ipad')
         let iphoneBtn = document.querySelector('#button_iphone')
 
 
-
-
-
-        //    let store = document.querySelector('.store');
-        //    let h = document.createElement('h');
-        //    h.innerText = "儲存裝置";
-        //    store.append(h);
-        //    let div2 = document.createElement('div');
-        //    div2.setAttribute('class','row');
-        //    div2.setAttribute('id','rowrowStorage')
-        //    store.append(div2);
-
-        //    let wifi = document.querySelector('.wifi');
-        //    let h1 = document.createElement('h5');
-        //    h1.innerText = "WI-FI加行動網路";
-        //    wifi.append(h1);
-        //    let div3 = document.createElement('div');
-        //    div3.setAttribute('class','row');
-        //    div3.setAttribute('id','rowwifi')
-        //    wifi.append(div3);
-
         ///切換Iphone///
         iphoneBtn.addEventListener('click', (event) => {
             //清除innerHTML//
-            row.innerHTML = '';
-            rowStorage.innerHTML = '';
-            rowWifi.innerHTML = '';
+            colorboxIdSet.innerHTML = '';
+            storeIdSet.innerHTML = '';
+            wifiIdSet.innerHTML = '';
+            content.innerHTML = '';
 
+            setHtml();
+            title.innerText = "購買IPhone"
+            picture.src="../assets/iphone-se-black.png";
+         
+            var row = document.querySelector('#row');
 
-
+            var rowStorage = document.querySelector('#rowStorage');
             createColorHtml(row, Product.Iphone.HtmlData.ColorDot);
             createStorageHtml(rowStorage, Product.Ipad.Spec.Storage);
 
@@ -408,30 +399,22 @@
                 })
 
             })
+            let price = document.querySelector(".totalprice");
+            price.innerText = `NT${currentPrice}起`;
+
 
         })
 
         ///切換Ipad///
         ipadBtn.addEventListener('click', (event) => {
-            
-            let colorbox = document.querySelector('.colorbox');
-            let h5 = document.createElement('h5');
-            h5.innerText = "外觀";
-            colorbox.append(h5);
-            let div = document.createElement('div');
-            div.setAttribute('class', 'row');
-            div.setAttribute('id', 'row')
-            colorbox.append(div);
 
-            let store = document.querySelector('.store');
-            let h = document.createElement('h');
-            h.innerText = "儲存裝置";
-            store.append(h);
-            let div2 = document.createElement('div');
-            div2.setAttribute('class', 'row');
-            div2.setAttribute('id', 'rowStorage')
-            store.append(div2);
-
+            colorboxIdSet.innerHTML = '';
+            storeIdSet.innerHTML = '';
+            wifiIdSet.innerHTML = '';
+            content.innerHTML = '';
+            picture.src="../assets/ipad-wifi-select-spacegray.png";
+            setHtml();
+            title.innerText = "購買IPad"
             let wifi = document.querySelector('.wifi');
             let h1 = document.createElement('h5');
             h1.innerText = "WI-FI加行動網路";
@@ -441,22 +424,10 @@
             div3.setAttribute('id', 'rowwifi')
             wifi.append(div3);
 
-            var content = document.querySelector('.content');
-            
-            let div4 = document.createElement('div');
-            div4.setAttribute('class', 'totalprice text-center mg-1');
-            content.append(div4);
-
             var row = document.querySelector('#row');
-         
             var rowStorage = document.querySelector('#rowStorage');
-
             var rowWifi = document.querySelector('#rowwifi');
             var wifitext = document.querySelectorAll('.wifitext');
-            
-             row.innerHTML = '';
-             rowStorage.innerHTML = '';
-             rowWifi.innerHTML = '';
 
 
             createWifiSection(rowWifi, Product.Ipad.HtmlData.HasWifi);
@@ -509,6 +480,8 @@
                     if (wifiColor == "true") {
                         picture.setAttribute('src',
                             `../assets/ipad-cell-select-${colorSplit[3]}`);
+
+                        
                     } else {}
 
                     const changewifiPrice = event.currentTarget.querySelector(
@@ -541,7 +514,8 @@
 
             })
             let price = document.querySelector(".totalprice");
-           price.innerText = `NT${currentPrice}起`;
+            price.innerText = `NT${currentPrice}起`;
+
 
 
         })
@@ -587,7 +561,6 @@
         ///選取容量之價錢變化///
         document.querySelectorAll('.storage-select').forEach((item) => {
             item.addEventListener('click', (event) => {
-                // const storage = event.currentTarget.querySelector('.price').innerText;
                 const storage = event.currentTarget.getAttribute('name');
                 currentPrice = parseInt(storage);
                 const changePrice = document.querySelectorAll('.wifiprice');
@@ -604,7 +577,7 @@
 
 
         ///圖片顏色選取互動///
-        // let picture = document.querySelector('#picture');
+        // 
         // document.querySelectorAll('.color-select').forEach((item) => {
         //     item.addEventListener('click', (event) => {
         //         const obj = event.currentTarget;
@@ -649,6 +622,29 @@
         // price.innerText = `NT${currentPrice}起`;
 
         //創造Html骨幹//
+        function setHtml() {
+            let colorbox = document.querySelector('.colorbox');
+            let h5 = document.createElement('h5');
+            h5.innerText = "外觀";
+            colorbox.append(h5);
+            let div = document.createElement('div');
+            div.setAttribute('class', 'row');
+            div.setAttribute('id', 'row')
+            colorbox.append(div);
+
+            let store = document.querySelector('.store');
+            let h = document.createElement('h');
+            h.innerText = "儲存裝置";
+            store.append(h);
+            let div2 = document.createElement('div');
+            div2.setAttribute('class', 'row');
+            div2.setAttribute('id', 'rowStorage')
+            store.append(div2);
+
+            let div4 = document.createElement('div');
+            div4.setAttribute('class', 'totalprice text-center mg-1');
+            content.append(div4);
+        }
     </script>
 
 
