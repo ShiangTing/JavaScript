@@ -424,6 +424,7 @@
             wifiIdSet.innerHTML = '';
             content.innerHTML = '';
             picture.src="../assets/ipad-wifi-select-spacegray.png";
+           
             setHtml();
           
     
@@ -494,8 +495,7 @@
 
                     const colorSplit = color.split('-');
                     if (wifiColor == "true") {
-                        picture.setAttribute('src',
-                            `../assets/ipad-cell-select-${colorSplit[3]}`);
+                        picture.setAttribute('src', `../assets/ipad-cell-select-${colorSplit[3]}`);
 
                         
                     } else {}
@@ -645,6 +645,7 @@
             child.style.paddingRight = child.offsetWidth - child.clientWidth + "px";
 
         }
+        ipadBtn.click();
     </script>
 
 

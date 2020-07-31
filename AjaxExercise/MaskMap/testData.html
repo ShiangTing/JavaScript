@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      fetch('https://maps.googleapis.com/maps/api/js?key=AIzaSyDzcd1lrEhGz0kfFRkqng1130IcMzwnS-k&callback=initMap&libraries=&v=weekly')
+    .then((response) => response.json())
+    .then((data) => {
+        // Put your code here
+    })
+    .catch((error) => {
+        // Handle the error
+    });
+    </script>
+</body>
+</html>
+
+//         $.each(json1.universities, function(key, data) {
+
+    // var latLng = new google.maps.LatLng(data.lat, data.lng);
+    
+    // var marker = new google.maps.Marker({
+    //   position: latLng,
+    //   map: map,
+    //   // icon: icon,
+    //   title: data.title
+    // });
+    
+    // var details = data.website + ", " + data.phone + ".";
+    
+    // bindInfoWindow(marker, map, infowindow, details);

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id='button1'>Request JSON1</button>
+  <div id='msg'></div>
+
+
+
+  <script type="module">
+    import { $g } from "../Modules/helpers.js"
+
+    const url = "https://raw.githubusercontent.com/ShiangTing/FileStorage/master/IPad.json";
+
+
+    window.onload = function () {
+      let btn1 = $g("#button1").addEventListener('click', AjaxCall);
+      let msg = $g("#msg");
+    }
+
+    function AjaxCall() {
+      let xhr = new XMLHttpRequest();
+      const promise1 = new Promise(function (resolve, reject) {
+
+
+
+
+        xhr.open('GET', url);
+        xhr.send();
+        
+        xhr.onload = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            resolve(xhr.responseText);
+          }
+          else {
+            let error = "發生錯誤 " + xhr.status
+            reject(error);
+          }
+        }
+
+      });
+      promise1.then(function (json) {
+        msg.innerText = json;
+
+      }, function (ex) {
+
+        msg.innerText = ex;
+      })
+    }
+
+     //   let xhr = new XMLHttpRequest();
+  </script>
+</body>
+
+</html>

@@ -10,63 +10,143 @@
 
     <title>計算機</title>
     <style>
-        .display{
-            background-color: #fcfcfc;
-            padding: 30px 10px ;
-            border-radius: 8px;
+        #calc {  
+  text-align: center;
+  width: 380px; 
+  display: block;
+  border-radius:8px;
+  border: 1px solid;
+  border-color: #abc6c2;
+  padding:8px;
+  margin-top:20px;
+  margin-left:auto;
+  margin-right:auto;
+  background: #224662;
+}
+        .input{
+            background: #bcbcbc;
+            padding: 8px;
+            margin:16px 12px 10px 16px;
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            border-radius:8px;
+        }
+        .keyboard{
+            
+
+        display: inline-block;  
+        text-align: center;
+         margin-bottom:8px;
+        width: 85%;
+        }
+
+        .btn{
+            width: 22%;
+            margin: 5px;
         }
     </style>
   </head>
   <body>
+<div class="caculator">
   <div class="container">
-      <div class="display">
+
+      <div  id="calc" class="text-center">
         <div class="input" id="display">
-            <div class="result"></div>
+            <div id="result">0</div>
+            <div id="previous">0</div>
 
         </div>
-
+ 
       <div class="keyboard">
           <div class="row">
-              <button class="btn btn-info" value="7">7</button>
-              <button class="btn btn-info" value="7">8</button>
-              <button class="btn btn-info" value="7">9</button>
-              <button class="btn btn-info" value="7">X</button>
+              <button class="btn btn-info" value="C">C</button>
+              <button class="btn btn-info" value="CE">CE</button>
+              <button class="btn btn-info" value="*-1">+/-</button>
+              <button class="btn btn-info" value="/">÷</button>
+             
+
            
           </div>
           <div class="row">
-            <button class="btn btn-info" value="7">7</button>
-            <button class="btn btn-info" value="7">8</button>
-            <button class="btn btn-info" value="7">9</button>
-            <button class="btn btn-info" value="7">X</button>
+            <button class="btn btn-info btn7" value="7">7</button>
+            <button class="btn btn-info" value="8">8</button>
+            <button class="btn btn-info" value="9">9</button>
+            <button class="btn btn-info" value="x">×</button>
          
         </div>
         <div class="row">
-            <button class="btn btn-info" value="7">7</button>
-            <button class="btn btn-info" value="7">8</button>
-            <button class="btn btn-info" value="7">9</button>
-            <button class="btn btn-info" value="7">X</button>
+            <button class="btn btn-info" value="4">4</button>
+            <button class="btn btn-info" value="5">5</button>
+            <button class="btn btn-info" value="6">6</button>
+            <button class="btn btn-info" value="-">-</button>
          
         </div>
         <div class="row">
-            <button class="btn btn-info" value="7">7</button>
-            <button class="btn btn-info" value="7">8</button>
-            <button class="btn btn-info" value="7">9</button>
-            <button class="btn btn-info" value="7">X</button>
+            <button class="btn btn-info" value="1">1</button>
+            <button class="btn btn-info" value="2">2</button>
+            <button class="btn btn-info" value="3">3</button>
+            <button class="btn btn-info" value="+">+</button>
+         
+        </div>
+
+        <div class="row">
+            <button class="btn btn-info" value="00">00</button>
+            <button class="btn btn-info" value="0">0</button>
+            <button class="btn btn-info" value=".">.</button>
+            <button class="btn btn-info" value="=">=</button>
          
         </div>
       </div>
+    </div>
 
 
 
 
-
-      </div>
+    
 
 
 
 
   </div>
 
+  <script>
+      ///取值///
+   
+    const previous = document.querySelector('#previous');
+   const numberBtn = document.querySelectorAll(".btn");
+   let currentNumber = previous.innerText
+    numberBtn.forEach((item)=>{
+        item.addEventListener('click',(event)=>{
+        
+        let values = event.target.value;
+        currentNumber= currentNumber +values;
+        previous.innerText = currentNumber
+    })
+
+    })
+    // function clickNumber(item){
+    //     let value = item.target.value
+    //     currentNumber= currentNumber +value;
+    //     previous.innerText = currentNumber
+    // }
+
+//    numberBtn.onclick = function(event){
+//        let value = event.target.value;
+//        let currentNumber = previous.innerText
+//         console.log(currentNumber);
+//         console.log(value);
+//         currentNumber= currentNumber +value;
+//         previous.innerText = currentNumber
+//    };
+//    numberBtn.addEventListener('click', (e)=>{
+//        let value = e.value;
+//        console.log(value);
+//        previous.innerText = value;
+//    })
+   
+
+  </script>
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

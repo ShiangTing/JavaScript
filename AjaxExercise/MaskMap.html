@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="row no-gutters">
+            <!-- 選擇所在區域 -->
+            <div class="toolbox col-sm-3 p-2 bg-white">
+                <div class="form-group d-flex">
+                    <label for="cityName" class="col-form-label mr-2 text-right">縣市</label>
+                    <div class="flex-fill">
+                        <select id="cityName" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group d-flex">
+                    <label for="area" class="col-form-label mr-2 text-right">地區</label>
+                    <div class="flex-fill">
+                        <select id="area" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 顯示藥局位置 -->
+            <div class="col-sm-9">
+                <div id="map"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        // const citiData = getgetAjaxData()
+        const pharmaData = getAjaxData(" https://maskmap.azurewebsites.net/api/mask/getmaskstock")
+        fetchData()
+   
+        function fetchData(){
+        fetch('https://maskmap.azurewebsites.net/api/mask/getmaskstock')
+            .then((response) => response.json())
+            .then((data) => {
+                // Put your code here
+
+            })
+            .catch((error) => {
+                // Handle the error
+            });
+        }
+        function getAjaxData(url) {
+            let xhr = new XMLHttpRequest();
+            const promise1 = new Promise(function (resolve, reject) {
+
+
+
+                xhr.onload = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                     
+                        const data = resolve(JSON.parse(xhr.response))
+                        resolve(data)
+                    }
+                    else {
+                        let error = "發生錯誤 " + xhr.status
+                        reject(error);
+                    }
+                }
+
+                xhr.open('GET', url);
+                xhr.send();
+            });
+           promise1.getAjaxData.then(datas=>{
+               const pharmaData = datas.features;
+           })
+        }
+
+     //   AIzaSyDzcd1lrEhGz0kfFRkqng1130IcMzwnS-k
+
+     function renderData(){
+        var latLng = new google.maps.LatLng(data.lat, data.lng);
+     }
+    </script>
+</body>
+
+</html>
