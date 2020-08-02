@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- <script src="/maps/documentation/javascript/examples/markerclusterer/markerclustererplus@4.0.1.min.js">
+    </script> -->
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzcd1lrEhGz0kfFRkqng1130IcMzwnS-k&callback=initMap&libraries=&v=weekly"
         defer></script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
     <!-- <script src="./app.js"></script> -->
     <style>
@@ -68,8 +71,8 @@
                 </div>
 
 
-                 <div class="card" id="storeblock">
-                        <!-- <div class="card-header">
+                <div class="card" id="storeblock">
+                    <!-- <div class="card-header">
                              Featured
                           </div>
                          <div class="card-body">
@@ -77,7 +80,7 @@
                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div> -->
-                     </div>
+                </div>
             </div>
 
             <!-- 顯示藥局位置 -->
@@ -86,70 +89,82 @@
             </div>
         </div>
     </div>
-        <script>
+    <script>
 
-            const cityData = " https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json"
-            const pharmData = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json"
-            let map;
-            let passData = ''
-            //建造地圖///
-            function initMap() {
-                //  let maskData = map.data.loadGeoJson('https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json');
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 10,
-                    center: new google.maps.LatLng(24.037132, 121.066095),
-                    //  mapTypeId: 'terrain'
-                });
-                var script = document.createElement('script');
-                // This example uses a local copy of the GeoJSON stored at
-                // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-                script.src = "./points.js";
-                document.getElementsByTagName('head')[0].appendChild(script);
+        const cityData = " https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json"
+        const pharmData = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json"
+        let map;
+        let passData = ''
+        //建造地圖///
+        function initMap() {
+            //  let maskData = map.data.loadGeoJson('https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json');
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(24.037132, 121.066095),
+                //  mapTypeId: 'terrain'
+            });
+            var script = document.createElement('script');
+            // This example uses a local copy of the GeoJSON stored at
+            // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+            script.src = "./points.js";
+            document.getElementsByTagName('head')[0].appendChild(script);
 
-            }
+        }
 
-            // Loop through the results array and place a marker for each
-            // set of coordinates.
-            window.loadData = function (results) {
+        // Loop through the results array and place a marker for each
+        // set of coordinates.
+        window.loadData = function (results) {
 
-                //放置marker//
-                for (var i = 0; i < results.features.length; i++) {
-                    var coords = results.features[i].geometry.coordinates;
-                    var latLng = new google.maps.LatLng(coords[1], coords[0]);
+            var markers = [];
+            //放置marker//
+            for (var i = 0; i < results.features.length; i++) {
+                var coords = results.features[i].geometry.coordinates;
+                var latLng = new google.maps.LatLng(coords[1], coords[0]);
 
-                    //marker顏色分辨///
-                    maskColor(results);
-                    function maskColor(results) {
-                        let number = parseInt(results.features[i].properties.mask_adult);
-                        let number2 = parseInt(results.features[i].properties.mask_child);
-                        if (number > 50 && number2 > 50) {
-                            return image = "../colorfull-icons/png/checkbox_check.png"
-                        }
-                        else if (number > 0 && number2 > 0) {
-                            return image = "../colorfull-icons/png/chat_exclamation38.png"
-                        }
-                        else {
-                            return image = "../colorfull-icons/png/close38.png"
-                        }
+                //marker顏色分辨///
+                maskColor(results);
+                function maskColor(results) {
+                    let number = parseInt(results.features[i].properties.mask_adult);
+                    let number2 = parseInt(results.features[i].properties.mask_child);
+                    if (number > 50 && number2 > 50) {
+                        return image = "../colorfull-icons/png/checkbox_check.png"
                     }
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                        icon: image,
-                        scale: 1,
-                        map: map
-                    });
+                    else if (number > 0 && number2 > 0) {
+                        return image = "../colorfull-icons/png/chat_exclamation38.png"
+                    }
+                    else {
+                        return image = "../colorfull-icons/png/close38.png"
+                    }
+                }
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                    icon: image,
+                    scale: 1,
+
+                    map: map
+                });
+
+               
+                // var markerForCluster = new google.maps.Marker({
+                //     position:latLng
+                // });
 
 
-                    //   彈出小視窗//
-                    google.maps.event.addListener(marker, 'click', function () {
+                markers.push(marker);
+            //    const imagePath = "./m1.png"
+              //  console.log(`cluster----${ markers}`)
+           
+
+                //   彈出小視窗//
+                google.maps.event.addListener(marker, 'click', function () {
 
 
-                        ///找出選取maker///
-                        let object = results.features.find(x => x.geometry.coordinates[1] == this.getPosition().lat() && x.geometry.coordinates[0] == this.getPosition().lng())
+                    ///找出選取maker///
+                    let object = results.features.find(x => x.geometry.coordinates[1] == this.getPosition().lat() && x.geometry.coordinates[0] == this.getPosition().lng())
 
-                        console.log(object);
-                        var contentString = `<div class="card  pharmacy">
+                    console.log(object);
+                    var contentString = `<div class="card  pharmacy">
                                   <h5 class="card-header">${object.properties.name}</h5>
                                   <div class="card-body">
                                   <h5 class="card-text">成人口罩:${object.properties.mask_adult}</h5>
@@ -158,161 +173,181 @@
                                   </div>
                                   </div>`;
 
-                        var infowindow = new google.maps.InfoWindow({
-                            content: contentString
-                        });
-
-                        ///彈出視窗///
-                        let newMarker = new google.maps.Marker({
-                            position: this.getPosition(),
-                            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                            icon: image,
-                            scale: 1,
-                            map: map
-                        });
-
-                        infowindow.open(map, newMarker);
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
                     });
 
-
-
-
-                    ///聚焦功能///
-                    marker.addListener("click", function () {
-                        map.setZoom(15);
-                        map.setCenter(this.getPosition());
-
-                    })
-
-                }
-
-                passData = results.features;
-
-            }
-            window.onload = function () {
-                fetchResourceGet(cityData)
-                //  fetchPharmaData(pharmData)
-            }
-
-            function fetchPharmaData(pharmData) {
-                fetch(pharmData)
-                    .then((response) => response.json())
-                    .then((pdata) => {
-
-                    })
-                    .catch((error) => {
-                        console.log("wrong2!")
+                    ///彈出視窗///
+                    let newMarker = new google.maps.Marker({
+                        position: this.getPosition(),
+                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                        icon: image,
+                        scale: 1,
+                        map: map
                     });
+
+                    infowindow.open(map, newMarker);
+                });
+
+                ///Cluster///
+              
+       
+              //  const markers = [{lat:results.features[0].geometry.coordinates[0],lng:features[0].geometry.coordinates[1]},
+                  //把marker foreach 然後放進markers裡(push)               
+            
+            
+         //   ]; 
+
+              
+
+                // Enable marker clustering for this map and these markers
+             //   const markerClusterer = new MarkerClusterer(map, marker, {imagePath: imagePath});
+
+                // Add a marker clusterer to manage the markers.
+                // var markerCluster = new MarkerClusterer(map, markers,
+                //     { imagePath: '../colorfull-icons/png/m1.png' });
             }
 
 
-            function fetchResourceGet(cityData) {
-                //  const request = new Request(url);
-                fetch(cityData)
-                    .then((response) => response.json())
-                    .then((data) => {
 
 
-                        createCityOption(data)
+            ///聚焦功能///
+            marker.addListener("click", function () {
+                map.setZoom(18);
+                map.setCenter(this.getPosition());
 
-                        document.querySelector('#city').addEventListener('change', (event) => {
-                            const citySelected = document.querySelector('#city').value;
-                            createArea(data, citySelected);
-                        })
+            })
 
-                        document.querySelector('#area').addEventListener('change', (event) => {
+            var markerCluster = new MarkerClusterer(map, markers, { imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m" });
+           // console.log(markerCluster)
 
-                            const areaSeletced = document.querySelector('#area').value;
-                            let storeData = passData.filter(x => x.properties.town == areaSeletced)
-                            createPharmacy(storeData, areaSeletced)
-                        })
-
-                        document.querySelector('#store').addEventListener('change', (event) => {
-
-                            const storeSeletced = document.querySelector('#store').value;
-                            let storeContentData = passData.find(x => x.properties.name == storeSeletced)
-                          //  console.log(storeContentData.properties.name)
-                            pharmacyTemplate(storeContentData)
+        }
 
 
-                            let storeCenter = storeContentData.geometry.coordinates;
-                            let testnumber = storeCenter.forEach((item)=>{parseInt(item)})
-                            let storeLng = parseInt(storeCenter[0])
-                            let storeLat = parseInt(storeCenter[1])
-                            //console.log(storeLang)
-                            map.setCenter({lat: storeContentData.geometry.coordinates[1], lng: storeContentData.geometry.coordinates[0]});
-                            map.setZoom(18);
-                            //set map center to storeselected's coordiate and scale the zomm
-                        })
+        window.onload = function () {
+            fetchResourceGet(cityData)
+            //  fetchPharmaData(pharmData)
+        }
+
+        function fetchPharmaData(pharmData) {
+            fetch(pharmData)
+                .then((response) => response.json())
+                .then((pdata) => {
+
+                })
+                .catch((error) => {
+                    console.log("wrong2!")
+                });
+        }
 
 
+        function fetchResourceGet(cityData) {
+            //  const request = new Request(url);
+            fetch(cityData)
+                .then((response) => response.json())
+                .then((data) => {
 
+
+                    createCityOption(data)
+
+                    document.querySelector('#city').addEventListener('change', (event) => {
+                        const citySelected = document.querySelector('#city').value;
+                        createArea(data, citySelected);
                     })
-                    .catch((error) => {
-                        console.log("Wrong!")
-                    });
-            }
+
+                    document.querySelector('#area').addEventListener('change', (event) => {
+
+                        const areaSeletced = document.querySelector('#area').value;
+                        let storeData = passData.filter(x => x.properties.town == areaSeletced)
+                        createPharmacy(storeData, areaSeletced)
+                    })
+
+                    document.querySelector('#store').addEventListener('change', (event) => {
+
+                        const storeSeletced = document.querySelector('#store').value;
+                        let storeContentData = passData.find(x => x.properties.name == storeSeletced)
+                        //  console.log(storeContentData.properties.name)
+                        pharmacyTemplate(storeContentData)
 
 
-            function createCityOption(data) {
-                const citySelect = document.querySelector('#city');
+                        let storeCenter = storeContentData.geometry.coordinates;
+                        let testnumber = storeCenter.forEach((item) => { parseInt(item) })
+                        let storeLng = parseInt(storeCenter[0])
+                        let storeLat = parseInt(storeCenter[1])
+                        //console.log(storeLang)
+                        map.setCenter({ lat: storeContentData.geometry.coordinates[1], lng: storeContentData.geometry.coordinates[0] });
+                        map.setZoom(18);
+                        //set map center to storeselected's coordiate and scale the zomm
+                    })
 
-                const cityArray = data.map(item => item.CityName.replace(/臺/g, '台'));
-      
-         
-                let cityOptionHTML = ``;
-                cityArray.forEach(item => {
-                    cityOptionHTML += `<option value="${item}" >${item}</option>`;
+
+
                 })
-                citySelect.innerHTML = cityOptionHTML;
-            }
-
-            function createArea(data, citySelected) {
-                const areaSelect = document.querySelector('#area');
-                const citySelectedObj = data.find(item => item.CityName.replace(/臺/g, '台') === citySelected);
-                const area = citySelectedObj.AreaList.map(item => item.AreaName)
-
-                //console.log(area)
-                //  let option = document.createElement("option")
-
-                let areaOptionHTML = `<option value="all" selected>全部</option>`;
-                area.forEach(item => {
-                    areaOptionHTML += `<option value="${item}">${item}</option>`;
-                })
-                areaSelect.innerHTML = areaOptionHTML;
-            }
+                .catch((error) => {
+                    console.log("Wrong!")
+                });
+        }
 
 
-            function createPharmacy(storeData, areaSelected) {
+        function createCityOption(data) {
+            const citySelect = document.querySelector('#city');
 
-                const storeSelectList = document.querySelector('#store');
-                //let storeList = passData.filter(x=>x.properties.town==areaSelected);
+            const cityArray = data.map(item => item.CityName.replace(/臺/g, '台'));
 
-                //    let storeOpt = document.createElement("option");
-                //    let store = document.querySelector("#store");
 
-                //    let tempHTML = storeSelectList.innerHTML
-                //    storeList.forEach(item=>{
-                //        storeOpt.setAttribute('value',`${item.properties.name}`);
-                //          store.append(storeOpt);
-                //          storeSelectList.innerHTML +=
-                //    })
-                let storeOptionHTML = `<option value="all" selected>全部</option>`;
+            let cityOptionHTML = ``;
+            cityArray.forEach(item => {
+                cityOptionHTML += `<option value="${item}" >${item}</option>`;
+            })
+            citySelect.innerHTML = cityOptionHTML;
+        }
 
-                storeData.forEach(item => {
-                    storeOptionHTML += `<option value="${item.properties.name}">${item.properties.name}</option>`;
-                })
-                storeSelectList.innerHTML = storeOptionHTML;
-            }
+        function createArea(data, citySelected) {
+            const areaSelect = document.querySelector('#area');
+            const citySelectedObj = data.find(item => item.CityName.replace(/臺/g, '台') === citySelected);
+            const area = citySelectedObj.AreaList.map(item => item.AreaName)
 
-            ///跳出的藥局樣板///
+            //console.log(area)
+            //  let option = document.createElement("option")
 
-            function pharmacyTemplate(data) {
+            let areaOptionHTML = `<option value="all" selected>全部</option>`;
+            area.forEach(item => {
+                areaOptionHTML += `<option value="${item}">${item}</option>`;
+            })
+            areaSelect.innerHTML = areaOptionHTML;
+        }
 
-                const pharmacySelected = document.querySelector('#storeblock');
-                pharmacySelected.innerHTML=""
-              //console.log(pharmacySelected);
-                pharmacySelected.insertAdjacentHTML("beforeend",`
+
+        function createPharmacy(storeData, areaSelected) {
+
+            const storeSelectList = document.querySelector('#store');
+            //let storeList = passData.filter(x=>x.properties.town==areaSelected);
+
+            //    let storeOpt = document.createElement("option");
+            //    let store = document.querySelector("#store");
+
+            //    let tempHTML = storeSelectList.innerHTML
+            //    storeList.forEach(item=>{
+            //        storeOpt.setAttribute('value',`${item.properties.name}`);
+            //          store.append(storeOpt);
+            //          storeSelectList.innerHTML +=
+            //    })
+            let storeOptionHTML = `<option value="all" selected>全部</option>`;
+
+            storeData.forEach(item => {
+                storeOptionHTML += `<option value="${item.properties.name}">${item.properties.name}</option>`;
+            })
+            storeSelectList.innerHTML = storeOptionHTML;
+        }
+
+        ///跳出的藥局樣板///
+
+        function pharmacyTemplate(data) {
+
+            const pharmacySelected = document.querySelector('#storeblock');
+            pharmacySelected.innerHTML = ""
+            //console.log(pharmacySelected);
+            pharmacySelected.insertAdjacentHTML("beforeend", `
                         <div class="card-header">
                              ${data.properties.name}
                           </div>
@@ -326,26 +361,28 @@
                         </div> `);
 
 
-          
-            }
 
-   
+        }
 
 
 
-        </script>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    
 </body>
 
 </html>
