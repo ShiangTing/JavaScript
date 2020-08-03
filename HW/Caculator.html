@@ -117,7 +117,7 @@
    const numberBtn = document.querySelectorAll("#btn_input");
    const result =  document.querySelector("#result");
    const deleteBtn = document.querySelector("#btn_delete")
-   let currentNumber = previous.innerText
+   let currentNumber = previous.innerText;
     
    numberBtn.forEach((item)=>{
         item.addEventListener('click',(event)=>{
@@ -148,8 +148,16 @@ caculate.addEventListener('click',function(){
 
 //delete//
 
+deleteBtn.addEventListener('click',function(){
+    CE();
+})
+
+function CE(){
+
+    currentNumber = currentNumber.length-1;
 
 
+}
 
 
 
@@ -222,6 +230,9 @@ function evaluate(expr) {
     console.log(evalStack)
     return evalStack.pop();
 }
+
+
+
 
 
 
