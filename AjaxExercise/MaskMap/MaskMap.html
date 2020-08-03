@@ -13,7 +13,8 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzcd1lrEhGz0kfFRkqng1130IcMzwnS-k&callback=initMap&libraries=&v=weekly"
         defer></script>
-        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
     <!-- <script src="./app.js"></script> -->
     <style>
@@ -22,7 +23,7 @@
         }
 
         .toolbox {
-            height: 120vh;
+            height: 100vh;
         }
 
         /* Optional: Makes the sample page fill the window. */
@@ -94,7 +95,8 @@
         const cityData = " https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json"
         const pharmData = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json"
         let map;
-        let passData = ''
+        let passData = '';
+        
         //建造地圖///
         function initMap() {
             //  let maskData = map.data.loadGeoJson('https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json');
@@ -116,110 +118,104 @@
         window.loadData = function (results) {
 
             var markers = [];
+            passData = results.features
             //放置marker//
             for (var i = 0; i < results.features.length; i++) {
-                var coords = results.features[i].geometry.coordinates;
-                var latLng = new google.maps.LatLng(coords[1], coords[0]);
-
+                let coords = results.features[i].geometry.coordinates;
+                let latLng = new google.maps.LatLng(coords[1], coords[0]);
+                let image;
                 //marker顏色分辨///
                 maskColor(results);
                 function maskColor(results) {
                     let number = parseInt(results.features[i].properties.mask_adult);
                     let number2 = parseInt(results.features[i].properties.mask_child);
                     if (number > 50 && number2 > 50) {
-                        return image = "../colorfull-icons/png/checkbox_check.png"
+                        image = "../colorfull-icons/png/medical_mask_greencolor.png"
                     }
                     else if (number > 0 && number2 > 0) {
-                        return image = "../colorfull-icons/png/chat_exclamation38.png"
+                        image = "../colorfull-icons/png/medical_mask_yellow.png"
                     }
                     else {
-                        return image = "../colorfull-icons/png/close38.png"
+                        image = "../colorfull-icons/png/medical_mask_red.png"
                     }
                 }
-                var marker = new google.maps.Marker({
+                let marker = new google.maps.Marker({
                     position: latLng,
                     path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                  //  animation: google.maps.Animation.DROP,
                     icon: image,
                     scale: 1,
-
                     map: map
                 });
+                
+                
+                // marker.addListener("click", function (e) {
+                    
+                //     map.setZoom(18);
+                //     map.setCenter(this.getPosition());
+                // })
 
-               
-                // var markerForCluster = new google.maps.Marker({
-                //     position:latLng
-                // });
-
-
-                markers.push(marker);
-            //    const imagePath = "./m1.png"
-              //  console.log(`cluster----${ markers}`)
-           
-
+                let object = results.features[i];
                 //   彈出小視窗//
-                google.maps.event.addListener(marker, 'click', function () {
-
+                // google.maps.event.addListener(marker, 'click', function () {
+                marker.addListener("click", function () {    
+                    ///聚焦功能///
+                    map.setZoom(18);
+                    map.setCenter(this.getPosition());
 
                     ///找出選取maker///
-                    let object = results.features.find(x => x.geometry.coordinates[1] == this.getPosition().lat() && x.geometry.coordinates[0] == this.getPosition().lng())
+                    // let object = results.features.find(x => x.geometry.coordinates[1] == this.getPosition().lat() && x.geometry.coordinates[0] == this.getPosition().lng())
+                    // let object = results.features[i];
+                    
 
-                    console.log(object);
-                    var contentString = `<div class="card  pharmacy">
+                    console.log("click"+ object)
+                    const contentString = `<div class="card  pharmacy">
                                   <h5 class="card-header">${object.properties.name}</h5>
                                   <div class="card-body">
                                   <h5 class="card-text">成人口罩:${object.properties.mask_adult}</h5>
                                   <h5 class="card-text">兒童口罩:${object.properties.mask_child}</h5>
-                                  <a href="#" class="btn btn-primary">前往地圖</a>
+
                                   </div>
                                   </div>`;
 
-                    var infowindow = new google.maps.InfoWindow({
+                    const infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
-
+                    console.log("infowindow"+ infowindow)
                     ///彈出視窗///
                     let newMarker = new google.maps.Marker({
                         position: this.getPosition(),
-                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                        // path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
                         icon: image,
                         scale: 1,
                         map: map
                     });
-
+                    console.log("newMarker"+ newMarker)
+                   
                     infowindow.open(map, newMarker);
+                    infowindow.addListener('closeclick', function() {
+                        console.log('---- close', object);
+                    })
+                    //e.stopPropagation();
+                    //pharmacyTemplate(data)
                 });
 
-                ///Cluster///
-              
-       
-              //  const markers = [{lat:results.features[0].geometry.coordinates[0],lng:features[0].geometry.coordinates[1]},
-                  //把marker foreach 然後放進markers裡(push)               
-            
-            
-         //   ]; 
-
-              
-
-                // Enable marker clustering for this map and these markers
-             //   const markerClusterer = new MarkerClusterer(map, marker, {imagePath: imagePath});
-
-                // Add a marker clusterer to manage the markers.
-                // var markerCluster = new MarkerClusterer(map, markers,
-                //     { imagePath: '../colorfull-icons/png/m1.png' });
+                
+                //將座標加入markers///
+                markers.push(marker);
             }
 
 
 
 
-            ///聚焦功能///
-            marker.addListener("click", function () {
-                map.setZoom(18);
-                map.setCenter(this.getPosition());
+            
+            
 
-            })
-
+            ///Cluster///
             var markerCluster = new MarkerClusterer(map, markers, { imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m" });
-           // console.log(markerCluster)
+            // console.log(markerCluster)
+
+
 
         }
 
@@ -382,7 +378,7 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 
-    
+
 </body>
 
 </html>
