@@ -71,8 +71,8 @@
                     </select>
                 </div>
 
-
-                <div class="card" id="storeblock">
+                <div class="item" id="item">
+                <!-- <div class="card" id="storeblock"> -->
                     <!-- <div class="card-header">
                              Featured
                           </div>
@@ -81,7 +81,8 @@
                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div> -->
-                </div>
+                <!-- </div> -->
+            </div>
             </div>
 
             <!-- 顯示藥局位置 -->
@@ -168,7 +169,7 @@
                     // let object = results.features[i];
                     
 
-                    console.log("click"+ object)
+                   
                     const contentString = `<div class="card  pharmacy">
                                   <h5 class="card-header">${object.properties.name}</h5>
                                   <div class="card-body">
@@ -181,7 +182,7 @@
                     const infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
-                    console.log("infowindow"+ infowindow)
+                
                     ///彈出視窗///
                     let newMarker = new google.maps.Marker({
                         position: this.getPosition(),
@@ -190,11 +191,11 @@
                         scale: 1,
                         map: map
                     });
-                    console.log("newMarker"+ newMarker)
                    
+                    pharmacyTemplate(object)
                     infowindow.open(map, newMarker);
-                    infowindow.addListener('closeclick', function() {
-                        console.log('---- close', object);
+                    infowindow.addListener('click', function() {
+                       
                     })
                     //e.stopPropagation();
                     //pharmacyTemplate(data)
@@ -340,10 +341,10 @@
 
         function pharmacyTemplate(data) {
 
-            const pharmacySelected = document.querySelector('#storeblock');
+            const pharmacySelected = document.querySelector('#item');
             pharmacySelected.innerHTML = ""
             //console.log(pharmacySelected);
-            pharmacySelected.insertAdjacentHTML("beforeend", `
+            pharmacySelected.insertAdjacentHTML("beforeend", ` <div class="card" id="storeblock">
                         <div class="card-header">
                              ${data.properties.name}
                           </div>
@@ -354,7 +355,8 @@
                              <p class="card-text">地址: ${data.properties.address}</p>
                              <p class="card-text">營業時間: ${data.properties.note}</p>
                            
-                        </div> `);
+                        </div> 
+                    </div> `);
 
 
 

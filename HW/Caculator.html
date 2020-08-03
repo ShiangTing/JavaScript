@@ -17,7 +17,7 @@
   border-radius:8px;
   border: 1px solid;
   border-color: #abc6c2;
-  padding:8px;
+  padding:20px 8px;
   margin-top:20px;
   margin-left:auto;
   margin-right:auto;
@@ -25,8 +25,8 @@
 }
         .input{
             background: #bcbcbc;
-            padding: 8px;
-            margin:16px 12px 10px 16px;
+            padding: 25px 8px;
+            margin:12px 12px 10px 16px;
             text-align: center;
             font-family: 'Share Tech Mono', monospace;
             border-radius:8px;
@@ -52,48 +52,48 @@
 
       <div  id="calc" class="text-center">
         <div class="input" id="display">
-            <div id="result">0</div>
-            <div id="previous">0</div>
+            <div id="result"></div>
+            <div id="previous"></div>
 
         </div>
  
       <div class="keyboard">
           <div class="row">
-              <button class="btn btn-info" value="C">C</button>
-              <button class="btn btn-info" value="CE">CE</button>
-              <button class="btn btn-info" value="*-1">+/-</button>
-              <button class="btn btn-info" value="/">÷</button>
+              <button class="btn btn-info" value="C" id="btn_delete">C</button>
+              <button class="btn btn-info " value="CE" id="btn_delete">CE</button>
+              <button class="btn btn-info " value="*-1" id="btn_input">+/-</button>
+              <button class="btn btn-info " value="/" id="btn_input">÷</button>
              
 
            
           </div>
           <div class="row">
-            <button class="btn btn-info btn7" value="7">7</button>
-            <button class="btn btn-info" value="8">8</button>
-            <button class="btn btn-info" value="9">9</button>
-            <button class="btn btn-info" value="x">×</button>
+            <button class="btn btn-info btn7" value="7" id="btn_input">7</button>
+            <button class="btn btn-info" value="8" id="btn_input">8</button>
+            <button class="btn btn-info" value="9" id="btn_input">9</button>
+            <button class="btn btn-info" value="*" id="btn_input">×</button>
          
         </div>
         <div class="row">
-            <button class="btn btn-info" value="4">4</button>
-            <button class="btn btn-info" value="5">5</button>
-            <button class="btn btn-info" value="6">6</button>
-            <button class="btn btn-info" value="-">-</button>
+            <button class="btn btn-info" value="4" id="btn_input">4</button>
+            <button class="btn btn-info" value="5" id="btn_input">5</button>
+            <button class="btn btn-info" value="6" id="btn_input">6</button>
+            <button class="btn btn-info" value="-" id="btn_input">-</button>
          
         </div>
         <div class="row">
-            <button class="btn btn-info" value="1">1</button>
-            <button class="btn btn-info" value="2">2</button>
-            <button class="btn btn-info" value="3">3</button>
-            <button class="btn btn-info" value="+">+</button>
+            <button class="btn btn-info" value="1" id="btn_input">1</button>
+            <button class="btn btn-info" value="2" id="btn_input">2</button>
+            <button class="btn btn-info" value="3" id="btn_input">3</button>
+            <button class="btn btn-info" value="+" id="btn_input">+</button>
          
         </div>
 
         <div class="row">
-            <button class="btn btn-info" value="00">00</button>
-            <button class="btn btn-info" value="0">0</button>
-            <button class="btn btn-info" value=".">.</button>
-            <button class="btn btn-info" value="=">=</button>
+            <button class="btn btn-info" value="00" id="btn_input">00</button>
+            <button class="btn btn-info" value="0" id="btn_input">0</button>
+            <button class="btn btn-info" value="dot" id="btn_input">.</button>
+            <button class="btn btn-info caculate" value="=" >=</button>
          
         </div>
       </div>
@@ -111,38 +111,135 @@
 
   <script>
       ///取值///
-   
+   let numberStack = [];
+   const caculate = document.querySelector('.caculate');
     const previous = document.querySelector('#previous');
-   const numberBtn = document.querySelectorAll(".btn");
+   const numberBtn = document.querySelectorAll("#btn_input");
+   const result =  document.querySelector("#result");
+   const deleteBtn = document.querySelector("#btn_delete")
    let currentNumber = previous.innerText
-    numberBtn.forEach((item)=>{
+    
+   numberBtn.forEach((item)=>{
         item.addEventListener('click',(event)=>{
         
+    
+        
         let values = event.target.value;
+        numberStack.push(values);
+      
         currentNumber= currentNumber +values;
         previous.innerText = currentNumber
+       // result.innerText =currentNumber
     })
 
     })
-    // function clickNumber(item){
-    //     let value = item.target.value
-    //     currentNumber= currentNumber +value;
-    //     previous.innerText = currentNumber
-    // }
 
-//    numberBtn.onclick = function(event){
-//        let value = event.target.value;
-//        let currentNumber = previous.innerText
-//         console.log(currentNumber);
-//         console.log(value);
-//         currentNumber= currentNumber +value;
-//         previous.innerText = currentNumber
-//    };
-//    numberBtn.addEventListener('click', (e)=>{
-//        let value = e.value;
-//        console.log(value);
-//        previous.innerText = value;
-//    })
+
+//按了之後計算//
+caculate.addEventListener('click',function(){
+   
+    // let postFix = toPostfix(numberStack)
+    console.log(numberStack);
+    let answer = evaluate(numberStack);
+    console.log(result)
+    result.innerText = answer.toString();
+})    
+
+
+//delete//
+
+
+
+
+
+
+
+///優先順序switch///
+
+
+function priority(op){
+    switch(op){
+        case '+' :return 1;
+        case '-' :return 1;
+        case '*':return 2;
+        case '/':return 2;
+        default: return 0;
+    }
+
+}
+
+
+
+
+/// 中序轉後序///
+function toPostfix(post) {
+    var stack = [];
+    var output = [];
+    var toStack = '(' ;
+    var toOutput = ')' ;
+    post.forEach(function(c) {
+        console.log(c)
+        debugger;
+        if(c === toStack) { stack.push(c); }
+        else if('+-*/'.indexOf(c) !== -1) {
+            while(stack!='' && 
+                   priority(stack[stack.length-1]) >= priority(c)) {
+                output.push(stack.pop());
+            }
+            stack.push(c);
+        }
+        else if(c === toOutput) {
+            while(stack[stack.length-1] !== toStack) {
+                output.push(stack.pop());
+            }
+            stack.pop();
+        }
+        else { output.push(c); }
+    });
+    
+    while(stack!='') { output.push(stack.pop()); }
+    
+    return  output.join('') ;
+}
+
+
+
+
+//機器計算///
+///要加上10的條件
+
+function evaluate(expr) {
+   let evalStack = [];
+    toPostfix(expr).split('').forEach(function(c) {
+        if('+-*/'.indexOf(c) !== -1) {
+            var n2 = evalStack.pop();
+            var n1 = evalStack.pop();
+            evalStack.push(cal(c, n1, n2));
+        } else {
+            evalStack.push(parseInt(c));
+        }
+    });
+    console.log(evalStack)
+    return evalStack.pop();
+}
+
+
+
+
+
+//計算//
+function cal(op,p1,p2){
+    switch(op){
+        case '+': return p1+p2;
+        case '-': return p1-p2;
+        case '*': return p1*p2;
+        case '/': return p1/p2;
+        
+        break;
+    }
+
+}
+
    
 
   </script>
