@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Calander</title>
+    <style>
+        * {
+            list-style: none;
+        }
+
+        .header {
+            padding: 30px 0;
+            background-color: blanchedalmond;
+        }
+
+        .year,
+        .month {
+            font-size: 30px;
+        }
+
+        .calander-table {
+            table-layout: fixed;
+            word-break: break-all;
+            word-wrap: break-all;
+        }
+
+        .calander-table tr td {
+            width: 100px;
+            height: 100px;
+        }
+
+        td:hover {
+            background-color: blanchedalmond;
+
+        }
+
+        .smallNote {
+            display: flex;
+        }
+
+        .smallNote .colorBox {
+            background-color: brown;
+            width: 10%;
+            height: 10%;
+            border-radius: 5px;
+            display: flex;
+            /* display: flex;
+            flex-direction: row;
+            writing-mode: horizontal-tb */
+        }
+
+        div.content {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        div.content::before {
+            color: coral;
+            content: "\25E6";
+            font-size: 30px;
+            /* padding: 5px 5px; */
+
+        }
+
+        .content div {
+            padding-top: 10px;
+        }
+
+        div.content:hover {
+            cursor: pointer;
+            background-color: lightgray;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header text-center ">
+
+
+        <!-- button控制月份增減 -->
+        <!-- <button id="previous"></button>
+         <button id="last"></button> -->
+        <button type="button" class="btn btn-success" id="next_Btn">Previous</button>
+
+        <span class="year">2020</span> <span class="month">8</span>
+        <button type="button" class="btn btn-success" id="previous_Btn">Next</button>
+
+    </div>
+    <div class="container">
+
+        <table class="table calander-table">
+            <thead class="thead">
+                <!-- 可以寫死 -->
+
+                <tr>
+                    <th scope="col">週一 Monday</th>
+                    <th scope="col">週二 Tuesday</th>
+                    <th scope="col">週三 Wednesday</th>
+                    <th scope="col">週四 Thursday</th>
+                    <th scope="col">週五 Friday</th>
+                    <th scope="col">週六 Saturday</th>
+                    <th scope="col">週日 Sunday</th>
+                </tr>
+            </thead>
+            <tbody class="table-bordered" id="table">
+                <!-- <tr>
+      
+            <td>test
+
+                <div class="smallNote">
+                   <li> <p>WorkOut</p> </li>
+                </div>
+            </td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+           
+          </tr> -->
+                <!--<tr>
+  
+            <td>週一</td>
+            <td>週二</td>
+            <td>週三</td>
+            <td>週四</td>
+            <td>週五</td>
+            <td>週六</td>
+            <td>週日</td>
+          </tr>
+          <tr>
+            <td>週一</td>
+            <td>週二</td>
+            <td>週三</td>
+            <td>週四</td>
+            <td>週五</td>
+            <td>週六</td>
+            <td>週日</td>
+          </tr>
+          <tr>
+            <td>週一</td>
+            <td>週二</td>
+            <td>週三</td>
+            <td>週四</td>
+            <td>週五</td>
+            <td>週六</td>
+            <td>週日</td>
+          </tr>
+
+          <tr>
+            <td>週一</td>
+            <td>週二</td>
+        
+          </tr> -->
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">增加記事</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="input">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
+                        <button type="button" class="btn btn-primary" id="send" onclick="addNote()">送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">修改記事</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="edit">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
+                        <button type="button" class="btn btn-primary" id="change" onclick="updateNote()">儲存</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script>
+
+        const nextBtn = document.querySelector('#previous_Btn');
+        const preBtn = document.querySelector('#next_Btn');
+
+        //得到年分與月份
+        let year = document.querySelector('.year');
+        let currentYear = document.querySelector('.year').innerText;
+        let month = document.querySelector('.month');
+        let currentMonth = document.querySelector('.month').innerText;
+        console.log(currentMonth)
+        let table = document.querySelector('#table')
+
+
+
+
+
+
+
+
+        // console.log("start----"+startDays)
+
+
+
+
+        nextBtn.addEventListener('click', function () {
+
+            //月份改變//
+            currentMonth = (parseInt(currentMonth) + 1).toString();
+            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+            month.innerText = currentMonth;
+            year.innerText = currentYear;
+            console.log(currentMonth)
+
+            let dates = getStartDate(currentMonth);
+            //清空///
+            table.innerHTML = ''
+            createCalenderHTML(dates, weekends);
+        })
+
+        preBtn.addEventListener('click', function () {
+            currentMonth = (parseInt(currentMonth) - 1).toString();
+            if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+            month.innerText = currentMonth;
+            year.innerText = currentYear;
+            console.log(currentMonth)
+            table.innerHTML = ''
+            let dates = getStartDate(currentMonth);
+            createCalenderHTML(dates, weekends);
+        })
+
+
+
+        //得到該月有幾天
+
+        let real = parseInt(currentMonth) - 1
+        console.log(real)
+        let date = new Date(currentYear, real, 0).getDate();
+        console.log(date)
+
+
+
+        //得到該月有幾週
+        let weekends = Math.floor(date / 7);
+        console.log(weekends)
+
+        let moreDays = date % 4;
+        console.log(moreDays)
+
+        function getStartDate(currentMonth) {
+            let nowYear = parseInt(currentYear) - 2000
+            let monthArray = [6, 2, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4]
+            let startDay = (1 + monthArray[parseInt(currentMonth) - 1] + nowYear + Math.floor(nowYear / 4) - checkifLeapYear(currentYear)) % 7
+            return startDay;
+            console.log(`${monthArray[parseInt(currentMonth) - 1]} + ${nowYear} +${Math.floor(nowYear / 4)} + ${checkifLeapYear(currentYear)} `)
+            console.log(monthArray[parseInt(currentMonth)])
+            console.log("startDay----" + startDay)
+        }
+        //為星期幾
+
+        //該月從星期幾開始
+        //公式
+
+        // 日號
+        // ＋月值（月份代表數值）
+        // ＋年值（只取尾兩位）
+        // ＋過4（由00年開始過了多少個4年，e.g., 2014年為3，）
+        // ＋世紀值（世紀代表數值）
+        // －1（減潤：若是計潤年一、二月的星期幾）
+        // 除7，並找出餘數
+        // 餘數0－6，分別代表星期日至星期六
+
+        function checkifLeapYear(n) {
+
+            if (n % 4 == 0 && n % 100 != 0 || n % 400 == 0) {
+                return 1
+            }
+            else {
+                return 0
+            }
+        }
+
+
+
+        function createCalenderHTML(startDay, weekends) {
+            //第一週
+            var tr = document.createElement("tr");
+            table.append(tr);
+            for (let k = 1; k <= 7; k++) {
+
+                var td = document.createElement("td")
+                td.setAttribute('data-toggle', 'modal');
+                td.setAttribute('data-target', '#exampleModal');
+                tr.append(td);
+
+            }
+
+            let number = 1;
+            for (let i = startDay + 1; i <= 7; i++) {
+
+                document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+                number++;
+            }
+
+            //其他週
+            let temp = 0;
+            let n = 7;
+            for (let i = 0; i <= weekends; i++) {
+
+                var tr = document.createElement("tr");
+                table.append(tr);
+                for (let j = 1; j <= 7; j++) {
+
+                    var td = document.createElement("td")
+                    td.setAttribute('data-toggle', 'modal');
+                    td.setAttribute('data-target', '#exampleModal');
+
+                    temp = j + 7 - startDay + n * i
+                    if (temp > date) {
+                        break;
+                    }
+                    else {
+                        td.innerText = temp;
+                        // console.log(temp);
+                        tr.append(td)
+                    }
+
+
+
+                }
+
+                // console.log(temp);
+            }
+
+
+
+
+        }
+
+        //init()
+        //第一週
+        var tr = document.createElement("tr");
+        table.append(tr);
+        for (let k = 1; k <= 7; k++) {
+            // data-toggle="modal" data-target="#exampleModal" 
+            var td = document.createElement("td")
+            td.setAttribute('data-toggle', 'modal');
+            td.setAttribute('data-target', '#exampleModal');
+            //td.innerText =j;
+            tr.append(td);
+
+        }
+
+        let number = 1;
+        for (let i = 5 + 1; i <= 7; i++) {
+
+            document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+            number++;
+        }
+
+        //其他週
+        let temp = 0;
+        let n = 7;
+        for (let i = 0; i <= weekends; i++) {
+
+            var tr = document.createElement("tr");
+            table.append(tr);
+            for (let j = 1; j <= 7; j++) {
+
+                var td = document.createElement("td")
+                td.setAttribute('data-toggle', 'modal');
+                td.setAttribute('data-target', '#exampleModal');
+                td.setAttribute('class', 'td')
+
+                temp = j + 7 - 5 + n * i
+                if (temp > date) {
+                    break;
+                }
+                else {
+                    td.innerText = temp;
+                    // console.log(temp);
+                    tr.append(td)
+                }
+
+
+
+            }
+
+            // console.log(temp);
+        }
+
+
+
+
+        //=======put 功能======//
+        let exampleModal = $('#exampleModal');
+        let updateModal = $('#updateModal');
+        let getItem = ""
+        let currentItem = "";
+        let currentTd = document.querySelectorAll('.td').forEach(item => {
+            item.addEventListener('click', function (e) {
+
+                getItem = e.currentTarget;
+                currentItem = e.currentTarget.innerText
+
+                console.log("---1 " + $(e.currentTarget).attr('data-target'));
+                console.log("---2 " + e.currentTarget.attributes['data-target'].value);
+                
+                e.stopPropagation();
+                if($(e.currentTarget).attr('data-target') === "#exampleModal"){
+                    exampleModal.modal('show');
+                }
+                else{
+                    updateModal.modal('show');
+                }
+                
+                
+
+                //return currentItem;
+            })
+        })
+
+        //    let temp = JSON.parse( localStorage.getItem('Name'))
+        //       //這樣才能順利印出物件
+
+        //       document.getElementById('display').innerText = temp.CName
+        function abc(e) {
+            console.log("abc")
+            e.stopPropagation();
+            updateModal.modal('show');
+        }
+
+
+        function updateNote(){
+            let temp = JSON.parse( localStorage.getItem(`${currentYear + currentMonth + currentItem}`))
+            console.log("temp---" +temp)
+            let updateText = document.querySelector('#edit').value;
+            console.log("updateText---" +updateText)
+            temp = updateText
+            let contenttext  = document.querySelector('.contenttext');
+            contenttext.innerText = temp
+            // localStorage.setItem(`${currentYear + currentMonth + currentItem}`,JSON.stringify())
+        }
+
+
+        function addNote(e) {
+            console.log('--- addNote');
+
+            let tempNote = document.querySelector('#input').value;
+            // console.log("currentItem"+currentItem);
+            localStorage.setItem(`${currentYear + currentMonth + currentItem}`, JSON.stringify(tempNote));
+            // console.log(currentItem)
+            //  currentItem.innerText = "found!"
+           
+
+            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" onclick="abc(event)">
+                   <div class="content"> <div class="contenttext"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + currentItem}`))}</div> </div>
+                </div>`);
+
+            
+        }
+
+
+
+        function deleteNote(){
+
+
+
+
+        }
+            
+
+
+
+
+
+    </script>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+</body>
+
+</html>

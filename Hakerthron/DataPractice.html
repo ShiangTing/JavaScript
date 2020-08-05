@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        #load{
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="text" id="input"> <button onclick="SaveData()">Save</button>
+
+</br>
+    <button id="load" onclick="LoadData()">Load</button>
+
+    <div class="display" id="display"></div>
+
+
+    <script>
+        function SaveData(){
+            let temp = document.getElementById('input').value
+
+            localStorage.setItem('Name',temp) //key value
+        }
+
+        function LoadData(){
+            let temp =  localStorage.getItem('Name');
+            document.querySelector(".display").innerText = temp;
+        }
+
+
+        //----------------------------------------------------
+
+        var dateA = new Date();//不帶參數 就是現在
+        console.log(dateA);
+
+        var dateB = new Date(2020,7,5);//月份從0開始
+        console.log(dateB);
+
+        console.log(dateB.getFullYear())
+        console.log(dateB.getMonth())
+
+
+        //how to know 幾月有幾天?
+        console.log(new Date(2020,1,0).getDate())//取1月有幾天(1月的最後一天是2月的第0天)
+
+    </script>
+</body>
+</html>
+</body>
+</html>

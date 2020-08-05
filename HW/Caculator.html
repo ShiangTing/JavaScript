@@ -92,7 +92,7 @@
         <div class="row">
             <button class="btn btn-info" value="00" id="btn_input">00</button>
             <button class="btn btn-info" value="0" id="btn_input">0</button>
-            <button class="btn btn-info" value="dot" id="btn_input">.</button>
+            <button class="btn btn-info" value="." id="btn_input">.</button>
             <button class="btn btn-info caculate" value="=" >=</button>
          
         </div>
@@ -117,6 +117,7 @@
    const numberBtn = document.querySelectorAll("#btn_input");
    const result =  document.querySelector("#result");
    const deleteBtn = document.querySelector("#btn_delete")
+   let flag = 0;
    let currentNumber = previous.innerText;
     
    numberBtn.forEach((item)=>{
@@ -139,9 +140,10 @@
 caculate.addEventListener('click',function(){
    
     // let postFix = toPostfix(numberStack)
-    console.log(numberStack);
-    let answer = evaluate(numberStack);
-    console.log(result)
+    let temp = checkIfNumber(numberStack)
+    console.log(temp);
+    let answer = evaluate(temp);
+    //console.log(result)
     result.innerText = answer.toString();
 })    
 
@@ -154,12 +156,60 @@ deleteBtn.addEventListener('click',function(){
 
 function CE(){
 
-    currentNumber = currentNumber.length-1;
+    previous.innerText = '';
 
 
 }
 
 
+
+
+//確認十進位與小數點//
+function checkIfNumber(array){
+let array2=[];
+var reg = /[0-9\.]/;
+let digits = ""
+debugger;
+ for(let i=0 ;i<array.length;i++){
+    if(flag==1){
+
+        if(array[i].match(reg)){
+            digits = digits+array[i];
+             array2.pop()
+            // array2.push(digits);
+            flag=1;
+        }
+        else{
+            flag=0;
+            digits = parseFloat(digits);
+            //array2.pop()
+            array2.push(digits)
+            array2.push(array[i]);
+        }
+    }
+    else if(flag==0){
+        if(array[i].match(reg)){
+            digits = digits+array[i];
+            array2.push(array[i]);
+            flag=1;
+        }
+
+        else{
+            flag=0;
+            array2.push(array[i]);
+        }
+    }
+
+    
+
+ }
+
+
+ return array2;
+    console.log(array2)
+
+
+}
 
 
 ///優先順序switch///
@@ -186,8 +236,8 @@ function toPostfix(post) {
     var toStack = '(' ;
     var toOutput = ')' ;
     post.forEach(function(c) {
-        console.log(c)
-        debugger;
+       
+
         if(c === toStack) { stack.push(c); }
         else if('+-*/'.indexOf(c) !== -1) {
             while(stack!='' && 
@@ -207,7 +257,8 @@ function toPostfix(post) {
     
     while(stack!='') { output.push(stack.pop()); }
     
-    return  output.join('') ;
+    // return  output.join('') ;
+    return output;
 }
 
 
@@ -218,13 +269,15 @@ function toPostfix(post) {
 
 function evaluate(expr) {
    let evalStack = [];
-    toPostfix(expr).split('').forEach(function(c) {
+    toPostfix(expr).forEach(function(c) {
         if('+-*/'.indexOf(c) !== -1) {
             var n2 = evalStack.pop();
             var n1 = evalStack.pop();
             evalStack.push(cal(c, n1, n2));
         } else {
-            evalStack.push(parseInt(c));
+
+            //視為浮點數
+            evalStack.push(parseFloat(c));
         }
     });
     console.log(evalStack)

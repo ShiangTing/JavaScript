@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        #load{
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="text" id="input"> <button onclick="SaveData()">Save</button>
+
+</br>
+    <button id="load" onclick="LoadData()">Load</button>
+
+    <div class="display" id="display"></div>
+
+
+    <script>
+        function SaveData(){
+         
+            let temp ={
+                Name:'Sharon',
+                CName:'湘婷',
+                Color:'black'
+            };
+
+           // localStorage.setItem('display',temp);
+            //如果key一樣會覆蓋原本value
+
+            localStorage.setItem('Name',JSON.stringify(temp));
+            //lovastorege裡的value只能放字串
+        }
+
+        function LoadData(){
+          let temp = JSON.parse( localStorage.getItem('Name'))
+          //這樣才能順利印出物件
+
+          document.getElementById('display').innerText = temp.CName
+          
+          document.getElementById('display').style.color = temp.color
+          
+
+        }
+    </script>
+</body>
+</html>
