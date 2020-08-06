@@ -176,11 +176,18 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" id="input">
+                        <form>
+                        
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">新增行程</label>
+                              <textarea class="form-control" id="input"></textarea>
+                            </div>
+                          </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
+                       
                         <button type="button" class="btn btn-primary" id="send" onclick="addNote()">送出</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend" onclick="deleteNote()">刪除記事</button>
                     </div>
                 </div>
             </div>
@@ -197,12 +204,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" id="edit">
+                        <form>
+                        
+                            <div class="form-group">
+                              <label for="message-text" class="col-form-label">修改行程</label>
+                              <textarea class="form-control" id="edit"></textarea>
+                            </div>
+                          </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
-                        <button type="button" class="btn btn-primary" id="change" onclick="updateNote()">儲存</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend">關閉</button>
+                        <button type="submit" class="btn btn-primary" id="change" onclick="updateNote()">儲存</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="closesend" onclick="deleteNote()">刪除記事</button>
                     </div>
                 </div>
             </div>
@@ -450,9 +462,7 @@
                 if($(e.currentTarget).attr('data-target') === "#exampleModal"){
                     exampleModal.modal('show');
                 }
-                else{
-                    updateModal.modal('show');
-                }
+       
                 
                 
 
@@ -464,10 +474,16 @@
         //       //這樣才能順利印出物件
 
         //       document.getElementById('display').innerText = temp.CName
-        function abc(e) {
-            console.log("abc")
+        let noteItem = ''
+        function modal(e) {
+            console.log(e)
+            console.log(e.currentTarget.parentNode)
+            noteItem = e.currentTarget.parentNode;
             e.stopPropagation();
             updateModal.modal('show');
+            
+            //show出原本內容
+
         }
 
 
@@ -485,7 +501,7 @@
 
         function addNote(e) {
             console.log('--- addNote');
-
+            event.preventDefault()
             let tempNote = document.querySelector('#input').value;
             // console.log("currentItem"+currentItem);
             localStorage.setItem(`${currentYear + currentMonth + currentItem}`, JSON.stringify(tempNote));
@@ -493,7 +509,7 @@
             //  currentItem.innerText = "found!"
            
 
-            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" onclick="abc(event)">
+            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" onclick="modal(event)">
                    <div class="content"> <div class="contenttext"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + currentItem}`))}</div> </div>
                 </div>`);
 
@@ -501,17 +517,24 @@
         }
 
 
+        //加上value 返回
 
         function deleteNote(){
 
-
-
+            let note = document.querySelector('.smallNote');
+            localStorage.removeItem(`${currentYear + currentMonth + currentItem}`);
+            //Storage.clear()
+           // currentTd.innerHTML='';
+           noteItem.removeChild(note);
+            //e.currentTarget = div content
 
         }
             
 
 
+        function getReload(){
 
+        }
 
 
     </script>
