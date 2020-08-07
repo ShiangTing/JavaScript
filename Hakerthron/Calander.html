@@ -52,26 +52,20 @@
             height: 10%;
             border-radius: 5px;
             display: flex;
-            /* display: flex;
-            flex-direction: row;
-            writing-mode: horizontal-tb */
+       
         }
 
         div.content {
             display: flex;
-            justify-content: space-evenly;
+            /* justify-content: space-evenly; */
+            background-color:lightseagreen;
+            width: 85%;
+            /* height: 20%; */
+            border-radius: 5px;
         }
 
-        div.content::before {
-            color: coral;
-            content: "\25E6";
-            font-size: 30px;
-            /* padding: 5px 5px; */
-
-        }
-
-        .content div {
-            padding-top: 10px;
+        .contenttext{
+            padding: 1.5px 5px;
         }
 
         div.content:hover {
@@ -89,10 +83,14 @@
         <!-- button控制月份增減 -->
         <!-- <button id="previous"></button>
          <button id="last"></button> -->
-        <button type="button" class="btn btn-success" id="next_Btn">Previous</button>
+        <div type="button" class="btn" id="next_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg></div>
 
         <span class="year">2020</span> <span class="month">8</span>
-        <button type="button" class="btn btn-success" id="previous_Btn">Next</button>
+        <div type="button" class="btn" id="previous_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg></div>
 
     </div>
     <div class="container">
@@ -179,6 +177,8 @@
                         <form>
                         
                             <div class="form-group">
+                                <label for="message-text" class="col-form-label">時間</label>
+                                <input type="time">
                               <label for="message-text" class="col-form-label">新增行程</label>
                               <textarea class="form-control" id="input"></textarea>
                             </div>
@@ -207,6 +207,8 @@
                         <form>
                         
                             <div class="form-group">
+                                <label for="">時間</label>
+                                <input type="time">
                               <label for="message-text" class="col-form-label">修改行程</label>
                               <textarea class="form-control" id="edit"></textarea>
                             </div>
@@ -240,7 +242,7 @@
         let currentYear = document.querySelector('.year').innerText;
         let month = document.querySelector('.month');
         let currentMonth = document.querySelector('.month').innerText;
-        console.log(currentMonth)
+   
         let table = document.querySelector('#table')
 
 
@@ -262,9 +264,10 @@
             if (currentMonth > 12) { currentMonth = 1; currentYear++; }
             month.innerText = currentMonth;
             year.innerText = currentYear;
-            console.log(currentMonth)
+          
 
             let dates = getStartDate(currentMonth);
+            gettotalDates(currentMonth,currentYear)
             //清空///
             table.innerHTML = ''
             createCalenderHTML(dates, weekends);
@@ -275,7 +278,7 @@
             if (currentMonth < 1) { currentMonth = 12; currentYear--; }
             month.innerText = currentMonth;
             year.innerText = currentYear;
-            console.log(currentMonth)
+            gettotalDates(currentMonth,currentYear)
             table.innerHTML = ''
             let dates = getStartDate(currentMonth);
             createCalenderHTML(dates, weekends);
@@ -285,12 +288,12 @@
 
         //得到該月有幾天
 
-        let real = parseInt(currentMonth) - 1
+        let real = parseInt(currentMonth)
         console.log(real)
+        
         let date = new Date(currentYear, real, 0).getDate();
-        console.log(date)
-
-
+        console.log("date---" + date)
+        
 
         //得到該月有幾週
         let weekends = Math.floor(date / 7);
@@ -333,8 +336,14 @@
         }
 
 
+        function gettotalDates(currentMonth,currentYear){
+          
+            let real = parseInt(currentMonth) 
+            let date = new Date(currentYear, real, 0).getDate();
+           console.log("new totaldates" +date )
+        }
 
-        function createCalenderHTML(startDay, weekends) {
+        function createCalenderHTML(startDay, weekends , totalDates, total) {
             //第一週
             var tr = document.createElement("tr");
             table.append(tr);
@@ -449,7 +458,10 @@
         let updateModal = $('#updateModal');
         let getItem = ""
         let currentItem = "";
-        let currentTd = document.querySelectorAll('.td').forEach(item => {
+        
+        document.querySelectorAll('.td')
+      
+      document.querySelectorAll('[data-target="#exampleModal"]').forEach(item => {
             item.addEventListener('click', function (e) {
 
                 getItem = e.currentTarget;
@@ -476,7 +488,7 @@
         //       document.getElementById('display').innerText = temp.CName
         let noteItem = ''
         function modal(e) {
-            console.log(e)
+   
             console.log(e.currentTarget.parentNode)
             noteItem = e.currentTarget.parentNode;
             e.stopPropagation();
@@ -495,7 +507,11 @@
             temp = updateText
             let contenttext  = document.querySelector('.contenttext');
             contenttext.innerText = temp
-            // localStorage.setItem(`${currentYear + currentMonth + currentItem}`,JSON.stringify())
+
+
+            //目前問題 儲存會存到不對檔案 =>可以先嘗試拿到key值之後再上傳
+            localStorage.setItem(`${currentYear + currentMonth + currentItem}`, JSON.stringify(updateText))
+            
         }
 
 
