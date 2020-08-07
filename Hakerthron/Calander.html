@@ -450,6 +450,13 @@
             // console.log(temp);
         }
 
+        
+        function getmsDate(){
+
+            let nowDate = new Date();
+
+            return nowDate.getTime()
+            }
 
 
 
@@ -487,10 +494,13 @@
 
         //       document.getElementById('display').innerText = temp.CName
         let noteItem = ''
+        let currentNote = ''
         function modal(e) {
-   
+           // 取到的都是同一筆
             console.log(e.currentTarget.parentNode)
             noteItem = e.currentTarget.parentNode;
+            currentNote = e.currentTarget.getAttribute('storage-key')
+            console.log("currentNote---" +currentNote)
             e.stopPropagation();
             updateModal.modal('show');
             
@@ -500,17 +510,25 @@
 
 
         function updateNote(){
-            let temp = JSON.parse( localStorage.getItem(`${currentYear + currentMonth + currentItem}`))
+            //let storageKey = currentNote.attributes['storage-key'].value
+            //let storageattr = currentNote.getAttribute('storage-key')
+            console.log(currentNote)
+           //console.log(storageattr)
+            let temp = JSON.parse( localStorage.getItem(`${currentNote}`))
             console.log("temp---" +temp)
+
+
             let updateText = document.querySelector('#edit').value;
             console.log("updateText---" +updateText)
-            temp = updateText
-            let contenttext  = document.querySelector('.contenttext');
-            contenttext.innerText = temp
+            temp = updateText;
 
+            //取出要更改的物件
+            let tempNode =  document.querySelector(`[storage-key ='${currentNote}']`);
+            let content = tempNode.querySelector('.content');
+            console.log("content---" +content)
+            content.innerText = temp;
 
-            //目前問題 儲存會存到不對檔案 =>可以先嘗試拿到key值之後再上傳
-            localStorage.setItem(`${currentYear + currentMonth + currentItem}`, JSON.stringify(updateText))
+            localStorage.setItem(`${currentNote}`, JSON.stringify(temp))
             
         }
 
@@ -519,17 +537,19 @@
             console.log('--- addNote');
             event.preventDefault()
             let tempNote = document.querySelector('#input').value;
-            // console.log("currentItem"+currentItem);
-            localStorage.setItem(`${currentYear + currentMonth + currentItem}`, JSON.stringify(tempNote));
+            let tempTime = getmsDate()
+            console.log(tempTime)
+        
             // console.log(currentItem)
             //  currentItem.innerText = "found!"
            
+            localStorage.setItem(`${currentYear + currentMonth + tempTime}`, JSON.stringify(tempNote));
 
-            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" onclick="modal(event)">
-                   <div class="content"> <div class="contenttext"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + currentItem}`))}</div> </div>
+            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" storage-key = ${currentYear + currentMonth + tempTime}  onclick="modal(event)">
+                   <div class="content"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + tempTime}`))} </div>
                 </div>`);
 
-            
+               
         }
 
 
@@ -537,8 +557,10 @@
 
         function deleteNote(){
 
+            let storageKey = currentNote.attributes['storage-key'].value
+          
             let note = document.querySelector('.smallNote');
-            localStorage.removeItem(`${currentYear + currentMonth + currentItem}`);
+            localStorage.removeItem(`${storageKey}`);
             //Storage.clear()
            // currentTd.innerHTML='';
            noteItem.removeChild(note);
@@ -548,9 +570,6 @@
             
 
 
-        function getReload(){
-
-        }
 
 
     </script>
