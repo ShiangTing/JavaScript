@@ -186,8 +186,8 @@
                     </div>
                     <div class="modal-footer">
                        
-                        <button type="button" class="btn btn-primary" id="send" onclick="addNote()">送出</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="closesend" onclick="deleteNote()">刪除記事</button>
+                        <button type="button" class="btn btn-primary" id="send" onclick="addNote()" data-dismiss="modal" >儲存</button>
+                       
                     </div>
                 </div>
             </div>
@@ -499,8 +499,10 @@
            // 取到的都是同一筆
             console.log(e.currentTarget.parentNode)
             noteItem = e.currentTarget.parentNode;
+           
             currentNote = e.currentTarget.getAttribute('storage-key')
             console.log("currentNote---" +currentNote)
+           
             e.stopPropagation();
             updateModal.modal('show');
             
@@ -508,7 +510,7 @@
 
         }
 
-
+      //要增加未命名記事
         function updateNote(){
             //let storageKey = currentNote.attributes['storage-key'].value
             //let storageattr = currentNote.getAttribute('storage-key')
@@ -519,8 +521,16 @@
 
 
             let updateText = document.querySelector('#edit').value;
+            if(updateText==""){
+                updateText ="未命名記事"
+                temp = updateText;
+
+            }
+            else{
+                temp = updateText;
+            }
             console.log("updateText---" +updateText)
-            temp = updateText;
+       
 
             //取出要更改的物件
             let tempNode =  document.querySelector(`[storage-key ='${currentNote}']`);
@@ -537,6 +547,11 @@
             console.log('--- addNote');
             event.preventDefault()
             let tempNote = document.querySelector('#input').value;
+           if(tempNote==""){
+            tempNote="未命名記事"
+           }
+           
+           
             let tempTime = getmsDate()
             console.log(tempTime)
         
@@ -557,14 +572,14 @@
 
         function deleteNote(){
 
-            let storageKey = currentNote.attributes['storage-key'].value
+            let storageKey = currentNote;
           
-            let note = document.querySelector('.smallNote');
+            let note = document.querySelector(`[storage-key ='${storageKey}']`);
+            console.log(note);
             localStorage.removeItem(`${storageKey}`);
             //Storage.clear()
            // currentTd.innerHTML='';
            noteItem.removeChild(note);
-            //e.currentTarget = div content
 
         }
             
