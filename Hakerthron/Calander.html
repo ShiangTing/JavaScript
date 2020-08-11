@@ -23,7 +23,8 @@
 
         .year,
         .month {
-            font-size: 30px;
+            padding: 10px 20px;
+            font-size: 40px;
         }
 
         .calander-table {
@@ -42,6 +43,7 @@
 
         }
 
+
         .smallNote {
             display: flex;
         }
@@ -52,26 +54,70 @@
             height: 10%;
             border-radius: 5px;
             display: flex;
-       
+
         }
 
         div.content {
             display: flex;
             /* justify-content: space-evenly; */
-            background-color:lightseagreen;
+            background-color: lightseagreen;
             width: 85%;
             /* height: 20%; */
             border-radius: 5px;
+            overflow:hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 1.5px 5px;
+            display:block;
         }
 
-        .contenttext{
-            padding: 1.5px 5px;
-        }
 
         div.content:hover {
             cursor: pointer;
             background-color: lightgray;
 
+        }
+
+        .btn-cstm-light {
+            color: #ffffff;
+            background-color: #212841;
+            border-color: #212841;
+        }
+
+        .btn-cta {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 20px;
+            font-size: .8rem;
+            font-weight: 600;
+        }
+
+        .bg-img {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .m-h-30 {
+            min-height: 30vh;
+        }
+
+        .close {
+
+            position: absolute;
+            z-index: 99;
+            right: 10px !important;
+            top: 10px !important;
+            background: rgba(193, 193, 193, .3) !important;
+            /* padding: 10px; */
+            border-radius: 50%;
+            height: 2.5rem;
+            width: 2.5rem;
+            color: cornsilk;
+        }
+
+        .close:hover {
+            color: lightslategray;
         }
     </style>
 </head>
@@ -83,14 +129,19 @@
         <!-- button控制月份增減 -->
         <!-- <button id="previous"></button>
          <button id="last"></button> -->
-        <div type="button" class="btn" id="next_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-          </svg></div>
+        <span class="year">2020</span>
+        <div type="button" class="btn" id="next_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
+                class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+            </svg></div>
 
-        <span class="year">2020</span> <span class="month">8</span>
-        <div type="button" class="btn" id="previous_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-          </svg></div>
+        <span class="month">8</span><span class="word">月</span>
+        <div type="button" class="btn" id="previous_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
+                class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg></div>
 
     </div>
     <div class="container">
@@ -162,33 +213,49 @@
           </tr> -->
             </tbody>
         </table>
+ 
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <!-- <div class="modal-header">
+                        <img class="mw-100" src="https://d33wubrfki0l68.cloudfront.net/03e77c4c8b09fdab64a0cb19b40719939ef19e66/93e46/assets/img/cherry-waiting.png" width="200">
                         <h5 class="modal-title" id="exampleModalLabel">增加記事</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                       
+                    </div> -->
+                    <button type="button" class="close light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="m-h-30 bg-img rounded-top modal-pic"
+                        style="background-image: url('https://images.unsplash.com/photo-1543363136-3fdb62e11be5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80')">
+
                     </div>
                     <div class="modal-body">
                         <form>
-                        
+
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">時間</label>
-                                <input type="time">
-                              <label for="message-text" class="col-form-label">新增行程</label>
-                              <textarea class="form-control" id="input"></textarea>
+                                <input type="time" id="time">
+
                             </div>
-                          </form>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">新增行程:</label>
+                                <textarea class="form-control" id="input"></textarea>
+                            </div>
+                        </form>
+                        <button type="button" class="btn btn-cstm-light btn-cta" id="send" onclick="addNote()"
+                            data-dismiss="modal">儲存</button>
                     </div>
-                    <div class="modal-footer">
+
+                    <!-- <div class="modal-footer">
                        
-                        <button type="button" class="btn btn-primary" id="send" onclick="addNote()" data-dismiss="modal" >儲存</button>
+                      
                        
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -197,27 +264,40 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <button type="button" class="close light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="m-h-30 bg-img rounded-top modal-pic"
+                        style="background-image: url('https://images.unsplash.com/photo-1543363136-3fdb62e11be5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80')">
+
+                    </div>
+                    <!-- <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">修改記事</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+
+                    </div> -->
                     <div class="modal-body">
                         <form>
-                        
+
                             <div class="form-group">
                                 <label for="">時間</label>
-                                <input type="time">
-                              <label for="message-text" class="col-form-label">修改行程</label>
-                              <textarea class="form-control" id="edit"></textarea>
+                                <input type="time" id="time02"  class="time02">
+
                             </div>
-                          </form>
-                    </div>
-                    <div class="modal-footer">
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">修改行程</label>
+                                <textarea class="form-control" id="edit"></textarea>
+                            </div>
+                        </form>
                         <button type="submit" class="btn btn-primary" id="change" onclick="updateNote()">儲存</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="closesend" onclick="deleteNote()">刪除記事</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="closesend"
+                            onclick="deleteNote()">刪除記事</button>
                     </div>
+                    <!-- <div class="modal-footer">
+                       
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -242,17 +322,28 @@
         let currentYear = document.querySelector('.year').innerText;
         let month = document.querySelector('.month');
         let currentMonth = document.querySelector('.month').innerText;
-   
+
         let table = document.querySelector('#table')
 
 
+        //    let pictureArray ={
+
+        //     [0:""]
+        //     []
+        //     []
+        //     []
+        //    }
 
 
 
 
-
-
-        // console.log("start----"+startDays)
+        //     let now = new Date;
+        // document.querySelector("#time2").value = now.toLocaleString("sv-SE", {
+        //     hour: "2-digit",
+        //     minute: "2-digit",
+        //     second: "2-digit"
+        // });
+        // document.querySelector("p").innerText = now;
 
 
 
@@ -264,13 +355,13 @@
             if (currentMonth > 12) { currentMonth = 1; currentYear++; }
             month.innerText = currentMonth;
             year.innerText = currentYear;
-          
+
 
             let dates = getStartDate(currentMonth);
-            gettotalDates(currentMonth,currentYear)
+            gettotalDates(currentMonth, currentYear)
             //清空///
             table.innerHTML = ''
-            createCalenderHTML(dates, weekends);
+            createCalenderHTML(dates, weekends, currentMonth, currentYear);
         })
 
         preBtn.addEventListener('click', function () {
@@ -278,22 +369,33 @@
             if (currentMonth < 1) { currentMonth = 12; currentYear--; }
             month.innerText = currentMonth;
             year.innerText = currentYear;
-            gettotalDates(currentMonth,currentYear)
+            let totalDays = gettotalDates(currentMonth, currentYear)
             table.innerHTML = ''
             let dates = getStartDate(currentMonth);
-            createCalenderHTML(dates, weekends);
+            createCalenderHTML(dates, weekends, totalDays, currentMonth, currentYear);
         })
 
 
 
+
+        function modalBGChoose() {
+            let time = document.querySelector('#time').value;
+
+            let pictureArray = [0, 1, 2, 3]
+
+            Date.parse(ScheduleDate).valueOf() < (Date.parse(CurrentDate)).valueOf()
+            // if ( Date.parse(time).valueOf()>=  (Date.parse("12:00")).valueOf() && Date.parse(time).valueOf()<= (Date.parse("15:00")).valueOf()) {
+            //     modal - pic.setAttribute('',)
+            // }
+        }
         //得到該月有幾天
 
-        let real = parseInt(currentMonth)
-        console.log(real)
-        
-        let date = new Date(currentYear, real, 0).getDate();
+        // let real = parseInt(currentMonth)
+        // console.log(real)
+
+        let date = new Date(currentYear, currentMonth, 0).getDate();
         console.log("date---" + date)
-        
+
 
         //得到該月有幾週
         let weekends = Math.floor(date / 7);
@@ -336,14 +438,15 @@
         }
 
 
-        function gettotalDates(currentMonth,currentYear){
-          
-            let real = parseInt(currentMonth) 
-            let date = new Date(currentYear, real, 0).getDate();
-           console.log("new totaldates" +date )
+        function gettotalDates(currentMonth, currentYear) {
+
+            // let real = parseInt(currentMonth) 
+            let date = new Date(currentYear, currentMonth, 0).getDate();
+            return date;
+            console.log("new totaldates" + date)
         }
 
-        function createCalenderHTML(startDay, weekends , totalDates, total) {
+        function createCalenderHTML(startDay, weekends, totalDays, currentMonth, currentYear) {
             //第一週
             var tr = document.createElement("tr");
             table.append(tr);
@@ -356,7 +459,21 @@
 
             }
 
+            // let lastDay = new Date(currentYear,currentMonth-1,0).getDate()
+            // let number = lastDay-startDay+1
+            // for(let i=1; i<=7;i++){
+            //     if(number<=lastDay){
+            //     document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+            //     number++;
+            //      }
+            //     else{
+            //         number=1;
+            //         document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+            //         number++;
+            //      }
+            // }
             let number = 1;
+            //(if number>30/31 ){number==1}
             for (let i = startDay + 1; i <= 7; i++) {
 
                 document.querySelector(`tr td:nth-child(${i})`).innerText = number;
@@ -377,7 +494,7 @@
                     td.setAttribute('data-target', '#exampleModal');
 
                     temp = j + 7 - startDay + n * i
-                    if (temp > date) {
+                    if (temp > totalDays) {
                         break;
                     }
                     else {
@@ -411,6 +528,20 @@
             tr.append(td);
 
         }
+
+
+        // let number = 27
+        // for(let i=1; i<=7;i++){
+        //     if(number<=31){
+        //     document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+        //     number++;
+        //      }
+        //     else{
+        //         number=1;
+        //         document.querySelector(`tr td:nth-child(${i})`).innerText = number;
+        //         number++;
+        //      }
+        // }
 
         let number = 1;
         for (let i = 5 + 1; i <= 7; i++) {
@@ -450,13 +581,13 @@
             // console.log(temp);
         }
 
-        
-        function getmsDate(){
+
+        function getmsDate() {
 
             let nowDate = new Date();
 
             return nowDate.getTime()
-            }
+        }
 
 
 
@@ -465,10 +596,10 @@
         let updateModal = $('#updateModal');
         let getItem = ""
         let currentItem = "";
-        
+
         document.querySelectorAll('.td')
-      
-      document.querySelectorAll('[data-target="#exampleModal"]').forEach(item => {
+
+        document.querySelectorAll('[data-target="#exampleModal"]').forEach(item => {
             item.addEventListener('click', function (e) {
 
                 getItem = e.currentTarget;
@@ -476,14 +607,24 @@
 
                 console.log("---1 " + $(e.currentTarget).attr('data-target'));
                 console.log("---2 " + e.currentTarget.attributes['data-target'].value);
-                
+
                 e.stopPropagation();
-                if($(e.currentTarget).attr('data-target') === "#exampleModal"){
+                if ($(e.currentTarget).attr('data-target') === "#exampleModal") {
+                    let nowTime = new Date();
+             
+                    document.querySelector("#time").value = nowTime.toLocaleString("sv-SE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        // second: "2-digit"
+                    });
+
                     exampleModal.modal('show');
+
+
                 }
-       
-                
-                
+
+
+
 
                 //return currentItem;
             })
@@ -495,94 +636,111 @@
         //       document.getElementById('display').innerText = temp.CName
         let noteItem = ''
         let currentNote = ''
+        let itemTime = ''
         function modal(e) {
-           // 取到的都是同一筆
+            // 取到的都是同一筆
             console.log(e.currentTarget.parentNode)
             noteItem = e.currentTarget.parentNode;
-           
+            //時間只要直接拿attribute就可以add-time="14:12"
+            itemTime = e.currentTarget.getAttribute('add-time')
             currentNote = e.currentTarget.getAttribute('storage-key')
-            console.log("currentNote---" +currentNote)
-           
+            console.log("currentNote---" + currentNote)
+
+            let temp = JSON.parse(localStorage.getItem(`${currentNote}`))
+
+     
+          
+       
             e.stopPropagation();
+          
             updateModal.modal('show');
-            
-            //show出原本內容
+
+            //內容存放在變數沒用
+            document.querySelector('#edit').value= temp;
+
+            document.querySelector('#time02').value = itemTime;
+            //updateText = temp;
+          
+    
 
         }
 
-      //要增加未命名記事
-        function updateNote(){
+      
+        function updateNote() {
             //let storageKey = currentNote.attributes['storage-key'].value
             //let storageattr = currentNote.getAttribute('storage-key')
             console.log(currentNote)
-           //console.log(storageattr)
-            let temp = JSON.parse( localStorage.getItem(`${currentNote}`))
-            console.log("temp---" +temp)
-
-
-            let updateText = document.querySelector('#edit').value;
-            if(updateText==""){
-                updateText ="未命名記事"
-                temp = updateText;
-
-            }
-            else{
-                temp = updateText;
-            }
-            console.log("updateText---" +updateText)
        
+            let temp = JSON.parse(localStorage.getItem(`${currentNote}`))
+            console.log("temp---" + temp)
+
+            
+            let updateText = document.querySelector('#edit').value;
+            
+            if (updateText == "") {
+                updateText = "未命名記事"
+                temp = updateText;
+
+            }
+            else {
+                temp = updateText;
+            }
+            console.log("updateText---" + updateText)
+
 
             //取出要更改的物件
-            let tempNode =  document.querySelector(`[storage-key ='${currentNote}']`);
+            let tempNode = document.querySelector(`[storage-key ='${currentNote}']`);
+            let addTime = document.querySelector(`[add-time ='${itemTime}']`);
             let content = tempNode.querySelector('.content');
-            console.log("content---" +content)
+            console.log("content---" + content)
             content.innerText = temp;
-
+            document.querySelector('#time02').value =addTime;
             localStorage.setItem(`${currentNote}`, JSON.stringify(temp))
-            
+
         }
 
-
+        //增加行程
         function addNote(e) {
             console.log('--- addNote');
             event.preventDefault()
+            let pickTime = document.querySelector("#time").value
             let tempNote = document.querySelector('#input').value;
-           if(tempNote==""){
-            tempNote="未命名記事"
-           }
-           
-           
+            if (tempNote == "") {
+                tempNote = "未命名記事"
+            }
+
+
             let tempTime = getmsDate()
             console.log(tempTime)
-        
+
             // console.log(currentItem)
             //  currentItem.innerText = "found!"
-           
+
             localStorage.setItem(`${currentYear + currentMonth + tempTime}`, JSON.stringify(tempNote));
 
-            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" storage-key = ${currentYear + currentMonth + tempTime}  onclick="modal(event)">
+            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" storage-key = ${currentYear + currentMonth + tempTime} add-time="${pickTime}" onclick="modal(event)">
                    <div class="content"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + tempTime}`))} </div>
                 </div>`);
 
-               
+
         }
 
 
-        //加上value 返回
+        //刪除行程
 
-        function deleteNote(){
+        function deleteNote() {
 
             let storageKey = currentNote;
-          
+
             let note = document.querySelector(`[storage-key ='${storageKey}']`);
             console.log(note);
             localStorage.removeItem(`${storageKey}`);
             //Storage.clear()
-           // currentTd.innerHTML='';
-           noteItem.removeChild(note);
+            // currentTd.innerHTML='';
+            noteItem.removeChild(note);
 
         }
-            
+
 
 
 
@@ -594,7 +752,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
+
 </body>
 
 </html>

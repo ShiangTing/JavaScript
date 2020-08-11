@@ -31,13 +31,18 @@
     </style>
 </head>
 <body>
-    <div class="container">
-    <div class="box">
-        <div class="title"><h1>HTML&CSS作業</h3></div>
-     <li class="section">
-        <ul><a href="https://csharpprojects.azurewebsites.net/Practice/HTML&CSS_HW01.html">肺炎統計資料表</a></ul>
-      
-</div>
-    </div>
+  
+    <input type="time">
+    <p></p>
+
+    <script>
+          let date = new Date;
+    document.querySelector("input").value = date.toLocaleString("sv-SE", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+    document.querySelector("p").innerText = date;
+    </script>
 </body>
 </html>
