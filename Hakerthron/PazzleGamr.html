@@ -6,92 +6,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .picture {
-            position: relative;
-             width: 450px;
-            height: 450px; 
-            /* display: flex; */
-           background-image: url("./pokemon.jpg"); 
+        .picture div{
+            width:97px;
+            height:97px;
+            border: 1px solid #CCCCCC;
+            margin: 1px;
+            background-image: url('./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg');
             background-repeat: no-repeat;
-            background-position: center;
-           
-        }
+            position: absolute;
+            -webkit-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            -ms-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
 
+        }
+/* 
         .picture img {
             width: 100%;
             height: 100%;
-        }
+        } */
 
 
-        #pic-1{
-            width: 33.3333%;
-            height: 33.3333%; 
-            overflow: hidden;
-            background-image: url("./pokemon.jpg"); 
-        }
+
         .row1 {
             top: 0px;
         }
 
         .row2 {
-            top: 150px
+            top: 99px
         }
+
         .row3 {
-            top: 300px
+            top: 198px
         }
-      
+
 
         .col-1 {
             left: 0px;
         }
 
         .col-2 {
-            left: 150px;
+            left: 99px;
         }
 
         .col-3 {
-            left: 300px;
+            left:198px;
         }
 
 
         #pic1 {
-            width: 50%;
-            height: 50%; 
-            /* overflow: hidden; */
-            background-position: -0px 0px;
-            background-repeat: no-repeat;
 
-            /* width: 50%;
-    height: 50%;
-    /* overflow: hidden; */
-    /* background-position: 77px 135px;
-    background-repeat: no-repeat;
-    opacity: 1;  */
+            background-position: -0px 0px;
+
         }
 
         #pic2 {
-            background-position: -450px 0px;
+            background-position: -99px 0px;
+       
+          
         }
 
         #pic3 {
-            background-position: -900px 0px;
+            background-position: -198px 0px;
+
+         
         }
 
         #pic4 {
-            background-position: -264px 0px;
+         
+            background-position: 0px -99px;
+
+       
         }
+
         #pic5 {
-            background-position: -264px 0px;
+            background-position: -99px -99px;
         }
+
         #pic6 {
-            background-position: -264px 0px;
+            background-position: -198px -99px;
+
         }
+
         #pic7 {
-            background-position: -264px 0px;
+            background-position: -0px -198px;
         }
 
         #pic8 {
-            background-position: -264px 0px;
+            background-position: -99px -198px;
+        }
+
+        #puzzle #empty {
+            border: none;
+            background: none;
+            background-color: lightslategray;
+            opacity: 0.3;
+            padding: 1px;
+        }
+        .startbtn{
+            position: absolute;
+            left: 300px;
         }
     </style>
 
@@ -99,93 +114,248 @@
 </head>
 
 <body>
-    <div class="picture" style="background-image: url(./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg)" id="puzzle">
+    <div class="picture"  id="puzzle">
 
-        <div id="pic1" class="row1 col-1" style="background-image: url(./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg)"></div>
-        <div id="pic2" class="row1 col-2" ></div>
-        <div id="pic3" class="row1 col-3"></div>
-        <div id="pic4" class="row2 col-1"></div>
-        <div id="pic5" class="row2 col-2"></div>
-        <div id="pic6" class="row2 col-3"></div>
-        <div id="pic7" class="row3 col-1"></div>
-        <div id="pic8" class="row3 col-2"></div>
-        <div id="empty" class="row3 col-3"></div>
+        <div id="pic1" class="row1 col-1 pic1" name = "pic" >
+        </div>
+        <div id="pic2" class="row1 col-2 pic2" name = "pic">
+        </div>
+        <div id="pic3" class="row1 col-3 pic3"  name = "pic">
+        </div>
+        <div id="pic4" class="row2 col-1 pic4"  name = "pic">
+        </div>
+        <div id="pic5" class="row2 col-2 pic5"  name = "pic"></div>
+        <div id="pic6" class="row2 col-3 pic6"  name = "pic"></div>
+        <div id="pic7" class="row3 col-1 pic7"   name = "pic"></div>
+        <div id="pic8" class="row3 col-2 pic8"  name = "pic"></div>
+        <div id="empty" class="row3 col-3 empty"  name = "pic"></div>
 
-
+        <button id="startbtn" class="startbtn">開始</button>
 
     </div>
 
+   
+    <script>
+        //動態生成block div///
 
-<script>
-    //動態生成block div///
+        const puzzle = document.querySelector("#puzzle")
+        const empty = document.createElement("div")
+        empty.setAttribute('id', 'empty');
+        empty.setAttribute('class', 'row3 col-3');
+        //     for(let i=1;i<=3;i++){
+        //         for(let j=1;j<=3;j++){
 
-    const puzzle = document.querySelector("#puzzle")
-    const empty = document.createElement("div")
-    empty.setAttribute('id','empty');
-    empty.setAttribute('class','row3 col-3');
-//     for(let i=1;i<=3;i++){
-//         for(let j=1;j<=3;j++){
+        //         var  div = document.createElement("div")
+        //         div.setAttribute('class','row'+i + "col" +j)
+        //         div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
+        //        puzzle.append(div);     
 
-//         var  div = document.createElement("div")
-//         div.setAttribute('class','row'+i + "col" +j)
-//         div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
-//        puzzle.append(div);     
+        //         }
 
-//         }
+
+        //     } 
+
+
+        // puzzle.append(empty);
+
+
+
+        //產生隨機亂數 打亂圖片
+        function randomPic(picCollection) {
+
+            //Shuffling array
+            let numberArray = [ 1, 2, 3, 4, 5, 6, 7, 8,9]
+            // numberArray.sort(() => Math.random() - 0.5);
+            // console.log(numberArray)
+
+            let invertion = 0;
+            do{
+                numberArray.sort(() => Math.random() - 0.5);
+                
+                for(let i=0;i<numberArray;i++){
+                    for(let j=i+1;j<numberArray;j++){
+                        if(numberArray[j]<numberArray[i]){
+                            invertion++;
+                        }
+                    }
+                }   
+            }while(invertion%2!=0)
+    
+            console.log(numberArray)
+            
+            // 圖片交換
+            
+           
+           
+            //從div picture底下的子元素變成一組陣列 取出calssName並map成另一個陣列
+            let  temp = document.querySelectorAll("[name = 'pic']");
+            let i = 0
+            let picArray = Array.from(temp).map(function(item){ 
+                i++
+                return {
+                    key:numberArray[i-1],
+                    className:item.className
+                    
+                }
+              
+                 ///一定要有key值!!!
+
+            })
+            console.log(picArray)
+
+
+             //再 依照 numberArray sort那個 picArray
+            // picArray = picArray.sort(function(a,b){
+            //     console.log(numberArray)
+            //         return numberArray.indexOf(a.key)-numberArray.indexOf(b.key)
+                
+            //     })
+            //    console.log(picArray)
+
+                
+            //把sort好的陣列跟原來的swap
+
+
+            for (let k = 1; k <= 9; k++) {
+                //picCollection.
+          
+            
+              // let temp = picCollection.querySelector(`div:nth-child(${k})`).className
+                 
+              console.log(picArray[k-1].className)
+              console.log( picCollection.querySelector(`div:nth-child(${picArray[k-1].key})`).className)
+               // let i=numberArray[k-1]
+               let a = picCollection.querySelector(`div:nth-child(${picArray[k-1].key})`);
+                a.className=picArray[k-1].className;
+            }
+
+
+        }
+
+
+        // 法一
+        // function sort(array) {
+        //   array.sort(() => Math.random() - 0.5);
+        // }
+
+
+        //法二
+        //Fisher-Yates Shuffle
+        // function shuffle(array) {
+        //   for (let i = array.length - 1; i > 0; i--) {
+        //     let j = Math.floor(Math.random() * (i + 1));
+        //     [array[i], array[j]] = [array[j], array[i]];
+        //   }
+        // }
         
+
+      let startBtn = document.querySelector('#startbtn')
+      startBtn.addEventListener('click',function(){
+        let picCollection = document.querySelector(".picture ");
       
-//     } 
+        randomPic(picCollection)
+      })
 
 
-// puzzle.append(empty);
+        //拼圖移動//
 
 
-//產生隨機亂數 打亂圖片
-function randomPic(){
+        //確認是否可以移動
+        function checkIfValid(item,item2){
+            //確認是否在空白隔壁
+            //抓移動資料
+            style = getComputedStyle(item)
+            style2 = getComputedStyle(item2)
 
-    let array1 = [1-8]
-    Math.random
-    // 圖片交換
-    for(let k=1;k<=8;k++){
-        item[k].className = array1[k].className
-        //[item[0].className ,  array1[0].className]
-    }
+            let left1 = style.left.split('p')[0] ;//99px
+            console.log("item"+left1)
+
+            let left2 = style2.left.split('p')[0]; //99px
+           
+            console.log("item2"+(left1.split('p')))
+            
+            let top1 = style.top.split('p')[0];
+            console.log("item"+top1)
+            let top2 = style2.top.split('p')[0];
+            console.log("item2"+top2)
+
+            //相減要轉型?
+
+            debugger
+            let offsetTop = top1-top2;
+            let offsetLeft = left1-left2;
+            if(offsetTop<0 ||offsetLeft<0 ){
+                offsetTop = offsetTop*-1
+                offsetLeft = offsetLeft*-1
+                if ((left1==left2 && (offsetTop)<=99)||(top1==top2 && (offsetLeft)<=99)){
+             
+                return true;
+                }
+    
+                 else{
+                     return false;
+                 }
+            }
+            else{
+                if ((left1==left2 && (offsetTop)<=99)||(top1==top2 && (offsetLeft)<=99)){
+             
+             return true;
+             }
+ 
+              else{
+                  return false;
+              }
+            }
 
 
-}
+            }
 
 
-// 法一
-// function sort(array) {
-//   array.sort(() => Math.random() - 0.5);
-// }
+        
+        function CheckIfSuccess(){
+            let  temp = document.querySelectorAll("[name = 'pic']");
+            console.log(temp)
+            let picArray = Array.from(temp);
+            console.log(picArray)
+            let count = 0;
+            debugger;
+            for(let item of temp){
+          
+                if (item.className.includes(item.id)){
+                    count++
+                    if(count==9){
+                        alert("成功!")
+                    }
+                
+          
+        }
+        }
+        }
 
+        document.querySelectorAll("[name = 'pic']").forEach(item=>{
+            item.addEventListener('click',function(e){
+            e.stopPropagation();
+            let item = e.currentTarget
+  
+            let item2 = document.querySelector("#empty");
+         
+            let a = checkIfValid(item,item2)
+       
+            if(a==true){
 
-//法二
-// function shuffle(array) {
-//   for (let i = array.length - 1; i > 0; i--) {
-//     let j = Math.floor(Math.random() * (i + 1));
-//     [array[i], array[j]] = [array[j], array[i]];
-//   }
-// }
+                let temp = item.className;
 
-//拼圖移動//
-function clickPuzzle(){
- checkIfValid()
+                item.className = item2.className; 
+                item2.className = temp;
+                CheckIfSuccess()
+            }
 
+           
+        })
+        })
+     
 
-}
-// function checkIfValid(){
-//     //確認是否在空白隔壁
-//     if (empty.getAttribute("id")==click)
-
-
-// }
-
-
-
-
-</script>
+    </script>
 
 </body>
 

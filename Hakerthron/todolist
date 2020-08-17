@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="wrap clearfix">
+
+    <div class="content">
+          <div class="addList">
+            <input type="text" class="text"  placeholder="請填寫代辦內容" required >
+            <input type="button" class="send" value="加入代辦">
+          </div>
+          <ul class="list"></ul>
+          
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+  <script>
+      
+  
+    // -------- 指定 dom -------- //
+var list = document.querySelector('.list');
+var sendData = document.querySelector('.send');
+// 取出 localstorage裡的資料，有就取值，沒就塞空陣列
+var data = JSON.parse(localStorage.getItem('listData')) || [];
+
+
+
+// --------  監聽和更新 -------- //
+// 監聽btn 送出 todo
+sendData.addEventListener('click',addData);
+// 刪除 todo
+list.addEventListener('click',toggleDone);
+// 更新列表
+updateList(data);
+
+
+
+// -------- 加入列表 -------- //
+function addData(e) {
+  e.preventDefault();
+  
+  var txt = document.querySelector('.text').value;
+  // 新增 todo的 object
+    // content 是 localStorage object裡的 key
+    // txt 是 localStorage object裡的 value
+  var todo = {
+    content: txt
+  };
+  data.push(todo);
+  // 更新網頁內容
+  updateList(data);
+  // 更新localstorage,要存入要轉成string
+  localStorage.setItem('listData', JSON.stringify(data));
+}
+
+
+
+
+// --------  更新列表 -------- //
+function updateList(items) {
+  // 定義 str暫存todo的項目
+  var str = "";
+  len = items.length;
+  // updateList(items)的 items是指 localStorage的 object項目
+  // 用for跑出所有的待辦item
+  for(var i = 0; i < len; i++) {
+    str += '<li><a href="#" data-index=' + i + '>刪除</a><span>'+ items[i].content+ '</span></li>'
+  };
+  // 存回頁面更新html
+  list.innerHTML = str;
+}
+
+
+// --------  刪除列表 -------- //
+function toggleDone(e) {
+  e.preventDefault();
+  // 確認點擊的是否為a元素，否則跳出
+  if(e.target.tagName !== 'A') { return };
+  // 確認點擊的a元素 index
+  var index = e.target.dataset.index;
+  // 刪除data
+  data.splice(index,1);
+  // 將data存回localStorage
+  localStorage.setItem('listData',JSON.stringify(data));
+  // 更新頁面的list
+  updateList(data);
+}
+  </script>
+
+
+</body>
+
+</html>

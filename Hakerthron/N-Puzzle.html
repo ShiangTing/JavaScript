@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Puzzle</title>
+    <style>
+        .picture div {
+
+            width: 97px;
+            height: 97px;
+            border: 1px solid #CCCCCC;
+            margin: 1px;
+            background-image: url('./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg');
+            background-repeat: no-repeat;
+            position: absolute;
+
+            -webkit-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            -ms-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+
+        }
+
+        /* 
+        .picture img {
+            width: 100%;
+            height: 100%;
+        } */
+
+
+
+        .row1 {
+            top: 0px;
+        }
+
+        .row2 {
+            top: 99px
+        }
+
+        .row3 {
+            top: 198px
+        }
+
+
+        .col-1 {
+            left: 0px;
+        }
+
+        .col-2 {
+            left: 99px;
+        }
+
+        .col-3 {
+            left: 198px;
+        }
+
+
+        #pic1 {
+
+            background-position: -0px 0px;
+
+        }
+
+        #pic2 {
+            background-position: -99px 0px;
+
+
+        }
+
+        #pic3 {
+            background-position: -198px 0px;
+
+
+        }
+
+        #pic4 {
+
+            background-position: 0px -99px;
+
+
+        }
+
+        #pic5 {
+            background-position: -99px -99px;
+        }
+
+        #pic6 {
+            background-position: -198px -99px;
+
+        }
+
+        #pic7 {
+            background-position: -0px -198px;
+        }
+
+        #pic8 {
+            background-position: -99px -198px;
+        }
+
+        #puzzle #empty {
+            border: none;
+            background: none;
+            background-color: lightslategray;
+            opacity: 0.3;
+            padding: 1px;
+        }
+
+        .startbtn,
+        .dropdown {
+            position: absolute;
+            left: 300px;
+        }
+
+        .dropdown {
+            top: 200px
+        }
+
+        .box {
+            position: relative;
+            margin-top: 100px;
+
+        }
+
+        .test,
+        .pictbtn {
+            position: absolute;
+            top: 150px;
+            left: 300px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div> 拼圖遊戲</div>
+    <div class="container box">
+
+        <div class="picture" id="puzzle">
+
+            <div id="pic1" class="row1 col-1 pic1" name="pic">
+            </div>
+            <div id="pic2" class="row1 col-2 pic2" name="pic">
+            </div>
+            <div id="pic3" class="row1 col-3 pic3" name="pic">
+            </div>
+            <div id="pic4" class="row2 col-1 pic4" name="pic">
+            </div>
+            <div id="pic5" class="row2 col-2 pic5" name="pic"></div>
+            <div id="pic6" class="row2 col-3 pic6" name="pic"></div>
+            <div id="pic7" class="row3 col-1 pic7" name="pic"></div>
+            <div id="pic8" class="row3 col-2 pic8" name="pic"></div>
+            <div id="empty" class="row3 col-3 empty" name="pic"></div>
+
+
+            <button type="button" id="startbtn" class="startbtn btn btn-warning">開始</button>
+
+
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                難度
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">難度1</a>
+                <a class="dropdown-item" href="#">難度2</a>
+                <a class="dropdown-item" href="#">難度3</a>
+            </div>
+        </div>
+
+
+        <input type="file" class="pictbtn " accept="image/*">
+   
+        <!-- <button type="button" id="pictbtn" class="pictbtn btn btn-warning">上傳圖片</button>  -->
+    </div>
+    <script>
+        //動態生成block div///
+
+        
+        // for(let i=1;i<=3;i++){
+        //         for(let j=1;j<=3;j++){
+
+        //         var  div = document.createElement("div")
+        //         div.setAttribute('class','row'+i + "col" +j + 'pic '+ ((i - 1) * 4 + j))
+        //         div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
+        //         div.setAttribute('name','pic'))
+        //         puzzle.append(div);     
+
+        //         }
+
+
+        //     } 
+
+
+        // puzzle.append(empty);
+
+        const puzzle = document.querySelector("#puzzle")
+        const empty = document.createElement("div")
+        empty.setAttribute('id', 'empty');
+        empty.setAttribute('class', 'row3 col-3');
+
+        const loadPicture = document.querySelector(".pictbtn");
+
+        const test = document.querySelector('.test');
+
+        //上傳圖片///
+        function handleFiles() {
+
+            const fileList = this.files;
+            console.log(fileList);
+            
+                var file = fileList[0];
+                var imageType = /image.*/;
+            
+            // if (!file.type.match(imageType)) {
+            //     continue;
+            // }
+            var reader = new FileReader();
+            let temp = document.querySelectorAll("[name = 'pic']");
+
+            var reader = new FileReader();
+            //var file = this.files[0];
+            reader.onloadend = function () {
+                for(let i =1;i<=9;i++){
+                $("#pic"+ i).css('background-image', 'url("' + reader.result + '")');
+            }
+            }
+
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            }
+
+        }
+
+        loadPicture.addEventListener('change', handleFiles, false)
+
+
+
+
+
+
+
+        //產生隨機亂數 打亂圖片
+        function randomPic(picCollection) {
+
+            //Shuffling array
+            let numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            // numberArray.sort(() => Math.random() - 0.5);
+            // console.log(numberArray)
+
+            let invertion = 0;
+            do {
+                numberArray.sort(() => Math.random() - 0.5);
+
+                for (let i = 0; i < numberArray; i++) {
+                    for (let j = i + 1; j < numberArray; j++) {
+                        if (numberArray[j] < numberArray[i]) {
+                            invertion++;
+                        }
+                    }
+                }
+            } while (invertion % 2 != 0)
+
+            console.log(numberArray)
+
+            // 圖片交換
+
+
+
+            //從div picture底下的子元素變成一組陣列 取出calssName並map成另一個陣列
+            let temp = document.querySelectorAll("[name = 'pic']");
+            let i = 0
+            let picArray = Array.from(temp).map(function (item) {
+                i++
+                return {
+                    key: numberArray[i - 1],
+                    className: item.className
+
+                }
+
+                ///一定要有key值!!!
+
+            })
+            console.log(picArray)
+
+
+            //再 依照 numberArray sort那個 picArray
+            // picArray = picArray.sort(function(a,b){
+            //     console.log(numberArray)
+            //         return numberArray.indexOf(a.key)-numberArray.indexOf(b.key)
+
+            //     })
+            //    console.log(picArray)
+
+
+            //把sort好的陣列跟原來的swap
+
+
+            for (let k = 1; k <= 9; k++) {
+                //picCollection.
+
+
+                // let temp = picCollection.querySelector(`div:nth-child(${k})`).className
+
+                console.log(picArray[k - 1].className)
+                console.log(picCollection.querySelector(`div:nth-child(${picArray[k - 1].key})`).className)
+                // let i=numberArray[k-1]
+                let a = picCollection.querySelector(`div:nth-child(${picArray[k - 1].key})`);
+                a.className = picArray[k - 1].className;
+            }
+
+
+        }
+
+        // 法一
+        // function sort(array) {
+        //   array.sort(() => Math.random() - 0.5);
+        // }
+
+
+        //法二
+        //Fisher-Yates Shuffle
+        // function shuffle(array) {
+        //   for (let i = array.length - 1; i > 0; i--) {
+        //     let j = Math.floor(Math.random() * (i + 1));
+        //     [array[i], array[j]] = [array[j], array[i]];
+        //   }
+        // }
+
+
+        let startBtn = document.querySelector('#startbtn')
+        startBtn.addEventListener('click', function () {
+            let picCollection = document.querySelector(".picture ");
+
+            randomPic(picCollection)
+        })
+
+
+        //拼圖移動//
+
+
+        //確認是否可以移動
+        function checkIfValid(item, item2) {
+            //確認是否在空白隔壁
+            //抓移動資料
+            style = getComputedStyle(item)
+            style2 = getComputedStyle(item2)
+
+            let left1 = style.left.split('p')[0];//99px
+            console.log("item" + left1)
+
+            let left2 = style2.left.split('p')[0]; //99px
+
+            console.log("item2" + (left1.split('p')))
+
+            let top1 = style.top.split('p')[0];
+            console.log("item" + top1)
+            let top2 = style2.top.split('p')[0];
+            console.log("item2" + top2)
+
+            //相減要轉型?
+
+            debugger
+            let offsetTop = top1 - top2;
+            let offsetLeft = left1 - left2;
+            if (offsetTop < 0 || offsetLeft < 0) {
+                offsetTop = offsetTop * -1
+                offsetLeft = offsetLeft * -1
+                if ((left1 == left2 && (offsetTop) <= 99) || (top1 == top2 && (offsetLeft) <= 99)) {
+
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
+            }
+            else {
+                if ((left1 == left2 && (offsetTop) <= 99) || (top1 == top2 && (offsetLeft) <= 99)) {
+
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
+            }
+
+
+        }
+
+        function CheckIfSuccess() {
+            let temp = document.querySelectorAll("[name = 'pic']");
+            console.log(temp)
+            let picArray = Array.from(temp);
+            console.log(picArray)
+            let count = 0;
+            debugger;
+            for (let item of temp) {
+
+                if (item.className.includes(item.id)) {
+                    count++
+                    if (count == 9) {
+                        alert("成功!")
+                    }
+
+
+                }
+            }
+        }
+
+        document.querySelectorAll("[name = 'pic']").forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+                let item = e.currentTarget
+
+                let item2 = document.querySelector("#empty");
+
+                let a = checkIfValid(item, item2)
+
+                if (a) {
+
+                    let temp = item.className;
+
+                    item.className = item2.className;
+                    item2.className = temp;
+                    CheckIfSuccess()
+                }
+
+
+            })
+        })
+
+
+    </script>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

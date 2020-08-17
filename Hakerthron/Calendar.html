@@ -12,8 +12,11 @@
 
     <title>Calander</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lemonada&display=swap');
+
         * {
             list-style: none;
+            font-family: 'Lemonada', cursive,'Microsoft JhengHei';
         }
 
         .header {
@@ -130,14 +133,14 @@
         <!-- <button id="previous"></button>
          <button id="last"></button> -->
         <span class="year">2020</span>
-        <div type="button" class="btn" id="next_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
+        <div type="button" class="btn" id="previous_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
                 class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg></div>
 
-        <span class="month">8</span><span class="word">月</span>
-        <div type="button" class="btn" id="previous_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
+        <span class="month">8</span>
+        <div type="button" class="btn" id="next_Btn"><svg width="3em" height="3em" viewBox="0 0 16 16"
                 class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -231,7 +234,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                     <div class="m-h-30 bg-img rounded-top modal-pic"
-                    style="background-image: url('https://d33wubrfki0l68.cloudfront.net/03e77c4c8b09fdab64a0cb19b40719939ef19e66/93e46/assets/img/cherry-waiting.png');">
+                    style="background-image: url('https://images.unsplash.com/photo-1543363136-3fdb62e11be5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80');">
 
                     </div>
                     <div class="modal-body">
@@ -314,8 +317,8 @@
         crossorigin="anonymous"></script>
     <script>
 
-        const nextBtn = document.querySelector('#previous_Btn');
-        const preBtn = document.querySelector('#next_Btn');
+        const nextBtn = document.querySelector('#next_Btn');
+        const preBtn = document.querySelector('#previous_Btn');
 
         //得到年分與月份
         let year = document.querySelector('.year');
@@ -325,10 +328,10 @@
 
         let table = document.querySelector('#table')
 
-
+    
            let pictureArray =[
                //wake up
-            "https://images.unsplash.com/photo-1543363136-3fdb62e11be5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80",
+            "https://d33wubrfki0l68.cloudfront.net/03e77c4c8b09fdab64a0cb19b40719939ef19e66/93e46/assets/img/cherry-waiting.png",
                 //work
             "./clip-programming.png",
                 //food
@@ -366,10 +369,10 @@
 
 
             let dates = getStartDate(currentMonth);
-            gettotalDates(currentMonth, currentYear)
+            let totalDays = gettotalDates(currentMonth, currentYear)
             //清空///
             table.innerHTML = ''
-            createCalenderHTML(dates, weekends, currentMonth, currentYear);
+            createCalenderHTML(dates, weekends, totalDays, currentMonth, currentYear);
         })
 
         preBtn.addEventListener('click', function () {
@@ -389,17 +392,35 @@
         function modalBGChoose() {
             let time = document.querySelector('#time').value;
             let modal = document.querySelector('.modal-pic')
+            debugger
            // Date.parse(ScheduleDate).valueOf() < (Date.parse(CurrentDate)).valueOf()
              if ( time<=  "12:00" && (time>= "09:00")) {
-                modal.style.backgroundImage = pictureArray[1]
+                modal.style.backgroundImage = `url( ${pictureArray[1]})`
+                pictureArray[1]
          }
          else if(time<= "15:00" && time>= "12:01"){
-            modal.style.backgroundImage = pictureArray[0]
+            modal.style.backgroundImage = `url( ${pictureArray[0]})`
          }
-         else if(time>=  "23:00"){
-            modal.style.backgroundImage = pictureArray[4]
+         else if(time>= "15:01" && time<= "23:00"){
+            modal.style.backgroundImage = `url( ${pictureArray[3]})`
+         }
+         else if(time>=  "23:01"){
+            modal.style.backgroundImage =`url( ${pictureArray[0]})`
          }
         }
+
+
+
+        //時間轉換圖片////
+        // document.querySelectorAll(".timeinput").addEventListener('change',function(){
+
+
+        // })
+
+
+
+
+
         //得到該月有幾天
 
         // let real = parseInt(currentMonth)
@@ -467,23 +488,12 @@
                 var td = document.createElement("td")
                 td.setAttribute('data-toggle', 'modal');
                 td.setAttribute('data-target', '#exampleModal');
+                td.setAttribute('class',`${currentMonth}`)
                 tr.append(td);
 
             }
 
-            // let lastDay = new Date(currentYear,currentMonth-1,0).getDate()
-            // let number = lastDay-startDay+1
-            // for(let i=1; i<=7;i++){
-            //     if(number<=lastDay){
-            //     document.querySelector(`tr td:nth-child(${i})`).innerText = number;
-            //     number++;
-            //      }
-            //     else{
-            //         number=1;
-            //         document.querySelector(`tr td:nth-child(${i})`).innerText = number;
-            //         number++;
-            //      }
-            // }
+     
             let number = 1;
             //(if number>30/31 ){number==1}
             for (let i = startDay + 1; i <= 7; i++) {
@@ -504,7 +514,7 @@
                     var td = document.createElement("td")
                     td.setAttribute('data-toggle', 'modal');
                     td.setAttribute('data-target', '#exampleModal');
-
+                    td.setAttribute('class',`${currentMonth}`)
                     temp = j + 7 - startDay + n * i
                     if (temp > totalDays) {
                         break;
@@ -536,6 +546,7 @@
             var td = document.createElement("td")
             td.setAttribute('data-toggle', 'modal');
             td.setAttribute('data-target', '#exampleModal');
+            td.setAttribute('class', '8');
             //td.innerText =j;
             tr.append(td);
 
@@ -574,7 +585,7 @@
                 var td = document.createElement("td")
                 td.setAttribute('data-toggle', 'modal');
                 td.setAttribute('data-target', '#exampleModal');
-                td.setAttribute('class', 'td')
+                td.setAttribute('class', '8')
 
                 temp = j + 7 - 5 + n * i
                 if (temp > date) {
@@ -616,7 +627,7 @@
 
                 getItem = e.currentTarget;
                 currentItem = e.currentTarget.innerText
-
+                console.log(getItem)
                 console.log("---1 " + $(e.currentTarget).attr('data-target'));
                 console.log("---2 " + e.currentTarget.attributes['data-target'].value);
 
@@ -711,6 +722,7 @@
 
         }
 
+        //把localhtml一起放進localstorage
         //增加行程
         function addNote(e) {
             console.log('--- addNote');
@@ -730,11 +742,14 @@
 
             localStorage.setItem(`${currentYear + currentMonth + tempTime}`, JSON.stringify(tempNote));
 
-            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" storage-key = ${currentYear + currentMonth + tempTime} add-time="${pickTime}" onclick="modal(event)">
+            //insert有問題
+
+
+            getItem.insertAdjacentHTML("beforeend", `<div class="smallNote" data-toggle="modal" data-target="#updateModal" storage-key = ${currentYear + currentMonth + tempTime} add-time="${pickTime} class=${currentMonth}" onclick="modal(event)">
                    <div class="content"> ${JSON.parse(localStorage.getItem(`${currentYear + currentMonth + tempTime}`))} </div>
                 </div>`);
 
-
+            //localStorage.headerHTML = getItem.innerHTML;
         }
 
 
@@ -752,6 +767,7 @@
             noteItem.removeChild(note);
 
         }
+
 
 
 
