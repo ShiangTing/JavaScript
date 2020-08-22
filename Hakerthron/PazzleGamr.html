@@ -2,17 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Puzzle</title>
     <title>Document</title>
     <style>
-        .picture div{
-            width:97px;
-            height:97px;
+        .picture div {
+            width: 148px;
+            height: 148px;
             border: 1px solid #CCCCCC;
             margin: 1px;
-            background-image: url('./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg');
+            background-image: url('./pokemon.jpg');
             background-repeat: no-repeat;
+            background-position: center center;
             position: absolute;
             -webkit-transition: all 0.4s;
             -moz-transition: all 0.4s;
@@ -21,81 +29,198 @@
             transition: all 0.4s;
 
         }
-/* 
+
+        /* 
         .picture img {
             width: 100%;
             height: 100%;
         } */
 
 
-
-        .row1 {
+        div[name="pic1"].row1 {
             top: 0px;
         }
 
-        .row2 {
-            top: 99px
+        div[name="pic1"].row2 {
+            top: 225px;
         }
 
-        .row3 {
-            top: 198px
-        }
-
-
-        .col-1 {
+        div[name="pic1"].col1 {
             left: 0px;
         }
 
-        .col-2 {
-            left: 99px;
-        }
-
-        .col-3 {
-            left:198px;
+        div[name="pic1"].col2 {
+            left: 225px;
         }
 
 
-        #pic1 {
+        div[name="pic2"].row1 {
+            top: 0px;
+        }
 
+        div[name="pic2"].row2 {
+            top: 150px
+        }
+
+        div[name="pic2"].row3 {
+            top: 300px
+        }
+
+
+        div[name="pic2"].col1 {
+            left: 0px;
+        }
+
+        div[name="pic2"].col2 {
+            left: 150px;
+        }
+
+        div[name="pic2"].col3 {
+            left: 300px;
+        }
+
+
+        div[name="pic3"].row1 {
+            top: 0px;
+        }
+
+        div[name="pic3"].row2 {
+            top: 112.5px
+        }
+
+        div[name="pic3"].row3 {
+            top: 225px
+        }
+
+        div[name="pic3"].row4 {
+            top: 337.5px
+        }
+
+
+        div[name="pic3"].col1 {
+            left: 0px;
+        }
+
+        div[name="pic3"].col2 {
+            left: 112.5px;
+        }
+
+        div[name="pic3"].col3 {
+            left: 225px;
+        }
+
+        div[name="pic3"].col4 {
+            left: 337.5px;
+        }
+
+        div[name="pic1"]#pic1 {
             background-position: -0px 0px;
-
         }
 
-        #pic2 {
-            background-position: -99px 0px;
-       
-          
+        div[name="pic1"]#pic2 {
+            background-position: -225px 0px;
         }
 
-        #pic3 {
-            background-position: -198px 0px;
-
-         
+        div[name="pic1"]#pic3 {
+            background-position: 0px -225px;
         }
 
-        #pic4 {
-         
-            background-position: 0px -99px;
-
-       
+        div[name="pic2"]#pic1 {
+            background-position: -0px 0px;
         }
 
-        #pic5 {
-            background-position: -99px -99px;
+        div[name="pic2"]#pic2 {
+            background-position: -150px 0px;
         }
 
-        #pic6 {
-            background-position: -198px -99px;
-
+        div[name="pic2"]#pic3 {
+            background-position: -300px 0px;
         }
 
-        #pic7 {
-            background-position: -0px -198px;
+        div[name="pic2"]#pic4 {
+            background-position: 0px -150px;
         }
 
-        #pic8 {
-            background-position: -99px -198px;
+        div[name="pic2"]#pic5 {
+            background-position: -150px -150px;
         }
+
+        div[name="pic2"]#pic6 {
+            background-position: -300px -150px;
+        }
+
+        div[name="pic2"]#pic7 {
+            background-position: -0px -300px;
+        }
+
+        div[name="pic2"]#pic8 {
+            background-position: -150px -300px;
+        }
+
+
+
+
+
+        div[name="pic3"]#pic1 {
+            background-position: -0px 0px;
+        }
+
+        div[name="pic3"]#pic2 {
+            background-position: -112.5px 0px;
+        }
+
+        div[name="pic3"]#pic3 {
+            background-position: -225px 0px;
+        }
+
+        div[name="pic3"]#pic4 {
+            background-position: -337.5px 0px;
+        }
+
+        div[name="pic3"]#pic5 {
+            background-position: 0px -112.5px;
+        }
+
+        div[name="pic3"]#pic6 {
+            background-position: -112.5px -112.5px;
+        }
+
+        div[name="pic3"]#pic7 {
+            background-position: -225px -112.5px;
+        }
+
+        div[name="pic3"]#pic8 {
+            background-position: -337.5px -112.5px;
+        }
+
+        div[name="pic3"]#pic9 {
+            background-position: 0px -225px;
+        }
+
+        div[name="pic3"]#pic10 {
+            background-position: -112.5px -225px;
+        }
+
+        div[name="pic3"]#pic11 {
+            background-position: -225px -225px;
+        }
+
+        div[name="pic3"]#pic12 {
+            background-position: -337.5px -225px;
+        }
+
+        div[name="pic3"]#pic13 {
+            background-position: 0px -337.5px;
+        }
+
+        div[name="pic3"]#pic14 {
+            background-position: -112.5px -337.5px;
+        }
+
+        div[name="pic3"]#pic15 {
+            background-position: -225px -337.5px;
+        }
+
 
         #puzzle #empty {
             border: none;
@@ -104,9 +229,35 @@
             opacity: 0.3;
             padding: 1px;
         }
-        .startbtn{
+
+        .startbtn,
+        .dropdown {
             position: absolute;
-            left: 300px;
+            left: 480px;
+        }
+
+        .dropdown {
+            top: 200px
+        }
+
+        .box {
+            position: relative;
+            margin-top: 100px;
+
+        }
+
+        .test,
+        .pictbtn {
+            position: absolute;
+            top: 150px;
+            left: 480px;
+
+        }
+
+        .checkansbtn {
+            position: absolute;
+            left: 480px;
+            top: 250px;
         }
     </style>
 
@@ -114,249 +265,424 @@
 </head>
 
 <body>
-    <div class="picture"  id="puzzle">
+    <div class="picture" id="puzzle">
 
-        <div id="pic1" class="row1 col-1 pic1" name = "pic" >
+        <div id="pic1" class="row1 col1 pic1" name="pic2">
         </div>
-        <div id="pic2" class="row1 col-2 pic2" name = "pic">
+        <div id="pic2" class="row1 col2 pic2" name="pic2">
         </div>
-        <div id="pic3" class="row1 col-3 pic3"  name = "pic">
+        <div id="pic3" class="row1 col3 pic3" name="pic2">
         </div>
-        <div id="pic4" class="row2 col-1 pic4"  name = "pic">
+        <div id="pic4" class="row2 col1 pic4" name="pic2">
         </div>
-        <div id="pic5" class="row2 col-2 pic5"  name = "pic"></div>
-        <div id="pic6" class="row2 col-3 pic6"  name = "pic"></div>
-        <div id="pic7" class="row3 col-1 pic7"   name = "pic"></div>
-        <div id="pic8" class="row3 col-2 pic8"  name = "pic"></div>
-        <div id="empty" class="row3 col-3 empty"  name = "pic"></div>
+        <div id="pic5" class="row2 col2 pic5" name="pic2"></div>
+        <div id="pic6" class="row2 col3 pic6" name="pic2"></div>
+        <div id="pic7" class="row3 col1 pic7" name="pic2"></div>
+        <div id="pic8" class="row3 col2 pic8" name="pic2"></div>
+        <div id="empty" class="row3 col3 empty" name="pic2"></div>
 
-        <button id="startbtn" class="startbtn">開始</button>
+
 
     </div>
+    <button id="startbtn" class="startbtn">開始</button>
+    <button id="checkansbtn" class="checkansbtn btn btn-secondary">看答案</button>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            難度
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" id=level1>難度1</a>
+            <a class="dropdown-item" href="#" id=level2>難度2</a>
+            <a class="dropdown-item" href="#" id=level3>難度3</a>
+        </div>
+    </div>
 
-   
+
+    <input type="file" class="pictbtn " accept="image/*">
+
+
     <script>
         //動態生成block div///
 
         const puzzle = document.querySelector("#puzzle")
         const empty = document.createElement("div")
-        empty.setAttribute('id', 'empty');
-        empty.setAttribute('class', 'row3 col-3');
-        //     for(let i=1;i<=3;i++){
-        //         for(let j=1;j<=3;j++){
 
-        //         var  div = document.createElement("div")
-        //         div.setAttribute('class','row'+i + "col" +j)
-        //         div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
-        //        puzzle.append(div);     
+        const loadPicture = document.querySelector(".pictbtn");
+        const levelOne = document.querySelector("#level1")
+        const levelThree = document.querySelector("#level3")
+        const levelTwo = document.querySelector("#level2")
 
-        //         }
+        function withandheight(number) {
+            switch (number) {
+                case '1': return 223;
+                case '2': return 148;
+                case '3': return 110.5;
+
+                    break;
+            }
+
+        }
 
 
-        //     } 
+        function createPuzzle(levelNumber) {
+
+            //動態生成block div///
+
+            puzzle.innerHTML = '';
+            for (let i = 1; i <= levelNumber; i++) {
+                for (let j = 1; j <= levelNumber; j++) {
+
+                    if (i == levelNumber && j == levelNumber) {
+                        var empty = document.createElement("div");
+                        //empty.setAttribute('id', 'empty');
+                        empty.id = 'empty'
+                        empty.classList.add('row' + levelNumber);
+                        empty.classList.add('col' + levelNumber);
+                        empty.classList.add('empty')
+                        empty.setAttribute('name', `pic${levelNumber - 1}`)
+                        puzzle.appendChild(empty);
+                        break;
+                    }
+                    var div = document.createElement("div")
+                    div.classList.add('row' + i);
+
+                    div.classList.add('col' + j)
+                    div.classList.add(`pic${((i - 1) * levelNumber + j)}`)
+                    div.setAttribute('id', `pic${((i - 1) * levelNumber + j)}`)
+                    div.setAttribute('name', `pic${levelNumber - 1}`)
+
+                    puzzle.append(div);
+
+                }
+
+
+            }
+
+        }
+
+        const divBox = document.querySelector(".picture")
+        levelOne.addEventListener('click', function () {
+
+            createPuzzle(2)
+
+            divBox.querySelectorAll("div").forEach(element => {
+                element.style.height = withandheight('1') + "px";
+         
+                element.style.width = withandheight('1') + "px";
+             
+            })
+        })
+        levelTwo.addEventListener('click', function () {
+
+            createPuzzle(3)
+
+            divBox.querySelectorAll("div").forEach(element => {
+                element.style.height = withandheight('2') + "px";
+      
+                element.style.width = withandheight('2') + "px";
+              
+            })
+        })
+        levelThree.addEventListener('click', function () {
+
+            createPuzzle(4)
+
+            divBox.querySelectorAll("div").forEach(element => {
+                element.style.height = withandheight('3') + "px";
+     
+                element.style.width = withandheight('3') + "px";
+            
+            })
+        })
+
+
+
+        const checkBox = document.querySelector("#checkansbtn");
+        ///選擇看答案時重新生成圖片or 浮出原圖
+        function checkAnswer() {
+            //拿出圖片
+            let ele = document.querySelector("#pic1")
+            let currentImg = window.getComputedStyle(ele).backgroundImage.slice(4, -1).replace(/"/g, "")
+            puzzle.innerHTML = ''
+         
+            createPuzzle(3)
+            // let img = document.createElement("img");
+            // img.src = currentImg
+            // puzzle.append(img);
+        }
+
+        checkBox.addEventListener("click", function () {
+            checkAnswer()
+        })
+
 
 
         // puzzle.append(empty);
+        //上傳圖片///
+        function handleFiles() {
+
+            const fileList = this.files;
+            console.log(fileList);
+
+            var file = fileList[0];
+
+            console.log(file);
+            var imageType = /image.*/;
+
+            // if (!file.type.match(imageType)) {
+            //     continue;
+            // }
+
+            let tempNode = document.querySelector(".picture").children
+            let value = tempNode[0].getAttribute('name')
+            var reader = new FileReader();
+            let temp = document.querySelectorAll(`[name = ${value}]`);
+            //var file = this.files[0];
+            reader.onloadend = function () {
+                console.log(reader.result);
+                for (let i = 1; i <= 9; i++) {
+                    $("#pic" + i).css('background-image', 'url("' + reader.result + '")');
+                }
+            }
+
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            }
+
+        }
+
+        loadPicture.addEventListener('change', handleFiles, false)
 
 
 
         //產生隨機亂數 打亂圖片
         function randomPic(picCollection) {
 
+            let tempNode = document.querySelector(".picture").children
+            let value = tempNode[0].getAttribute('name')
             //Shuffling array
-            let numberArray = [ 1, 2, 3, 4, 5, 6, 7, 8,9]
+            let arrayLength = Array.from(tempNode).length
+            let keys = Array.from(tempNode).keys();
+            let numberArray = [];
+
+            for (let item of keys) {
+
+
+                numberArray.push(parseInt(item) + 1)
+            }
+
+            // keys.forEach(item=>{
+            //     console.log(item)
+            //     numberArray.push(item)
+            // })
+            //把數字加進array
+            // let numberArray = [1, 2, 3, 4]
             // numberArray.sort(() => Math.random() - 0.5);
             // console.log(numberArray)
-
+            debugger
             let invertion = 0;
-            do{
+            do {
                 numberArray.sort(() => Math.random() - 0.5);
-                
-                for(let i=0;i<numberArray;i++){
-                    for(let j=i+1;j<numberArray;j++){
-                        if(numberArray[j]<numberArray[i]){
+
+                for (let i = 0; i < numberArray.length; i++) {
+                    for (let j = i + 1; j < numberArray.length; j++) {
+                        if (numberArray[j] < numberArray[i]) {
                             invertion++;
                         }
                     }
-                }   
-            }while(invertion%2!=0)
-    
+                }
+            } while (invertion % 2 != 0 || invertion == 0)
+
             console.log(numberArray)
-            
+
             // 圖片交換
-            
-           
-           
+
+
+
             //從div picture底下的子元素變成一組陣列 取出calssName並map成另一個陣列
-            let  temp = document.querySelectorAll("[name = 'pic']");
+            let temp = document.querySelectorAll(`[name = ${value}]`);
             let i = 0
-            let picArray = Array.from(temp).map(function(item){ 
+            let picArray = Array.from(temp).map(function (item) {
                 i++
                 return {
-                    key:numberArray[i-1],
-                    className:item.className
-                    
+                    key: numberArray[i - 1],
+                    className: item.className
+
                 }
-              
-                 ///一定要有key值!!!
+
+                ///一定要有key值!!!
 
             })
             console.log(picArray)
 
 
-             //再 依照 numberArray sort那個 picArray
-            // picArray = picArray.sort(function(a,b){
-            //     console.log(numberArray)
-            //         return numberArray.indexOf(a.key)-numberArray.indexOf(b.key)
-                
-            //     })
-            //    console.log(picArray)
 
-                
-            //把sort好的陣列跟原來的swap
-
-
-            for (let k = 1; k <= 9; k++) {
+            for (let k = 1; k <= arrayLength; k++) {
                 //picCollection.
-          
-            
-              // let temp = picCollection.querySelector(`div:nth-child(${k})`).className
-                 
-              console.log(picArray[k-1].className)
-              console.log( picCollection.querySelector(`div:nth-child(${picArray[k-1].key})`).className)
-               // let i=numberArray[k-1]
-               let a = picCollection.querySelector(`div:nth-child(${picArray[k-1].key})`);
-                a.className=picArray[k-1].className;
+
+
+                // let temp = picCollection.querySelector(`div:nth-child(${k})`).className
+
+                console.log(picArray[k - 1].className)
+                console.log(picCollection.querySelector(`div:nth-child(${picArray[k - 1].key})`).className)
+                // let i=numberArray[k-1]
+                let a = picCollection.querySelector(`div:nth-child(${picArray[k - 1].key})`);
+                a.className = picArray[k - 1].className;
             }
 
 
         }
 
 
-        // 法一
-        // function sort(array) {
-        //   array.sort(() => Math.random() - 0.5);
-        // }
 
 
-        //法二
-        //Fisher-Yates Shuffle
-        // function shuffle(array) {
-        //   for (let i = array.length - 1; i > 0; i--) {
-        //     let j = Math.floor(Math.random() * (i + 1));
-        //     [array[i], array[j]] = [array[j], array[i]];
-        //   }
-        // }
-        
+        ///按下開始圖片///
+        let startBtn = document.querySelector('#startbtn')
+        startBtn.addEventListener('click', function () {
+            let picCollection = document.querySelector(".picture ");
 
-      let startBtn = document.querySelector('#startbtn')
-      startBtn.addEventListener('click',function(){
-        let picCollection = document.querySelector(".picture ");
-      
-        randomPic(picCollection)
-      })
+            ///打亂圖片///
+            randomPic(picCollection)
+
+            let tempNode = document.querySelector(".picture").children
+            let value = tempNode[0].getAttribute('name')
+
+            ///綁上確認是否可以移動與是否成功功能///
+            document.querySelectorAll(`[name = ${value}]`).forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    let item = e.currentTarget
+                    let item2 = document.querySelector("#empty");
+                    let a = checkIfValid(item, item2)
+                    if (a == true) {
+                        let temp = item.className;
+                        item.className = item2.className;
+                        item2.className = temp;
+                        CheckIfSuccess()
+                    }
+
+
+                })
+            })
+        })
 
 
         //拼圖移動//
 
 
         //確認是否可以移動
-        function checkIfValid(item,item2){
+        function checkIfValid(item, item2) {
             //確認是否在空白隔壁
             //抓移動資料
             style = getComputedStyle(item)
             style2 = getComputedStyle(item2)
 
-            let left1 = style.left.split('p')[0] ;//99px
-            console.log("item"+left1)
+            let left1 = style.left.split('p')[0];//99px
+            console.log("item" + left1)
 
             let left2 = style2.left.split('p')[0]; //99px
-           
-            console.log("item2"+(left1.split('p')))
-            
+
+            console.log("item2" + (left1.split('p')))
+
             let top1 = style.top.split('p')[0];
-            console.log("item"+top1)
+            console.log("item" + top1)
             let top2 = style2.top.split('p')[0];
-            console.log("item2"+top2)
+            console.log("item2" + top2)
 
             //相減要轉型?
+            let testNumber = parseInt(divBox.querySelector('div').offsetHeight) + 2
+            console.log(testNumber)
 
-            debugger
-            let offsetTop = top1-top2;
-            let offsetLeft = left1-left2;
-            if(offsetTop<0 ||offsetLeft<0 ){
-                offsetTop = offsetTop*-1
-                offsetLeft = offsetLeft*-1
-                if ((left1==left2 && (offsetTop)<=99)||(top1==top2 && (offsetLeft)<=99)){
-             
-                return true;
+            let offsetTop = top1 - top2;
+            let offsetLeft = left1 - left2;
+            if (offsetTop < 0 || offsetLeft < 0) {
+                offsetTop = offsetTop * -1
+                offsetLeft = offsetLeft * -1
+                if ((left1 == left2 && (offsetTop) <= testNumber) || (top1 == top2 && (offsetLeft) <= testNumber)) {
+
+                    return true;
                 }
-    
-                 else{
-                     return false;
-                 }
-            }
-            else{
-                if ((left1==left2 && (offsetTop)<=99)||(top1==top2 && (offsetLeft)<=99)){
-             
-             return true;
-             }
- 
-              else{
-                  return false;
-              }
-            }
 
+                else {
+                    return false;
+                }
+            }
+            else {
+                if ((left1 == left2 && (offsetTop) <= testNumber) || (top1 == top2 && (offsetLeft) <= testNumber)) {
 
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
             }
 
 
-        
-        function CheckIfSuccess(){
-            let  temp = document.querySelectorAll("[name = 'pic']");
+        }
+
+        let tempNode = document.querySelector(".picture").children
+        let value = tempNode[0].getAttribute('name')
+
+        function CheckIfSuccess() {
+            let tempNode = document.querySelector(".picture").children
+            let value = tempNode[0].getAttribute('name')
+            let temp = document.querySelectorAll(`[name = ${value}]`);
             console.log(temp)
             let picArray = Array.from(temp);
             console.log(picArray)
             let count = 0;
             debugger;
-            for(let item of temp){
-          
-                if (item.className.includes(item.id)){
+            for (let item of temp) {
+
+                if (item.className.includes(item.id)) {
                     count++
-                    if(count==9){
+                    if (count == temp.length) {
                         alert("成功!")
                     }
-                
-          
-        }
-        }
-        }
 
-        document.querySelectorAll("[name = 'pic']").forEach(item=>{
-            item.addEventListener('click',function(e){
-            e.stopPropagation();
-            let item = e.currentTarget
-  
-            let item2 = document.querySelector("#empty");
-         
-            let a = checkIfValid(item,item2)
-       
-            if(a==true){
 
-                let temp = item.className;
-
-                item.className = item2.className; 
-                item2.className = temp;
-                CheckIfSuccess()
+                }
             }
+        }
 
-           
+
+
+
+        document.querySelectorAll(`[name = ${value}]`).forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+                let item = e.currentTarget
+                let item2 = document.querySelector("#empty");
+                let a = checkIfValid(item, item2)
+                if (a == true) {
+                    let temp = item.className;
+                    item.className = item2.className;
+                    item2.className = temp;
+                    CheckIfSuccess()
+                }
+
+
+            })
         })
-        })
-     
+
+
 
     </script>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

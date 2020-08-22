@@ -14,14 +14,14 @@
     <style>
         .picture div {
 
-            width: 97px;
-            height: 97px;
+            width: 148px;
+            height: 148px;
             border: 1px solid #CCCCCC;
             margin: 1px;
             background-image: url('./29a516e9-1a1a-438f-8d30-3a86f5a2a23e.jpg');
             background-repeat: no-repeat;
             position: absolute;
-
+        
             -webkit-transition: all 0.4s;
             -moz-transition: all 0.4s;
             -ms-transition: all 0.4s;
@@ -30,81 +30,59 @@
 
         }
 
-        /* 
-        .picture img {
-            width: 100%;
-            height: 100%;
-        } */
-
-
-
-        .row1 {
-            top: 0px;
+        .picture{
+            position: relative;
+            top: 200px;
+            left: 300px;
         }
 
-        .row2 {
-            top: 99px
-        }
+        div[name = "pic1"].row1{top: 0px; }
+        div[name = "pic1"].row2{top: 225px; }
+        div[name = "pic1"].col-1 {left: 0px;}
+        div[name = "pic1"].col-2 { left: 225px; }
 
-        .row3 {
-            top: 198px
-        }
+        div[name = "pic"].row1 {top: 0px; }
 
+        div[name = "pic"].row2 { top: 150px}
 
-        .col-1 {
-            left: 0px;
-        }
-
-        .col-2 {
-            left: 99px;
-        }
-
-        .col-3 {
-            left: 198px;
-        }
+        .row3 { top: 300px}
 
 
-        #pic1 {
+        .col-1 {left: 0px;}
 
-            background-position: -0px 0px;
+        .col-2 { left: 150px; }
 
-        }
-
-        #pic2 {
-            background-position: -99px 0px;
+        .col-3 {left:300px; }
 
 
-        }
+        div[name = "pic1"]#pic1 {  background-position: -0px 0px; }
 
-        #pic3 {
-            background-position: -198px 0px;
+        div[name = "pic1"]#pic2 { background-position: -225px 0px;}
 
+        div[name = "pic1"]#pic3 {  background-position: -225px -225px;  }
 
-        }
+      
 
-        #pic4 {
-
-            background-position: 0px -99px;
+       
 
 
-        }
 
-        #pic5 {
-            background-position: -99px -99px;
-        }
+        #pic1 {  background-position: -0px 0px; }
 
-        #pic6 {
-            background-position: -198px -99px;
+        #pic2 { background-position: -150px 0px;}
 
-        }
+        #pic3 {  background-position: -300px 0px;  }
 
-        #pic7 {
-            background-position: -0px -198px;
-        }
+        #pic4 {   background-position: 0px -150px;}
 
-        #pic8 {
-            background-position: -99px -198px;
-        }
+        #pic5 {  background-position: -150px -150px;}
+
+        #pic6 {  background-position: -300px -150px; }
+
+        #pic7 {background-position: -0px -300px;}
+
+        #pic8 {  background-position: -150px -300px; }
+
 
         #puzzle #empty {
             border: none;
@@ -117,12 +95,13 @@
         .startbtn,
         .dropdown {
             position: absolute;
-            left: 300px;
+            left: 480px;
+            top: 150px;
         }
 
-        .dropdown {
-            top: 200px
-        }
+        /* .dropdown {
+           
+        } */
 
         .box {
             position: relative;
@@ -130,11 +109,11 @@
 
         }
 
-        .test,
+     
         .pictbtn {
             position: absolute;
             top: 150px;
-            left: 300px;
+            left: 600px;
 
         }
     </style>
@@ -143,8 +122,7 @@
 
 <body>
     <div> 拼圖遊戲</div>
-    <div class="container box">
-
+    
         <div class="picture" id="puzzle">
 
             <div id="pic1" class="row1 col-1 pic1" name="pic">
@@ -162,52 +140,153 @@
             <div id="empty" class="row3 col-3 empty" name="pic"></div>
 
 
+           
             <button type="button" id="startbtn" class="startbtn btn btn-warning">開始</button>
-
-
         </div>
+        
+
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 難度
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">難度1</a>
-                <a class="dropdown-item" href="#">難度2</a>
-                <a class="dropdown-item" href="#">難度3</a>
+                <a class="dropdown-item" href="#" id=level1>難度1</a>
+                <a class="dropdown-item" href="#" id=level2>難度2</a>
+                <a class="dropdown-item" href="#" id=level3>難度3</a>
             </div>
+           
         </div>
-
-
         <input type="file" class="pictbtn " accept="image/*">
+
+      
    
         <!-- <button type="button" id="pictbtn" class="pictbtn btn btn-warning">上傳圖片</button>  -->
-    </div>
+   
     <script>
-        //動態生成block div///
 
-        
-        // for(let i=1;i<=3;i++){
-        //         for(let j=1;j<=3;j++){
-
-        //         var  div = document.createElement("div")
-        //         div.setAttribute('class','row'+i + "col" +j + 'pic '+ ((i - 1) * 4 + j))
-        //         div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
-        //         div.setAttribute('name','pic'))
-        //         puzzle.append(div);     
-
-        //         }
-
-
-        //     } 
-
-
-        // puzzle.append(empty);
 
         const puzzle = document.querySelector("#puzzle")
-        const empty = document.createElement("div")
-        empty.setAttribute('id', 'empty');
-        empty.setAttribute('class', 'row3 col-3');
+        // var empty = document.createElement("div")
+        // empty.setAttribute('id', 'empty');
+        // empty.setAttribute('class', 'row3 col-3');
+        const levelOne = document.querySelector("#level1")
+        const levelThree = document.querySelector("#level3")
+        const levelTwo = document.querySelector("#level2")
+      
+     
+
+        function withandheight(number){
+        switch(number){
+        case '1': return 223;
+        case '2': return 148;
+        case '3': return 110.5;
+        
+        break;
+    }
+
+}
+  
+       
+
+       
+        function createPuzzle(levelNumber){
+
+                //動態生成block div///
+           
+            puzzle.innerHTML = '';
+            for(let i=1;i<=levelNumber;i++){
+                for(let j=1;j<=levelNumber;j++){
+
+                    if (i == levelNumber && j == levelNumber) {
+                        var empty = document.createElement("div");
+                        //empty.setAttribute('id', 'empty');
+                        empty.id = 'empty'
+                        empty.classList.add('row'+levelNumber);
+                        empty.classList.add('col-'+levelNumber);
+                       // empty.setAttribute('class', 'row4 col-4');
+                        empty.setAttribute('name',`pic${levelNumber-1}`)
+                        puzzle.appendChild(empty);
+                        break;
+                  }
+                var  div = document.createElement("div")
+                div.classList.add('row'+i);
+                
+                div.classList.add('col-'+j)
+                div.classList.add(`pic${((i - 1) * levelNumber + j)}`)
+                div.setAttribute('id',`pic${((i - 1) * levelNumber + j)}`)
+                div.setAttribute('name',`pic${levelNumber-1}`)
+           
+               puzzle.append(div);     
+
+                }
+
+
+            } 
+            
+        }
+            // puzzle.innerHTML = '';
+            // for(let i=1;i<=4;i++){
+            //     for(let j=1;j<=4;j++){
+
+            //         if (i == 4 && j == 4) {
+            //             var empty = document.createElement("div");
+            //             empty.setAttribute('id', 'empty');
+            //             empty.id = 'empty'
+            //             //empty.style.top = "150px";
+            //             empty.setAttribute('class', 'row4 col4');
+            //             empty.setAttribute('name','pic')
+            //             puzzle.appendChild(empty);
+            //             break;
+            //       }
+            //     var  div = document.createElement("div")
+            //     div.setAttribute('class','row'+i + "col" +j)
+            //     div.setAttribute('id','pic '+ ((i - 1) * 4 + j))
+            //     div.setAttribute('name','pic')
+              
+            //    puzzle.append(div);     
+
+            //     }
+
+
+            // } 
+
+
+    
+    const divBox = document.querySelector(".picture")           
+    levelOne.addEventListener('click',function(){
+
+        createPuzzle(2)
+        
+        divBox.querySelectorAll("div").forEach(element=>{
+            element.style.height = withandheight('1')+"px";
+            console.log("height--"+ element.style.height)
+            element.style.width = withandheight('1')+"px";
+            console.log("width--"+element.style.width)
+        })
+    }) 
+    levelTwo.addEventListener('click',function(){
+      
+        divBox.querySelectorAll("div").forEach(element=>{
+            element.style.height = withandheight('2');
+          
+            element.style.width = withandheight('2');
+
+        })
+        createPuzzle(3)
+    }) 
+    levelThree.addEventListener('click',function(){
+     
+        divBox.querySelectorAll("div").forEach(element=>{
+            element.style.height = withandheight('3');
+            element.style.width = withandheight('3');
+
+        })
+        createPuzzle(4)
+    })
+
+
+        puzzle.append(empty);
 
         const loadPicture = document.querySelector(".pictbtn");
 
@@ -220,6 +299,8 @@
             console.log(fileList);
             
                 var file = fileList[0];
+
+                console.log(file);
                 var imageType = /image.*/;
             
             // if (!file.type.match(imageType)) {
@@ -227,10 +308,9 @@
             // }
             var reader = new FileReader();
             let temp = document.querySelectorAll("[name = 'pic']");
-
-            var reader = new FileReader();
             //var file = this.files[0];
             reader.onloadend = function () {
+                console.log(reader.result );
                 for(let i =1;i<=9;i++){
                 $("#pic"+ i).css('background-image', 'url("' + reader.result + '")');
             }
@@ -296,16 +376,7 @@
             console.log(picArray)
 
 
-            //再 依照 numberArray sort那個 picArray
-            // picArray = picArray.sort(function(a,b){
-            //     console.log(numberArray)
-            //         return numberArray.indexOf(a.key)-numberArray.indexOf(b.key)
-
-            //     })
-            //    console.log(picArray)
-
-
-            //把sort好的陣列跟原來的swap
+     
 
 
             for (let k = 1; k <= 9; k++) {
@@ -356,6 +427,7 @@
             //確認是否在空白隔壁
             //抓移動資料
             style = getComputedStyle(item)
+            console.log(item)
             style2 = getComputedStyle(item2)
 
             let left1 = style.left.split('p')[0];//99px
@@ -378,7 +450,7 @@
             if (offsetTop < 0 || offsetLeft < 0) {
                 offsetTop = offsetTop * -1
                 offsetLeft = offsetLeft * -1
-                if ((left1 == left2 && (offsetTop) <= 99) || (top1 == top2 && (offsetLeft) <= 99)) {
+                if ((left1 == left2 && (offsetTop) <= 150) || (top1 == top2 && (offsetLeft) <= 150)) {
 
                     return true;
                 }
@@ -388,7 +460,7 @@
                 }
             }
             else {
-                if ((left1 == left2 && (offsetTop) <= 99) || (top1 == top2 && (offsetLeft) <= 99)) {
+                if ((left1 == left2 && (offsetTop) <= 150) || (top1 == top2 && (offsetLeft) <= 150)) {
 
                     return true;
                 }
@@ -421,9 +493,10 @@
             }
         }
 
-        document.querySelectorAll("[name = 'pic']").forEach(item => {
+        document.querySelectorAll("[name = 'pic]").forEach(item => {
             item.addEventListener('click', function (e) {
-                e.stopPropagation();
+                alert('click')
+              //  e.stopPropagation();
                 let item = e.currentTarget
 
                 let item2 = document.querySelector("#empty");
