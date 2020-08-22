@@ -30,11 +30,12 @@
 
         }
 
-        /* 
-        .picture img {
-            width: 100%;
-            height: 100%;
-        } */
+        
+        .picture {
+           position: relative;
+           left: 50px;
+           top: 50px;
+        } 
 
 
         div[name="pic1"].row1 {
@@ -259,6 +260,11 @@
             left: 480px;
             top: 250px;
         }
+        .button-section{
+            position: relative;
+            left: 50px;
+            top: 50px;
+        }
     </style>
 
 
@@ -284,6 +290,7 @@
 
 
     </div>
+    <div class="button-section">
     <button id="startbtn" class="startbtn">開始</button>
     <button id="checkansbtn" class="checkansbtn btn btn-secondary">看答案</button>
     <div class="dropdown">
@@ -300,7 +307,7 @@
 
 
     <input type="file" class="pictbtn " accept="image/*">
-
+</div>
 
     <script>
         //動態生成block div///
