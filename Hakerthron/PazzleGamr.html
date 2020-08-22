@@ -237,7 +237,7 @@
             left: 480px;
         }
 
-        .dropdown {
+        .startbtn {
             top: 200px
         }
 
@@ -271,7 +271,7 @@
 </head>
 
 <body>
-    <div class="picture" id="puzzle">
+    <div class="picture container" id="puzzle">
 
         <div id="pic1" class="row1 col1 pic1" name="pic2">
         </div>
@@ -290,23 +290,25 @@
 
 
     </div>
-    <div class="button-section">
-    <button id="startbtn" class="startbtn">開始</button>
-    <button id="checkansbtn" class="checkansbtn btn btn-secondary">看答案</button>
+    <div class="button-section container">
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            難度
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" id=level1>難度1</a>
-            <a class="dropdown-item" href="#" id=level2>難度2</a>
-            <a class="dropdown-item" href="#" id=level3>難度3</a>
-        </div>
+            <button class="btn btn-secondary dropdown-toggle dropdownBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                難度
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" id=level1>難度1</a>
+                <a class="dropdown-item" href="#" id=level2>難度2</a>
+                <a class="dropdown-item" href="#" id=level3>難度3</a>
+            </div>
     </div>
+    <input type="file" class="pictbtn " accept="image/*" disabled>
+    <button id="startbtn" class="startbtn btn btn-secondary" disabled>開始</button>
+    <button id="checkansbtn" class="checkansbtn btn btn-secondary" disabled>看答案</button>
 
 
-    <input type="file" class="pictbtn " accept="image/*">
+
+   
 </div>
 
     <script>
@@ -319,6 +321,9 @@
         const levelOne = document.querySelector("#level1")
         const levelThree = document.querySelector("#level3")
         const levelTwo = document.querySelector("#level2")
+        const checkBox = document.querySelector("#checkansbtn");
+        const startBtn = document.querySelector('#startbtn')
+        const dropdownBtn = document.querySelector('.dropdownBtn');
 
         function withandheight(number) {
             switch (number) {
@@ -368,8 +373,10 @@
 
         }
 
+        
         const divBox = document.querySelector(".picture")
         levelOne.addEventListener('click', function () {
+           
 
             createPuzzle(2)
 
@@ -379,6 +386,10 @@
                 element.style.width = withandheight('1') + "px";
              
             })
+            loadPicture.disabled = false;
+            startBtn.disabled  = false;
+            checkBox.disabled  = false;
+            dropdownBtn.disabled = true;
         })
         levelTwo.addEventListener('click', function () {
 
@@ -390,6 +401,10 @@
                 element.style.width = withandheight('2') + "px";
               
             })
+            loadPicture.disabled = false;
+            startBtn.disabled  = false;
+            checkBox.disabled  = false;
+            dropdownBtn.disabled = true;
         })
         levelThree.addEventListener('click', function () {
 
@@ -401,11 +416,15 @@
                 element.style.width = withandheight('3') + "px";
             
             })
+            loadPicture.disabled = false;
+            startBtn.disabled  = false;
+            checkBox.disabled  = false;
+            dropdownBtn.disabled = true;
         })
 
 
 
-        const checkBox = document.querySelector("#checkansbtn");
+        
         ///選擇看答案時重新生成圖片or 浮出原圖
         function checkAnswer() {
             //拿出圖片
@@ -421,11 +440,14 @@
 
         checkBox.addEventListener("click", function () {
             checkAnswer()
+            loadPicture.disabled = true;
+            startBtn.disabled  = true;
+            checkBox.disabled  = true;
+            dropdownBtn.disabled = false;
         })
 
 
 
-        // puzzle.append(empty);
         //上傳圖片///
         function handleFiles() {
 
@@ -481,14 +503,7 @@
                 numberArray.push(parseInt(item) + 1)
             }
 
-            // keys.forEach(item=>{
-            //     console.log(item)
-            //     numberArray.push(item)
-            // })
-            //把數字加進array
-            // let numberArray = [1, 2, 3, 4]
-            // numberArray.sort(() => Math.random() - 0.5);
-            // console.log(numberArray)
+ 
             debugger
             let invertion = 0;
             do {
@@ -547,7 +562,7 @@
 
 
         ///按下開始圖片///
-        let startBtn = document.querySelector('#startbtn')
+     
         startBtn.addEventListener('click', function () {
             let picCollection = document.querySelector(".picture ");
 
