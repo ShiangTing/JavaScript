@@ -337,6 +337,22 @@
         }
 
 
+        function btnDisabled(variable){
+
+            if(variable=="1"){
+            loadPicture.disabled = false;
+            startBtn.disabled  = false;
+            checkBox.disabled  = false;
+            dropdownBtn.disabled = true;
+            }
+            else{
+            loadPicture.disabled = true;
+            startBtn.disabled  = true;
+            checkBox.disabled  = true;
+            dropdownBtn.disabled = false;
+            }
+        }
+
         function createPuzzle(levelNumber) {
 
             //動態生成block div///
@@ -386,10 +402,7 @@
                 element.style.width = withandheight('1') + "px";
              
             })
-            loadPicture.disabled = false;
-            startBtn.disabled  = false;
-            checkBox.disabled  = false;
-            dropdownBtn.disabled = true;
+            btnDisabled("1")
         })
         levelTwo.addEventListener('click', function () {
 
@@ -401,10 +414,7 @@
                 element.style.width = withandheight('2') + "px";
               
             })
-            loadPicture.disabled = false;
-            startBtn.disabled  = false;
-            checkBox.disabled  = false;
-            dropdownBtn.disabled = true;
+            btnDisabled("1")
         })
         levelThree.addEventListener('click', function () {
 
@@ -416,10 +426,7 @@
                 element.style.width = withandheight('3') + "px";
             
             })
-            loadPicture.disabled = false;
-            startBtn.disabled  = false;
-            checkBox.disabled  = false;
-            dropdownBtn.disabled = true;
+            btnDisabled("1")
         })
 
 
@@ -440,10 +447,7 @@
 
         checkBox.addEventListener("click", function () {
             checkAnswer()
-            loadPicture.disabled = true;
-            startBtn.disabled  = true;
-            checkBox.disabled  = true;
-            dropdownBtn.disabled = false;
+            btnDisabled("2")
         })
 
 
